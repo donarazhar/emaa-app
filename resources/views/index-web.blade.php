@@ -11,42 +11,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <style>
-        .icon {
-            transition: 0.5s ease-in-out;
-            border: 7px solid #eee;
-            cursor: pointer;
-        }
-
-        .icon.active {
-            transform: scale(1) translateY(-0.2em);
-            background: linear-gradient(135deg, #ef2684, #ef2684);
-            border: 8px solid #ffffff;
-            color: white;
-        }
-
-        .middle-icon {
-            position: relative;
-            top: -0.2em;
-            background: linear-gradient(135deg, #ef2684, #ef2684);
-            border: 8px solid #ffffff;
-            color: white;
-            transform: scale(1);
-        }
-    </style>
-
 </head>
 
 <body class="bg-gray-100">
 
     <!-- Header -->
-    {{-- Header Top Navbar --}}
-    <header class="bg-gray-100 fixed w-full top-0 shadow z-50">
+
+    {{-- Top Navbar --}}
+    <header class="bg-white fixed w-full top-0 shadow z-50">
         <div class="container mx-auto px-5 py-1">
             <div class="flex items-center justify-between">
                 <img src="https://placehold.co/100" alt="" class="rounded-3xl">
                 <nav class="hidden md:flex space-x-5">
-                    <a href="#" class="mt-2 text-gray-500 hover:text-red-500">Beranda</a>
+                    <a href="/" class="mt-2 text-gray-500 hover:text-red-500">Beranda</a>
                     <a href="#features" class="mt-2 text-gray-500 hover:text-red-500">Fitur</a>
                     <a href="#donation" class="mt-2 text-gray-500 hover:text-red-500">Rekening</a>
                     <a href="#services" class="mt-2 text-gray-500 hover:text-red-500">Layanan</a>
@@ -60,31 +37,46 @@
 
     <!-- Bottom Nav -->
     <nav
-        class="mobile-nav flex justify-around md:hidden bg-gray-100 shadow fixed bottom-0 left-0 right-0 mx-auto max-w-lg rounded-t-lg">
-        <a href="#" class="text-center p-1">
-            <i class="fa-solid fa-house text-xl icon rounded-full p-2 hover:text-blue-600" onclick="change(this)"
-                style="font-size: 2rem;"></i>
-            <p class="text-sm text hidden">Beranda</p>
+        class="mobile-nav flex justify-around md:hidden bg-white fixed bottom-0 left-0 right-0 mx-auto max-w-xl rounded-t-xl">
+        <a href="#" class="text-center group">
+            <div class="icon-wrapper relative rounded-full p-2">
+                <i id="icon1"
+                    class="fa-solid fa-house text-xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    onclick="change(this)" style="font-size: 1.5rem;"></i>
+                <p class="text-sm mt-2">Beranda</p>
+            </div>
         </a>
-        <a href="#features" class="text-center p-1">
-            <i class="fa-solid fa-newspaper text-xl icon rounded-full p-2 hover:text-blue-600" onclick="change(this)"
-                style="font-size: 2rem;"></i>
-            <p class="text-sm text hidden">Fitur</p>
+        <a href="#features" class="text-center group">
+            <div class="icon-wrapper relative rounded-full p-2">
+                <i id="icon2"
+                    class="fa-solid fa-newspaper text-xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    onclick="change(this)" style="font-size: 1.5rem;"></i>
+                <p class="text-sm mt-2">Fitur</p>
+            </div>
         </a>
-        <a href="#donation" class="text-center -p-2 relative -top-4">
-            <i class="fa-solid fa-circle-dollar-to-slot text-3xl icon middle rounded-full p-2 hover:text-blue-600"
-                onclick="change(this)" style="font-size: 3rem;"></i>
-            <p class="text-sm text hidden">Rekening</p>
+        <a href="#donation" class="text-centerc relative -top-4 group">
+            <div class="icon-wrapper relative bg-white rounded-full p-2">
+                <i id="icon3"
+                    class="fa-solid fa-circle-dollar-to-slot text-5xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    onclick="change(this)" style="font-size: 2rem;"></i>
+                <p class="text-sm mt-2">Rekening</p>
+            </div>
         </a>
-        <a href="#services" class="text-center p-1">
-            <i class="fa-brands fa-slack text-xl icon rounded-full p-2 hover:text-blue-600" onclick="change(this)"
-                style="font-size: 2rem;"></i>
-            <p class="text-sm text hidden">Layanan</p>
+        <a href="#services" class="text-center group">
+            <div class="icon-wrapper relative rounded-full p-2">
+                <i id="icon4"
+                    class="fa-brands fa-slack text-xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    onclick="change(this)" style="font-size: 1.5rem;"></i>
+                <p class="text-sm mt-2">Layanan</p>
+            </div>
         </a>
-        <a href="#" class="text-center p-1">
-            <i class="fa-solid fa-gift text-xl icon rounded-full p-2 hover:text-blue-600" onclick="change(this)"
-                style="font-size: 2rem;"></i>
-            <p class="text-sm text hidden">Donasi</p>
+        <a href="#" class="text-center group">
+            <div class="icon-wrapper relative rounded-full p-2">
+                <i id="icon5"
+                    class="fa-solid fa-gift text-xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    onclick="change(this)" style="font-size: 1.5rem;"></i>
+                <p class="text-sm mt-2">Donasi</p>
+            </div>
         </a>
     </nav>
 
@@ -277,25 +269,8 @@
         <p>Design by Staf ICT MAA | &copy; Copyright 2024</p>
     </footer>
 
-    <script>
-        function change(activeIcon) {
-            const icons = document.querySelectorAll('.icon');
-            const texts = document.querySelectorAll('.text');
-            icons.forEach(icon => {
-                icon.classList.remove('active');
-                icon.classList.remove('middle-icon');
-            });
-            texts.forEach(text => {
-                text.classList.add('hidden');
-            });
-            if (activeIcon.classList.contains('middle')) {
-                activeIcon.classList.add('middle-icon');
-            } else {
-                activeIcon.classList.add('active');
-            }
-            activeIcon.nextElementSibling.classList.remove('hidden');
-        }
-    </script>
+    <script src="{{ asset('js/script.js') }}"></script>
+
 </body>
 
 </html>

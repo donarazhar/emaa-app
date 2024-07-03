@@ -25,5 +25,15 @@ function toggleMenu() {
     }
 }
 
-
-
+// JS Bottom Nav
+function change(icon) {
+    // Hapus kelas clicked-icon dari semua ikon
+    document.querySelectorAll('.clicked-icon').forEach(el => {
+        el.classList.remove('clicked-icon');
+        el.nextElementSibling.style.display = 'none'; // Sembunyikan teks
+    });
+    
+    // Tambahkan kelas clicked-icon pada ikon yang diklik
+    icon.classList.add('clicked-icon');
+    icon.nextElementSibling.style.display = 'block'; // Tampilkan teks
+}
