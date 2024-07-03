@@ -20,7 +20,7 @@ function openTab(tabName) {
 
     // Hapus kelas aktif dari semua tab
     document.querySelectorAll('button[id^="tab-"]').forEach(tab => {
-        tab.classList.remove('bg-blue-500', 'text-white');
+        tab.classList.remove('bg-blue-700', 'text-white');
         tab.classList.add('text-gray-600');
     });
 
@@ -28,6 +28,6 @@ function openTab(tabName) {
     document.getElementById(`content-${tabName}`).classList.remove('hidden');
 
     // Tambahkan kelas aktif ke tab yang dipilih
-    document.getElementById(`tab-${tabName}`).classList.add('bg-blue-500', 'text-white');
+    document.getElementById(`tab-${tabName}`).classList.add('bg-blue-700', 'text-white');
 }
 
