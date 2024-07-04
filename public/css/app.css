@@ -1,0 +1,54 @@
+html {
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+    .mobile-nav {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 50;
+        background-color: white;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* CSS Bottom Nav */
+.icon-wrapper .clicked-icon {
+    position: absolute;
+    top: -15px;
+    /* Menyesuaikan jarak naik ikon */
+    left: 50%;
+    /* Mengatur ikon ke tengah secara horizontal */
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: top 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.icon-wrapper p {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.icon-wrapper .clicked-icon+p {
+    display: block;
+    opacity: 1;
+    margin-top: 25px;
+    /* Jarak antara ikon dan teks */
+    font-size: 0.675rem;
+    /* Ukuran font teks */
+    color: #000;
+    /* Warna teks */
+}
+
+.card-details {
+    display: none;
+}
