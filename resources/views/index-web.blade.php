@@ -11,9 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="{{ asset('js/before-script.js') }}"></script>
+
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-zinc-100">
 
     <!-- Header -->
 
@@ -23,13 +25,14 @@
             <div class="flex items-center justify-between">
                 <img src="https://placehold.co/100" alt="" class="rounded-3xl">
                 <nav class="hidden md:flex space-x-5">
-                    <a href="/" class="mt-2 text-gray-500 hover:text-red-500">Beranda</a>
-                    <a href="#features" class="mt-2 text-gray-500 hover:text-red-500">Fitur</a>
-                    <a href="#donation" class="mt-2 text-gray-500 hover:text-red-500">Rekening</a>
-                    <a href="#services" class="mt-2 text-gray-500 hover:text-red-500">Layanan</a>
-                    <a href="#download" class="mt-2 text-gray-500 hover:text-red-500">Download</a>
-                    <a href="#" class="mt-2 text-gray-500 hover:text-red-500">Donasi Online</a>
-                    <a href="#" class="bg-red-500 text-white px-7 py-3 rounded-lg hover:bg-blue-500">Subscribe</a>
+                    <a href="/" class="mt-2 text-zinc-500 hover:text-red-500">Beranda</a>
+                    <a href="#features" class="mt-2 text-zinc-500 hover:text-red-500">Fitur</a>
+                    <a href="#donation" class="mt-2 text-zinc-500 hover:text-red-500">Rekening</a>
+                    <a href="#services" class="mt-2 text-zinc-500 hover:text-red-500">Layanan</a>
+                    <a href="#download" class="mt-2 text-zinc-500 hover:text-red-500">Download</a>
+                    <a href="#" class="mt-2 text-zinc-500 hover:text-red-500">Donasi Online</a>
+                    <a href="#" class="bg-red-500 text-white px-7 py-3 rounded-lg hover:bg-blue-500">Info
+                        Masjid</a>
                 </nav>
             </div>
         </div>
@@ -37,35 +40,36 @@
 
     <!-- Bottom Nav -->
     <nav
-        class="mobile-nav flex justify-around md:hidden bg-white fixed bottom-0 left-0 right-0 mx-auto max-w-xl rounded-t-xl">
+        class="mobile-nav flex justify-around md:hidden bg-zinc fixed bottom-0 left-0 right-0 mx-auto max-w-xl rounded-t-xl">
         <a href="#" class="text-center group">
-            <div class="icon-wrapper relative rounded-full p-2">
+            <div class="icon-wrapper relative rounded-full p-2 group">
                 <i id="icon1"
-                    class="fa-solid fa-house text-xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    class="fa-solid fa-house text-xl text-zinc-500 transition duration-300 group-hover:text-blue-500"
                     onclick="change(this)" style="font-size: 1.5rem;"></i>
                 <p class="text-sm mt-2">Beranda</p>
             </div>
+
         </a>
         <a href="#features" class="text-center group">
             <div class="icon-wrapper relative rounded-full p-2">
                 <i id="icon2"
-                    class="fa-solid fa-newspaper text-xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    class="fa-solid fa-newspaper text-xl text-zinc-500 transition duration-300 group-hover:text-blue-500"
                     onclick="change(this)" style="font-size: 1.5rem;"></i>
                 <p class="text-sm mt-2">Fitur</p>
             </div>
         </a>
         <a href="#donation" class="text-centerc relative -top-4 group">
-            <div class="icon-wrapper relative bg-white rounded-full p-2">
+            <div class="icon-wrapper relative bg-zinc rounded-full p-2">
                 <i id="icon3"
-                    class="fa-solid fa-circle-dollar-to-slot text-5xl text-blue-500 transition duration-300 group-hover:text-red-500"
-                    onclick="change(this)" style="font-size: 2rem;"></i>
-                <p class="text-sm mt-2">Rekening</p>
+                    class="fa-solid fa-mosque text-5xl text-zinc-500 transition duration-300 group-hover:text-blue-500"
+                    onclick="change(this)" style="font-size: 1.8rem;"></i>
+                <p class="text-sm mt-2">Info Masjid</p>
             </div>
         </a>
         <a href="#services" class="text-center group">
             <div class="icon-wrapper relative rounded-full p-2">
                 <i id="icon4"
-                    class="fa-brands fa-slack text-xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    class="fa-brands fa-slack text-xl text-zinc-500 transition duration-300 group-hover:text-blue-500"
                     onclick="change(this)" style="font-size: 1.5rem;"></i>
                 <p class="text-sm mt-2">Layanan</p>
             </div>
@@ -73,7 +77,7 @@
         <a href="#" class="text-center group">
             <div class="icon-wrapper relative rounded-full p-2">
                 <i id="icon5"
-                    class="fa-solid fa-gift text-xl text-blue-500 transition duration-300 group-hover:text-red-500"
+                    class="fa-solid fa-gift text-xl text-zinc-500 transition duration-300 group-hover:text-blue-500"
                     onclick="change(this)" style="font-size: 1.5rem;"></i>
                 <p class="text-sm mt-2">Donasi</p>
             </div>
@@ -86,15 +90,16 @@
     <section id="hero" class="relative">
         <div class="container-fluid bg-white px-20 pt-10 grid grid-cols-1 md:grid-cols-2 items-center">
             <div class="text-center md:text-left mb-5">
-                <p class="text-gray-600 mb-2">Assalamualaikum Warrahmatullahi Wabarakatuh.</p>
+                <p class="text-zinc-600 mb-2">Assalamualaikum Warrahmatullahi Wabarakatuh.</p>
                 <h1 class="text-4xl md:text-6xl font-bold mb-5 leading-tight md:leading-tight">
                     Satu Aplikasi <span class="text-blue-500">untuk</span> GEMILANG
                     <br class="hidden md:inline">
                     <span class="text-blue-500">Masjidku</span>
                 </h1>
-                <p class="text-gray-600 mb-8">Aplikasi Masjid Agung Al Azhar berbasis mobile sebagai Media Silaturahmi,
+                <p class="text-zinc-600 mb-8">Aplikasi Masjid Agung Al Azhar berbasis mobile sebagai Media Silaturahmi,
                     Media Belajar, dan Media Donasi bagi Jamaah.</p>
-                <a href="#" class="bg-blue-500 text-white px-6 py-3 rounded-full mb-5">Selengkapnya...</a>
+                <a href="#"
+                    class="bg-blue-500 text-white hover:bg-red-500 px-6 py-3 rounded-full mb-5">Selengkapnya...</a>
             </div>
             <div class="flex justify-center md:justify-end">
                 <img src="https://placehold.co/400" alt="Aplikasi" class="max-w-full rounded-3xl">
@@ -121,83 +126,113 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 -z-0">
                 <div class="bg-white p-6 rounded shadow">
                     <h2 class="text-xl font-bold mb-2">Lorem, ipsum.</h2>
-                    <p class="text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis,
+                    <p class="text-white-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis,
                         itaque!</p>
                 </div>
                 <div class="bg-white p-6 rounded shadow">
                     <h2 class="text-xl font-bold mb-2">Lorem, ipsum.</h2>
-                    <p class="text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis,
+                    <p class="text-white-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis,
                         itaque!</p>
                 </div>
                 <div class="bg-white p-6 rounded shadow">
                     <h2 class="text-xl font-bold mb-2">Lorem, ipsum.</h2>
-                    <p class="text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis,
+                    <p class="text-white-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis,
                         itaque!</p>
                 </div>
                 <div class="bg-white p-6 rounded shadow">
                     <h2 class="text-xl font-bold mb-2">Lorem, ipsum.</h2>
-                    <p class="text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis,
+                    <p class="text-white-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis,
                         itaque!/p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Donation Section -->
-    <section id="donation" class="relative">
-        <div class="container-fluid bg-white mx-auto px-20 py-20 text-center border">
-            <h2 class="text-3xl font-bold mb-8">Salurkan <span class="text-blue-500">Donasi Anda Melalui
-                    Rekening</span>
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <!-- Rekening Section -->
+    <section id="donation" class="relative py-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-8 text-center">Salurkan <span class="text-blue-500">Donasi Anda Melalui
+                    Rekening</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 <!-- Card 1 -->
-                <div class="bg-white p-6 rounded shadow">
+                <div class="bg-white p-6 rounded-3xl shadow-2xl cursor-pointer" onclick="toggleDetails('1')">
                     <img src="https://placehold.co/100" alt="BNI Syariah" class="mx-auto mb-4">
-                    <p class="text-gray-600">BNI Syariah</p>
+                    <p class="text-zinc-600 text-center">BNI Syariah</p>
+                    <div id="details-1" class="card-details mt-4 p-4 bg-red-500 text-white rounded-lg">
+                        <p>Nama Bank: BNI Syariah</p>
+                        <p>No. Rekening: 1234567890</p>
+                    </div>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-white p-6 rounded shadow">
+                <div class="bg-white p-6 rounded-3xl shadow-2xl cursor-pointer" onclick="toggleDetails('2')">
                     <img src="https://placehold.co/100" alt="Mandiri Syariah" class="mx-auto mb-4">
-                    <p class="text-gray-600">Mandiri Syariah</p>
+                    <p class="text-zinc-600 text-center">Mandiri Syariah</p>
+                    <div id="details-2" class="card-details mt-4 p-4 bg-red-500 text-white rounded-lg">
+                        <p>Nama Bank: Mandiri Syariah</p>
+                        <p>No. Rekening: 2345678901</p>
+                    </div>
                 </div>
                 <!-- Card 3 -->
-                <div class="bg-white p-6 rounded shadow">
+                <div class="bg-white p-6 rounded-3xl shadow-2xl cursor-pointer" onclick="toggleDetails('3')">
                     <img src="https://placehold.co/100" alt="BTN Syariah" class="mx-auto mb-4">
-                    <p class="text-gray-600">BTN Syariah</p>
+                    <p class="text-zinc-600 text-center">BTN Syariah</p>
+                    <div id="details-3" class="card-details mt-4 p-4 bg-red-500 text-white rounded-lg">
+                        <p>Nama Bank: BTN Syariah</p>
+                        <p>No. Rekening: 3456789012</p>
+                    </div>
                 </div>
                 <!-- Card 4 -->
-                <div class="bg-white p-6 rounded shadow">
+                <div class="bg-white p-6 rounded-3xl shadow-2xl cursor-pointer" onclick="toggleDetails('4')">
                     <img src="https://placehold.co/100" alt="Bank Muamalat" class="mx-auto mb-4">
-                    <p class="text-gray-600">Bank Muamalat</p>
+                    <p class="text-zinc-600 text-center">Bank Muamalat</p>
+                    <div id="details-4" class="card-details mt-4 p-4 bg-red-500 text-white rounded-lg">
+                        <p>Nama Bank: Bank Muamalat</p>
+                        <p>No. Rekening: 4567890123</p>
+                    </div>
                 </div>
                 <!-- Card 5 -->
-                <div class="bg-white p-6 rounded shadow">
+                <div class="bg-white p-6 rounded-3xl shadow-2xl cursor-pointer" onclick="toggleDetails('5')">
                     <img src="https://placehold.co/100" alt="Mandiri" class="mx-auto mb-4">
-                    <p class="text-gray-600">Mandiri</p>
+                    <p class="text-zinc-600 text-center">Mandiri</p>
+                    <div id="details-5" class="card-details mt-4 p-4 bg-red-500 text-white rounded-lg">
+                        <p>Nama Bank: Mandiri</p>
+                        <p>No. Rekening: 5678901234</p>
+                    </div>
                 </div>
                 <!-- Card 6 -->
-                <div class="bg-white p-6 rounded shadow">
+                <div class="bg-white p-6 rounded-3xl shadow-2xl cursor-pointer" onclick="toggleDetails('6')">
                     <img src="https://placehold.co/100" alt="BNI" class="mx-auto mb-4">
-                    <p class="text-gray-600">BNI</p>
+                    <p class="text-zinc-600 text-center">BNI</p>
+                    <div id="details-6" class="card-details mt-4 p-4 bg-red-500 text-white rounded-lg">
+                        <p>Nama Bank: BNI</p>
+                        <p>No. Rekening: 6789012345</p>
+                    </div>
                 </div>
                 <!-- Card 7 -->
-                <div class="bg-white p-6 rounded shadow">
+                <div class="bg-white p-6 rounded-3xl shadow-2xl cursor-pointer" onclick="toggleDetails('7')">
                     <img src="https://placehold.co/100" alt="BSI" class="mx-auto mb-4">
-                    <p class="text-gray-600">BSI</p>
+                    <p class="text-zinc-600 text-center">BSI</p>
+                    <div id="details-7" class="card-details mt-4 p-4 bg-red-500 text-white rounded-lg">
+                        <p>Nama Bank: BSI</p>
+                        <p>No. Rekening: 7890123456</p>
+                    </div>
                 </div>
                 <!-- Card 8 -->
-                <div class="bg-white p-6 rounded shadow">
+                <div class="bg-white p-6 rounded-3xl shadow-2xl cursor-pointer" onclick="toggleDetails('8')">
                     <img src="https://placehold.co/100" alt="BSI" class="mx-auto mb-4">
-                    <p class="text-gray-600">BSI</p>
+                    <p class="text-zinc-600 text-center">BSI</p>
+                    <div id="details-8" class="card-details mt-4 p-4 bg-red-500 text-white rounded-lg">
+                        <p>Nama Bank: BSI</p>
+                        <p>No. Rekening: 8901234567</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="bg-gray-100 py-20">
+    <section id="services" class="bg-white py-20">
         <div class="container mx-auto px-6">
-
             <h2 class="text-5xl font-bold text-center mb-8">Layanan <span class="text-blue-500">Terbaik</span> Yang
                 Selalu Kami <span class="text-red-500">Berikan</span>.</h2>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -208,12 +243,12 @@
                     <div
                         class="absolute left-0 bottom-[220px] mx-auto w-4/5 bg-white p-6 rounded-3xl shadow-lg transform translate-y-1/2">
                         <h3 class="text-xl font-bold mt-5 mb-5">Kantor Kami</h3>
-                        <p class="text-gray-600 mb-4">Jl. Sisingamangaraja, Kebayoran Baru, Jakarta Selatan 12110,
+                        <p class="text-zinc-600 mb-4">Jl. Sisingamangaraja, Kebayoran Baru, Jakarta Selatan 12110,
                             Telp.(021) 727 83683 / 739 7267</p>
                     </div>
                     <div class="absolute left-0 bottom-[50px] mx-auto pl-6">
                         <a href="https://placehold.co/100"
-                            class="text-white bg-blue-500 hover:bg-blue-600 px-5 py-4 rounded-3xl shadow-2xl">Cari Di
+                            class="text-white bg-blue-500 hover:bg-red-500 px-5 py-4 rounded-3xl shadow-2xl">Cari Di
                             Google
                             Maps</a>
                     </div>
@@ -222,24 +257,24 @@
 
                 <!-- Kanan: Tiga Kartu dalam Satu Kolom -->
                 <div class="space-y-4">
-                    <div class="bg-white p-6 rounded shadow">
+                    <div class="bg-white p-6 rounded-3xl shadow-xl">
                         <img src="https://placehold.co/100" alt="Aula Buya Hamka"
                             class="mb-4 w-full h-40 object-cover rounded">
                         <h3 class="text-xl font-bold mb-2">Aula Buya Hamka</h3>
-                        <p class="text-gray-600 mb-4">Aula serba guna yang dapat digunakan untuk acara yang
+                        <p class="text-zinc-600 mb-4">Aula serba guna yang dapat digunakan untuk acara yang
                             direncanakan...</p>
                     </div>
-                    <div class="bg-white p-6 rounded shadow">
+                    <div class="bg-white p-6 rounded-3xl shadow-xl">
                         <img src="https://placehold.co/100" alt="Amal Usaha"
                             class="mb-4 w-full h-40 object-cover rounded">
                         <h3 class="text-xl font-bold mb-2">Amal Usaha</h3>
-                        <p class="text-gray-600 mb-4">Toko online Masjid Agung Al Azhar di Shopee dan Tokopedia...</p>
+                        <p class="text-zinc-600 mb-4">Toko online Masjid Agung Al Azhar di Shopee dan Tokopedia...</p>
                     </div>
-                    <div class="bg-white p-6 rounded shadow">
+                    <div class="bg-white p-6 rounded-3xl shadow-xl">
                         <img src="https://placehold.co/100" alt="Konsultasi & Pengislaman"
                             class="mb-4 w-full h-40 object-cover rounded">
                         <h3 class="text-xl font-bold mb-2">Konsultasi & Pengislaman</h3>
-                        <p class="text-gray-600 mb-4">Konsultasikan masalah anda ke Masjid Agung Al Azhar...</p>
+                        <p class="text-zinc-600 mb-4">Konsultasikan masalah anda ke Masjid Agung Al Azhar...</p>
                     </div>
                 </div>
             </div>
@@ -248,7 +283,7 @@
     </section>
 
     <!-- Download Section -->
-    <section id="download" class="bg-blue-600 text-white py-20">
+    <section id="download" class="bg-blue-600 text-zinc py-20">
         <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <!-- Kiri: Teks dan Tombol -->
             <div class="text-center md:text-left">
@@ -264,7 +299,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="container-fluid text-sm bg-white text-black text-center py-5 mb-20 md:mb-0">
+    <footer class="container-fluid text-sm bg-zinc text-black text-center py-5 mb-20 md:mb-0">
         <p>Masjid Agung Al Azhar | Epicentrum Dakwah dan Sosial | All rights reserved.</p>
         <p>Design by Staf ICT MAA | &copy; Copyright 2024</p>
     </footer>
