@@ -38,16 +38,20 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="{{ asset('thumbnail/saran_1626409136.png') }}" alt="Masjid Image" class="w-full h-64 md:h-fit object-cover">
+                    <img src="{{ asset('thumbnail/saran_1626409136.png') }}" alt="Masjid Image"
+                        class="w-full h-64 md:h-fit object-cover">
                 </div>
                 <div class="swiper-slide">
-                    <img src="{{ asset('thumbnail/maa-tv_1626408202.png') }}" alt="Masjid Image" class="w-full h-64 md:h-fit object-cover">
+                    <img src="{{ asset('thumbnail/maa-tv_1626408202.png') }}" alt="Masjid Image"
+                        class="w-full h-64 md:h-fit object-cover">
                 </div>
                 <div class="swiper-slide">
-                    <img src="{{ asset('thumbnail/konsultasi_1626408702.png') }}" alt="Masjid Image" class="w-full h-64 md:h-fit object-cover">
+                    <img src="{{ asset('thumbnail/konsultasi_1626408702.png') }}" alt="Masjid Image"
+                        class="w-full h-64 md:h-fit object-cover">
                 </div>
                 <div class="swiper-slide">
-                    <img src="{{ asset('thumbnail/buletin-jumat_1626408934.png') }}" alt="Masjid Image" class="w-full h-64 md:h-fit object-cover">
+                    <img src="{{ asset('thumbnail/buletin-jumat_1626408934.png') }}" alt="Masjid Image"
+                        class="w-full h-64 md:h-fit object-cover">
                 </div>
             </div>
             <!-- Add Pagination -->
@@ -87,10 +91,12 @@
     <!-- Tabs News -->
     <section id="tabs" class="my-4">
         <div class="flex justify-start bg-gray-200 p-2 rounded-md space-x-4">
-            <button id="tab-terbaru" class="bg-blue-700 text-white px-4 py-2 rounded-md" onclick="openTab('terbaru')">Terbaru</button>
+            <button id="tab-terbaru" class="bg-blue-700 text-white px-4 py-2 rounded-md"
+                onclick="openTab('terbaru')">Terbaru</button>
             <button id="tab-cahaya" class="text-gray-600 px-4 py-2 rounded-md" onclick="openTab('cahaya')">Cahaya Al
                 Quran</button>
-            <button id="tab-donasi" class="text-gray-600 px-4 py-2 rounded-md" onclick="openTab('donasi')">Donasi</button>
+            <button id="tab-donasi" class="text-gray-600 px-4 py-2 rounded-md"
+                onclick="openTab('donasi')">Donasi</button>
         </div>
     </section>
 
