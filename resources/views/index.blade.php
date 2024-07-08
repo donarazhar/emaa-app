@@ -12,24 +12,35 @@
 </head>
 
 <body>
-    <!-- Header Navbar -->
+    <!-- Header  Navbar-->
     <header class="bg-blue-900 sticky top-0 z-50">
         <nav class="w-11/12 md:container mx-auto py-4 flex justify-between items-center text-white">
             <a href="#" class="text-3xl font-bold">
-                <img class="h-10 w-10" src="{{ asset('img/logomaa.png') }}" alt="">
-            </a>
-            <ul class="hidden md:flex space-x-4">
-                <li><a href="/" class="px-4 py-2 hover:text-white hover:bg-red-500 rounded-lg">Beranda</a></li>
-                <li><a href="#fitur" class="px-4 py-2 hover:text-white hover:bg-red-500 rounded-lg">Fitur</a></li>
-                <li><a href="#rekening" class="px-4 py-2 hover:text-white hover:bg-red-500 rounded-lg">Rekening</a></li>
-                <li><a href="#layanan" class="px-4 py-2 hover:text-white hover:bg-red-500 rounded-lg">Layanan</a></li>
-                <li><a href="#download" class="px-4 py-2 hover:text-white hover:bg-red-500 rounded-lg">Download</a></li>
-                <li><a href="#about" class="px-4 py-2 hover:text-white hover:bg-red-500 rounded-lg">Donasi Online</a>
+                <img class="h-10 w-10" src="{{ asset('img/logomaa.png') }}" alt=""></a>
+            <ul
+                class="menu hidden md:flex bg-blue-900 mt-4 md:bg-blue-900 md:relative md:top-0 md:divide-y-0 md:w-auto">
+                <li class="px-4 py-2 hover:text-white hover:bg-red-500 hover:rounded-lg"><a href="/">Beranda</a>
                 </li>
-                <li><a href="#" class="px-6 py-2 border-2 bg-red-500 rounded-xl hover:bg-blue-900">Info MAA</a>
+                <li class="px-4 py-2 hover:text-white hover:bg-red-500 hover:rounded-lg"><a href="#fitur">Fitur</a>
+                </li>
+                <li class="px-4 py-2 hover:text-white hover:bg-red-500 hover:rounded-lg"><a
+                        href="#rekening">Rekening</a>
+                </li>
+                <li class="px-4 py-2 hover:text-white hover:bg-red-500 hover:rounded-lg"><a href="#layanan">Layanan</a>
+                </li>
+                <li class="px-4 py-2 hover:text-white hover:bg-red-500 hover:rounded-lg"><a
+                        href="#download">Download</a>
+                </li>
+                <li class="px-4 py-2 hover:text-white hover:bg-red-500 hover:rounded-lg"><a href="/">Donasi
+                        Online</a></li>
+                <li
+                    class="px-4 py-2 hover:text-white hover:bg-red-500 md:hover:bg-blue-900 md:hover:text-white hover:rounded-lg ">
+                    <a href="/"
+                        class="md:border-2 md:bg-red-500 md:py-2 md:px-6 md:rounded-xl md:hover:bg-blue-900 text-white">Info
+                        MAA</a>
                 </li>
             </ul>
-            <button class="md:hidden text-2xl">
+            <button class="hamburger-menu text-2xl md:hidden">
                 <i class="fa-solid fa-bars"></i>
                 <i class="fa-solid fa-xmark hidden"></i>
             </button>
@@ -46,16 +57,17 @@
                         class="absolute inset-0 h-full w-full object-cover opacity-10">
                     <div
                         class="container mx-auto text-center text-white h-screen grid grid-cols-1 md:grid-cols-2 items-center relative z-10">
-                        <div class="mx-auto w-3/4">
-                            <p class="text-sm font-italic mb-5">Assalamualaikum Warrahmatullahi Wabarakatuh.</p>
-                            <h3 class="text-5xl font-bold mb-5"><span class="text-red-500">Masjid for</span> Educational
-                                and Cultural <span class="text-red-500">Movement</span></h3>
-                            <p class="mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam non
-                                nihil ratione eveniet assumenda facilis.</p>
+                        <div class="mx-auto w-3/4 md:w-3/4">
+                            <p class="text-white mb-5 text-sm font-italic">Assalamualaikum Warrahmatullahi Wabarakatuh.
+                            </p>
+                            <h3 class="text-5xl font-bold text-center mb-5"><span class="text-red-500">Masjid For</span>
+                                Eductional And <span class="text-red-500">Cultural Movement</span></h3>
+                            <p class="text-white mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+                                non nihil ratione eveniet assumenda facilis.</p>
                             <a href="#portofolio"
                                 class="bg-red-500 text-white py-2 px-8 rounded-xl hover:bg-blue-900 hover:border-2">Selengkapnya...</a>
                         </div>
-                        <div class="mx-auto hidden md:block">
+                        <div class="mx-auto hidden md:block md:w-auto">
                             <img src="{{ asset('hero/maa.png') }}" alt="">
                         </div>
                     </div>
@@ -66,16 +78,17 @@
                         class="absolute inset-0 h-full w-full object-cover opacity-10">
                     <div
                         class="container mx-auto text-center text-white h-screen grid grid-cols-1 md:grid-cols-2 items-center relative z-10">
-                        <div class="mx-auto w-3/4">
-                            <p class="text-sm font-italic mb-5">Assalamualaikum Warrahmatullahi Wabarakatuh.</p>
-                            <h3 class="text-5xl font-bold mb-5"><span class="text-red-500">Satu Aplikasi</span> untuk
-                                GEMILANG <span class="text-red-500">Masjidku</span></h3>
-                            <p class="mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam non
-                                nihil ratione eveniet assumenda facilis.</p>
+                        <div class="mx-auto w-3/4 md:w-3/4">
+                            <p class="text-white mb-5 text-sm font-italic">Assalamualaikum Warrahmatullahi Wabarakatuh.
+                            </p>
+                            <h3 class="text-5xl font-bold text-center mb-5"><span class="text-red-500">Satu
+                                    Aplikasi</span> untuk GEMILANG <span class="text-red-500">Masjidku</span></h3>
+                            <p class="text-white mb-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+                                non nihil ratione eveniet assumenda facilis.</p>
                             <a href="#portofolio"
                                 class="bg-red-500 text-white py-2 px-8 rounded-xl hover:bg-blue-900 hover:border-2">Selengkapnya...</a>
                         </div>
-                        <div class="mx-auto hidden md:block">
+                        <div class="mx-auto hidden md:block md:w-auto">
                             <img src="{{ asset('hero/maa.png') }}" alt="">
                         </div>
                     </div>
@@ -89,18 +102,22 @@
 
     <!-- Fitur -->
     <section id="fitur" class="bg-white py-20 px-4 md:py-32 md:px-4">
-        <h3 class="text-4xl md:text-5xl font-bold text-center mb-5">Dapatkan <span class="text-red-500">Fitur</span>
+        <h3 class="text-4xl md:text-5xl font-bold text-center mb-3 md:mb-5">Dapatkan <span
+                class="text-red-500">Fitur</span>
             Menarik</h3>
-        <p class="text-gray-500 mb-8 text-center text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Eveniet, reprehenderit?</p>
+        <p class="text-gray-500 mb-2 md:mb-8 text-center text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing
+            elit.
+            Eveniet,
+            reprehenderit?</p>
         <div class="w-11/12 md:container mx-auto grid grid-cols-1 md:grid-cols-6 gap-4">
             <div class="col-span-2 flex justify-center items-center">
                 <img src="https://masjidagungalazhar.com/assets/images/about-left-image.png" alt=""
-                    class="md:w-8/12 hidden md:block">
+                    class="md:w-8/12 md:block hidden">
             </div>
             <div class="col-span-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Service 1 -->
-                <div class="flex space-x-6 py-4 px-4 bg-blue-900 text-white rounded-xl items-start">
+                <div
+                    class="flex space-x-6 py-4 px-4 text-white bg-red-500 md:bg-blue-900 md:text-white rounded-xl items-start">
                     <img class="h-16 w-16 mt-4" src="https://masjidagungalazhar.com/assets/images/service-icon-01.png"
                         alt="">
                     <div>
@@ -110,7 +127,8 @@
                     </div>
                 </div>
                 <!-- Service 2 -->
-                <div class="flex space-x-6 py-4 px-4 bg-blue-900 text-white rounded-xl items-start">
+                <div
+                    class="flex space-x-6 py-4 px-4 text-white bg-red-500 md:bg-blue-900 md:text-white rounded-xl items-start">
                     <img class="h-16 w-16 mt-4" src="https://masjidagungalazhar.com/assets/images/service-icon-02.png"
                         alt="">
                     <div>
@@ -120,7 +138,8 @@
                     </div>
                 </div>
                 <!-- Service 3 -->
-                <div class="flex space-x-6 py-4 px-4 bg-blue-900 text-white rounded-xl items-start">
+                <div
+                    class="flex space-x-6 py-4 px-4 text-white bg-red-500 md:bg-blue-900 md:text-white rounded-xl items-start">
                     <img class="h-16 w-16 mt-4" src="https://masjidagungalazhar.com/assets/images/service-icon-03.png"
                         alt="">
                     <div>
@@ -130,11 +149,12 @@
                     </div>
                 </div>
                 <!-- Service 4 -->
-                <div class="flex space-x-6 py-4 px-4 bg-blue-900 text-white rounded-xl items-start">
+                <div
+                    class="flex space-x-6 py-4 px-4 text-white bg-red-500 md:bg-blue-900 md:text-white rounded-xl items-start">
                     <img class="h-16 w-16 mt-4" src="https://masjidagungalazhar.com/assets/images/service-icon-04.png"
                         alt="">
                     <div>
-                        <h4 class="text-2xl font-bold mb-2">Notifikasi</h4>
+                        <h4 class="text-2xl font-bold mb-2">Nofitikasi</h4>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia inventore odio illum
                             corporis error esse.</p>
                     </div>
@@ -145,12 +165,15 @@
 
     <!-- Rekening -->
     <section id="rekening" class="py-20 px-4 md:py-32 md:px-4 bg-white">
-        <h3 class="text-4xl md:text-5xl font-bold text-center mb-5">Salurkan <span class="text-blue-900">Donasi</span>
+        <h3 class="text-4xl md:text-5xl font-bold text-center mb-3 md:mb-5">Salurkan <span
+                class="text-blue-900">Donasi</span>
             Anda</h3>
         <p class="text-gray-500 mb-5 text-center text-sm">Donasi operasional Masjid Agung Al Azhar dapat jamaah
-            salurkan melalui rekening dibawah ini:</p>
+            salurkan melalui rekening dibawah ini :
+        </p>
+
         <!-- Container untuk semua kartu -->
-        <div class="grid grid-cols-2 md:grid-cols-4 w-11/12 md:container mx-auto gap-4 mb-4">
+        <div class="grid grid-cols-2 md:grid-cols-4 w-11/12 md:container mx-auto gap-4 mb-2">
             <!-- Rekening 1 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
                 <a href="#" class="flex flex-col justify-center items-center">
@@ -195,6 +218,8 @@
                     </div>
                 </a>
             </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 w-11/12 md:container mx-auto gap-4 mb-4">
             <!-- Rekening 5 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
                 <a href="#" class="flex flex-col justify-center items-center">
@@ -240,15 +265,17 @@
                 </a>
             </div>
         </div>
+
+
     </section>
 
-    <!-- Layanan -->
+    {{-- Layanan --}}
     <section id="layanan" class="py-20 px-4 md:py-32 md:px-4 bg-white">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- Kolom 1/3 -->
                 <div class="col-span-1 md:col-span-2 relative">
-                    <h3 class="text-4xl md:text-5xl font-bold text-left mb-5 leading-tight">
+                    <h3 class="text-4xl md:text-5xl font-bold text-left mb-3 md:mb-5 leading-tight md:leading-tight">
                         Layanan <span class="text-blue-900">Terbaik Yang</span><br class="hidden md:block"> Selalu
                         Kami <span class="text-red-500">Berikan</span>
                     </h3>
@@ -265,9 +292,9 @@
                 </div>
 
                 <!-- Kolom 2/3 -->
-                <div class="col-span-1 md:col-span-2 bg-white p-6 rounded-3xl shadow-2xl">
+                <div class="col-span-1 md:col-span-2 bg-white p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Subkolom content 1 -->
+                        {{-- Subkolom content 1 --}}
                         <div class="flex flex-col justify-center items-start text-left">
                             <h2 class="text-3xl font-bold text-gray-600 mb-4">Aula Buya Hamka</h2>
                             <p class="text-lg text-gray-600">Aula serba guna yang dapat digunakan untuk acara yang
@@ -278,7 +305,7 @@
                                 alt="Aula Buya Hamka" class="w-3/4 h-auto shadow-2xl rounded-3xl">
                         </div>
 
-                        <!-- Subkolom content 2 -->
+                        {{-- Subkolom content 2 --}}
                         <div class="flex flex-col justify-center items-start text-left">
                             <h2 class="text-3xl font-bold text-gray-600 mb-4">Amal Usaha</h2>
                             <p class="text-lg text-gray-600">Toko online Masjid Agung Al Azhar di Shopee dan
@@ -289,7 +316,7 @@
                                 class="w-3/4 h-auto shadow-2xl rounded-3xl">
                         </div>
 
-                        <!-- Subkolom content 3 -->
+                        {{-- Subkolom content 3 --}}
                         <div class="flex flex-col justify-center items-start text-left">
                             <h2 class="text-3xl font-bold text-gray-600 mb-4">Konsultasi & Pengislaman</h2>
                             <p class="text-lg text-gray-600">Konsultasikan masalah anda ke Masjid Agung Al Azhar...</p>
@@ -310,15 +337,14 @@
             class="absolute inset-0 h-full w-full object-cover opacity-10">
         <div
             class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center relative z-10 text-left text-white px-4 md:px-8">
-            <div class="w-full flex flex-col justify-center items-start h-full">
+            <div class="w-full md:w-auto">
                 <h3 class="text-4xl md:text-5xl font-bold mb-5">Unduh Dan Hadirkan Masjid Agung Al Azhar Di Genggaman
                     Anda.</h3>
-                <img src="https://masjidagungalazhar.com/assets/images/gplay.png" alt=""
-                    class="h-full md:h-auto object-contain">
+                <img src="https://masjidagungalazhar.com/assets/images/gplay.png" alt="">
             </div>
-            <div class="w-full flex justify-center items-center h-full">
+            <div class="hidden md:block md:w-auto">
                 <img src="https://masjidagungalazhar.com/assets/images/ilustrasi.png" alt=""
-                    class="w-3/4 md:w-full mx-auto h-auto">
+                    class="w-full md:w-auto">
             </div>
         </div>
     </section>
@@ -329,8 +355,49 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script>
+        // Ambil elemen-elemen yang diperlukan dari DOM
+        const menu = document.querySelector('.menu');
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
 
+        // Tambahkan event listener untuk mengatur tampilan menu
+        menu.addEventListener('click', displayMenu);
+        hamburgerMenu.addEventListener('click', displayMenu);
+
+
+        const iconBars = document.querySelector('.fa-bars');
+        const iconClose = document.querySelector('.fa-xmark');
+
+        function displayMenu() {
+            if (menu.classList.contains('absolute')) {
+                menu.classList.add('hidden');
+                iconBars.style.display = 'inline';
+                iconClose.style.display = 'none';
+
+                menu.classList.remove('absolute');
+                menu.classList.remove('top-14');
+                menu.classList.remove('w-full');
+                menu.classList.remove('left-0');
+                menu.classList.remove('bg-blue-950');
+                menu.classList.remove('divide-blue-900');
+                menu.classList.remove('divide-y-2');
+
+            } else {
+                menu.classList.remove('hidden');
+                iconBars.style.display = 'none';
+                iconClose.style.display = 'inline';
+
+                menu.classList.add('absolute');
+                menu.classList.add('top-14');
+                menu.classList.add('w-full');
+                menu.classList.add('left-0');
+                menu.classList.add('bg-blue-950');
+                menu.classList.add('divide-blue-900');
+                menu.classList.add('divide-y-2');
+
+            }
+        }
+    </script>
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
