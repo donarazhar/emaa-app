@@ -9,3 +9,6 @@ Route::get('/', function () {
 Route::get('/blog', function () {
     return view('blog');
 });
+Route::get('/belajar', function () {
+    return view('belajar');
+});
