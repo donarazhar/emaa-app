@@ -128,7 +128,7 @@
                             corporis error esse.</p>
                     </div>
                 </div>
-                
+
                 <!-- Service 2 -->
                 <div
                     class="flex space-x-6 py-4 px-4 text-white bg-red-500 md:bg-blue-900 md:text-white rounded-xl items-start">
@@ -163,7 +163,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
     </section>
@@ -341,7 +341,7 @@
         <img src="https://c.inilah.com/2023/04/0415_104054_0e22_inilah.com_-1024x683.jpg" alt=""
             class="absolute inset-0 h-full w-full object-cover opacity-10">
         <div
-            class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center relative z-10 text-left text-white px-4 md:px-8">
+            class="container mx-auto grid grid-cols-1 md:grid-cols-2 items-center relative z-10 text-left text-white px-4 md:px-8 md:gap-6">
             <div class="w-full md:w-auto">
                 <h3 class="text-4xl md:text-5xl font-bold mb-5">Unduh Dan Hadirkan Masjid Agung Al Azhar Di Genggaman
                     Anda.</h3>

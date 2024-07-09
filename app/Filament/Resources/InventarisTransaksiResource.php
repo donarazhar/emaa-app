@@ -17,16 +17,25 @@ class InventarisTransaksiResource extends Resource
 {
     protected static ?string $model = InventarisTransaksi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
+    protected static ?string $navigationGroup = 'Transaksi Inventaris';
+    protected static ?int $navigationSort = 8;
+    protected static ?string $navigationLabel = 'Transaksi Data Inventaris';
 
-    protected static ?string $navigationGroup = 'Transaksi';
-    protected static ?string $navigationLabel = 'Transaksi Inventaris';
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('foto_data_inventaris')->image()->directory('file-inventaris')->label('Gambar'),
+                Forms\Components\FileUpload::make('foto_data_inventaris')
+                    ->image()
+                    ->maxSize(1024)
+                    ->directory('file-inventaris')
+                    ->label('Gambar'),
                 Forms\Components\TextInput::make('nama_data_inventaris')->label('Nama Barang')
                     ->required()
                     ->maxLength(255),
@@ -68,7 +77,7 @@ class InventarisTransaksiResource extends Resource
                 Tables\Columns\TextColumn::make('stok_data_inventaris')->label('Byk'),
                 Tables\Columns\TextColumn::make('bagian.nama_bagian')->label('Bagian'),
                 Tables\Columns\TextColumn::make('kategori.nama_kategori')->label('Kategori'),
-                Tables\Columns\TextColumn::make('tgl_data_inventaris')->label('Tgl. Input'),
+                Tables\Columns\TextColumn::make('tgl_data_inventaris')->dateTime('d/m/Y')->label('Tgl. Input'),
                 Tables\Columns\TextColumn::make('jenis_data_inventaris')->label('Jns'),
                 Tables\Columns\TextColumn::make('keterangan_data_inventaris')->label('Keterangan'),
             ])

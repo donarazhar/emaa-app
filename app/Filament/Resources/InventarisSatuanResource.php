@@ -17,10 +17,15 @@ class InventarisSatuanResource extends Resource
 {
     protected static ?string $model = InventarisSatuan::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
     protected static ?string $navigationGroup = 'Master Data Inventaris';
+    protected static ?int $navigationSort = 7;
     protected static ?string $navigationLabel = 'Input Data Satuan';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
 
     public static function form(Form $form): Form
@@ -40,8 +45,9 @@ class InventarisSatuanResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama_satuan')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('keterangan_satuan')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('nama_satuan')->label('Nama Satuan')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('keterangan_satuan')->label('Keterangan'),
             ])
             ->filters([
                 //

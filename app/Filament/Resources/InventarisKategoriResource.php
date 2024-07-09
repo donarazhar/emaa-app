@@ -17,10 +17,15 @@ class InventarisKategoriResource extends Resource
 {
     protected static ?string $model = InventarisKategori::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
     protected static ?string $navigationGroup = 'Master Data Inventaris';
+    protected static ?int $navigationSort = 5;
     protected static ?string $navigationLabel = 'Input Data Kategori';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -36,7 +41,8 @@ class InventarisKategoriResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama_kategori')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('nama_kategori')->label('Nama Kategori')->searchable()->sortable(),
             ])
             ->filters([
                 //

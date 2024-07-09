@@ -17,10 +17,15 @@ class InventarisMerkResource extends Resource
 {
     protected static ?string $model = InventarisMerk::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
     protected static ?string $navigationGroup = 'Master Data Inventaris';
+    protected static ?int $navigationSort = 6;
     protected static ?string $navigationLabel = 'Input Data Merk';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -36,7 +41,8 @@ class InventarisMerkResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama_merk')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('nama_merk')->label('Merk Barang')->searchable()->sortable(),
             ])
             ->filters([
                 //

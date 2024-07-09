@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('surat_transaksis', function (Blueprint $table) {
             $table->id();
-            $table->string('no_transaksi_surat')->unique();
+            $table->string('no_transaksi_surat');
             $table->date('tgl_transaksi_surat');
             $table->string('perihal_transaksi_surat');
             $table->string('surat_dari_transaksi_surat');

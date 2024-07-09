@@ -17,16 +17,26 @@ class SuratKategoriResource extends Resource
 {
     protected static ?string $model = SuratKategori::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
     protected static ?string $navigationGroup = 'Master Data Surat';
+    protected static ?int $navigationSort = 2;
     protected static ?string $navigationLabel = 'Input Data Kategori Surat';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nama_kategori')->label('Kategori Surat')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('keterangan_kategori')->label('Keterangan')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -34,7 +44,9 @@ class SuratKategoriResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('nama_kategori')->label('Kategori Surat')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('keterangan_kategori')->label('Keterangan'),
             ])
             ->filters([
                 //
