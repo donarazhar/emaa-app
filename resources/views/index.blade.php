@@ -51,6 +51,7 @@
     <section id="hero" class="bg-blue-900">
         <div class="swiper-container">
             <div class="swiper-wrapper">
+
                 <!-- Slide 1 -->
                 <div class="swiper-slide relative overflow-hidden">
                     <img src="https://c.inilah.com/2023/04/0415_104054_0e22_inilah.com_-1024x683.jpg" alt=""
@@ -72,6 +73,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- Slide 2 -->
                 <div class="swiper-slide relative overflow-hidden">
                     <img src="https://c.inilah.com/2023/04/0415_104054_0e22_inilah.com_-1024x683.jpg" alt=""
@@ -103,17 +105,17 @@
     <!-- Fitur -->
     <section id="fitur" class="bg-white py-20 px-4 md:py-32 md:px-4">
         <h3 class="text-4xl md:text-5xl font-bold text-center mb-3 md:mb-5">Dapatkan <span
-                class="text-red-500">Fitur</span>
-            Menarik</h3>
+                class="text-red-500">Fitur</span> Menarik
+        </h3>
         <p class="text-gray-500 mb-2 md:mb-8 text-center text-sm">Lorem ipsum, dolor sit amet consectetur adipisicing
-            elit.
-            Eveniet,
-            reprehenderit?</p>
+            elit. Eveniet, reprehenderit?</p>
         <div class="w-11/12 md:container mx-auto grid grid-cols-1 md:grid-cols-6 gap-4">
+            {{-- Cols 1 --}}
             <div class="col-span-2 flex justify-center items-center">
                 <img src="https://masjidagungalazhar.com/assets/images/about-left-image.png" alt=""
                     class="md:w-8/12 md:block hidden">
             </div>
+            {{-- Cols 2 --}}
             <div class="col-span-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Service 1 -->
                 <div
@@ -126,6 +128,7 @@
                             corporis error esse.</p>
                     </div>
                 </div>
+                
                 <!-- Service 2 -->
                 <div
                     class="flex space-x-6 py-4 px-4 text-white bg-red-500 md:bg-blue-900 md:text-white rounded-xl items-start">
@@ -159,6 +162,8 @@
                             corporis error esse.</p>
                     </div>
                 </div>
+
+                
             </div>
         </div>
     </section>
@@ -398,6 +403,7 @@
             }
         }
     </script>
+
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
