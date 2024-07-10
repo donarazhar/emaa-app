@@ -17,10 +17,10 @@ class SuratTransaksiResource extends Resource
 {
     protected static ?string $model = SuratTransaksi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document';
-    protected static ?string $navigationGroup = 'Transaksi Surat';
     protected static ?int $navigationSort = 3;
-    protected static ?string $navigationLabel = 'Transaksi Data Surat';
+    protected static ?string $navigationGroup = 'Surats';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
+    protected static ?string $modelLabel = 'Transaksi Surats';
 
     public static function getNavigationBadge(): ?string
     {
@@ -49,9 +49,9 @@ class SuratTransaksiResource extends Resource
                 Forms\Components\Select::make('status_transaksi_surat')
                     ->label('Status')
                     ->options([
-                        'disposisi' => 'Disposisi',
-                        'proses' => 'Proses',
-                        'selesai' => 'Selesai',
+                        'Disposisi' => 'Disposisi',
+                        'Proses' => 'Proses',
+                        'Selesai' => 'Selesai',
                     ])
                     ->required(),
                 Forms\Components\Select::make('kategori_surat_id')->label('Kategori Surat')
@@ -68,17 +68,23 @@ class SuratTransaksiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\TextColumn::make('no_transaksi_surat')->label('No Urut'),
-                Tables\Columns\TextColumn::make('tgl_transaksi_surat')->dateTime('d/m/Y')->label('Tgl. Input'),
-                Tables\Columns\TextColumn::make('perihal_transaksi_surat')->label('Perihal'),
-                Tables\Columns\TextColumn::make('surat_dari_transaksi_surat')->label('Surat dari'),
+                Tables\Columns\TextColumn::make('no_transaksi_surat')->label('No. Urut'),
+                Tables\Columns\TextColumn::make('tgl_transaksi_surat')->dateTime('d/m/Y')->label('Tgl. Input')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('perihal_transaksi_surat')->label('Perihal')->searchable(),
+                Tables\Columns\TextColumn::make('surat_dari_transaksi_surat')->label('Dari')->searchable(),
+                Tables\Columns\TextColumn::make('kategori.nama_kategori')->label('Kategori')->sortable(),
+                Tables\Columns\TextColumn::make('asal.nama_asal_surat')->label('Asal')->sortable(),
+                Tables\Columns\TextColumn::make('status_transaksi_surat')->label('Status')->sortable(),
                 Tables\Columns\TextColumn::make('disposisi_transaksi_surat')->label('Isi Disposisi'),
-                Tables\Columns\TextColumn::make('status_transaksi_surat')->label('Status'),
-                Tables\Columns\TextColumn::make('kategori.nama_kategori')->label('Kategori Surat'),
-                Tables\Columns\TextColumn::make('asal.nama_asal_surat')->label('Asal Surat'),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('nama_asal_surat')
+                    ->relationship('asal', 'nama_asal_surat'),
+                Tables\Filters\SelectFilter::make('nama_kategori')
+                    ->relationship('kategori', 'nama_kategori'),
+                Tables\Filters\SelectFilter::make('surat_dari_transaksi_surat')
+                    ->searchable()
+                    ->preload()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -105,4 +111,14 @@ class SuratTransaksiResource extends Resource
             'edit' => Pages\EditSuratTransaksi::route('/{record}/edit'),
         ];
     }
+
+    // public static function getModelLabel(): string
+    // {
+    //     return __(key: 'Transaksi Surat');
+    // }
+
+    // public static function getPluralModelLabel(): string
+    // {
+    //     return __(key: 'Data Transaksi Surat');
+    // }
 }

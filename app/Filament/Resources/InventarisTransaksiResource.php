@@ -17,10 +17,10 @@ class InventarisTransaksiResource extends Resource
 {
     protected static ?string $model = InventarisTransaksi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document';
-    protected static ?string $navigationGroup = 'Transaksi Inventaris';
-    protected static ?int $navigationSort = 8;
-    protected static ?string $navigationLabel = 'Transaksi Data Inventaris';
+    protected static ?string $navigationGroup = 'Inventaris';
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static ?string $modelLabel = 'Transaksi Data Inventaris';
+    protected static ?int $navigationSort = 9;
 
     public static function getNavigationBadge(): ?string
     {
@@ -44,7 +44,9 @@ class InventarisTransaksiResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('stok_data_inventaris')->label('Banyak')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->numeric()
+                    ->regex('/^\d+$/'),
                 Forms\Components\TextArea::make('keterangan_data_inventaris')->label('Keterangan')
                     ->required()
                     ->maxLength(255),
@@ -72,13 +74,14 @@ class InventarisTransaksiResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
                 Tables\Columns\ImageColumn::make('foto_data_inventaris')->label('Gambar')->circular(),
+                Tables\Columns\TextColumn::make('tgl_data_inventaris')->dateTime('d/m/Y')->label('Tgl. Input'),
                 Tables\Columns\TextColumn::make('nama_data_inventaris')->label('Nama Barang'),
                 Tables\Columns\TextColumn::make('merk.nama_merk')->label('Merk'),
                 Tables\Columns\TextColumn::make('stok_data_inventaris')->label('Byk'),
-                Tables\Columns\TextColumn::make('bagian.nama_bagian')->label('Bagian'),
+                Tables\Columns\TextColumn::make('satuan.nama_satuan')->label('Satuan'),
+                Tables\Columns\TextColumn::make('bagian.nama_bagian')->label('Lokasi'),
                 Tables\Columns\TextColumn::make('kategori.nama_kategori')->label('Kategori'),
-                Tables\Columns\TextColumn::make('tgl_data_inventaris')->dateTime('d/m/Y')->label('Tgl. Input'),
-                Tables\Columns\TextColumn::make('jenis_data_inventaris')->label('Jns'),
+                Tables\Columns\TextColumn::make('jenis_data_inventaris')->label('Jenis'),
                 Tables\Columns\TextColumn::make('keterangan_data_inventaris')->label('Keterangan'),
             ])
             ->filters([

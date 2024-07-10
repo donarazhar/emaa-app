@@ -17,10 +17,11 @@ class InventarisMerkResource extends Resource
 {
     protected static ?string $model = InventarisMerk::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
-    protected static ?string $navigationGroup = 'Master Data Inventaris';
-    protected static ?int $navigationSort = 6;
-    protected static ?string $navigationLabel = 'Input Data Merk';
+    protected static ?string $navigationGroup = 'Inventaris';
+    protected static ?string $modelLabel = 'Inventaris Merks';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
+    protected static ?int $navigationSort = 7;
 
     public static function getNavigationBadge(): ?string
     {

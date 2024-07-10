@@ -17,10 +17,11 @@ class SuratAsalResource extends Resource
 {
     protected static ?string $model = SuratAsal::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
-    protected static ?string $navigationGroup = 'Master Data Surat';
     protected static ?int $navigationSort = 1;
-    protected static ?string $navigationLabel = 'Input Data Asal Surat';
+    protected static ?string $navigationGroup = 'Surats';
+    protected static ?string $modelLabel = 'Asal Surats';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationParentItem = 'Transaksi Surats';
 
     public static function getNavigationBadge(): ?string
     {

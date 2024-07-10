@@ -17,10 +17,12 @@ class SuratKategoriResource extends Resource
 {
     protected static ?string $model = SuratKategori::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
-    protected static ?string $navigationGroup = 'Master Data Surat';
     protected static ?int $navigationSort = 2;
-    protected static ?string $navigationLabel = 'Input Data Kategori Surat';
+    protected static ?string $navigationGroup = 'Surats';
+    protected static ?string $modelLabel = 'Kategori Surat';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationParentItem = 'Transaksi Surats';
+
 
     public static function getNavigationBadge(): ?string
     {
@@ -76,4 +78,14 @@ class SuratKategoriResource extends Resource
             'edit' => Pages\EditSuratKategori::route('/{record}/edit'),
         ];
     }
+
+    // public static function getModelLabel(): string
+    // {
+    //     return __(key: 'Kategori Surat');
+    // }
+
+    // public static function getPluralModelLabel(): string
+    // {
+    //     return __(key: 'Data Kategori Surat');
+    // }
 }

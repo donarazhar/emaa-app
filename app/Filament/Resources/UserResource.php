@@ -2,20 +2,23 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\UserResource\RelationManagers;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
@@ -47,8 +50,13 @@ class UserResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('password')
                     ->password()
-                    ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->dehydrateStateUsing(static function ($state) {
+                        // Return the state only if it is filled, otherwise null
+                        return filled($state) ? Hash::make($state) : null;
+                    })
+                    ->dehydrated(fn ($state) => filled($state)) // Dehydrate only if the state is filled
+                    ->label('Password'),
             ]);
     }
 
@@ -89,5 +97,21 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        // Ensure that the password is not hydrated into the form, so it is not exposed
+        unset($data['password']);
+        return $data;
+    }
+
+    protected function handleRecordUpdate(Model $record, array $data): Model
+    {
+        if (array_key_exists('password', $data) && is_null($data['password'])) {
+            unset($data['password']); // Keep the existing password if no new password is provided
+        }
+        $record->update($data);
+        return $record;
     }
 }

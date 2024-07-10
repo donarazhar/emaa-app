@@ -17,10 +17,11 @@ class InventarisBagianResource extends Resource
 {
     protected static ?string $model = InventarisBagian::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
-    protected static ?string $navigationGroup = 'Master Data Inventaris';
-    protected static ?int $navigationSort = 4;
-    protected static ?string $navigationLabel = 'Input Data Bagian';
+    protected static ?string $navigationGroup = 'Inventaris';
+    protected static ?string $modelLabel = 'Inventaris Bagians';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
+    protected static ?int $navigationSort = 5;
 
     public static function getNavigationBadge(): ?string
     {

@@ -17,10 +17,11 @@ class InventarisKategoriResource extends Resource
 {
     protected static ?string $model = InventarisKategori::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
-    protected static ?string $navigationGroup = 'Master Data Inventaris';
-    protected static ?int $navigationSort = 5;
-    protected static ?string $navigationLabel = 'Input Data Kategori';
+    protected static ?string $navigationGroup = 'Inventaris';
+    protected static ?string $modelLabel = 'Inventaris Kategoris';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
+    protected static ?int $navigationSort = 6;
 
     public static function getNavigationBadge(): ?string
     {
