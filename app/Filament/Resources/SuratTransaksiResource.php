@@ -114,11 +114,11 @@ class SuratTransaksiResource extends Resource
 
     // public static function getModelLabel(): string
     // {
-    //     return __(key: 'Transaksi Surat');
+    //     return __('Transaksi Surat');
     // }
 
     // public static function getPluralModelLabel(): string
     // {
-    //     return __(key: 'Data Transaksi Surat');
+    //     return __('Data Transaksi Surat');
     // }
 }

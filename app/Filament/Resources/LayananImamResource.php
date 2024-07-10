@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SuratKategoriResource\Pages;
-use App\Filament\Resources\SuratKategoriResource\RelationManagers;
-use App\Models\SuratKategori;
+use App\Filament\Resources\LayananImamResource\Pages;
+use App\Filament\Resources\LayananImamResource\RelationManagers;
+use App\Models\LayananImam;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,30 +13,27 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SuratKategoriResource extends Resource
+class LayananImamResource extends Resource
 {
-    protected static ?string $model = SuratKategori::class;
+    protected static ?string $model = LayananImam::class;
 
-    protected static ?int $navigationSort = 2;
-    protected static ?string $navigationGroup = 'Surats';
-    protected static ?string $modelLabel = 'Kategori Surat';
+    protected static ?string $navigationGroup = 'Layanan';
+    protected static ?string $modelLabel = 'Imams';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Surats';
-
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
+    protected static ?string $navigationParentItem = 'Transaksi Konsultasis';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_kategori')->label('Kategori Surat')
+                Forms\Components\TextInput::make('nama_imam')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('keterangan_kategori')->label('Keterangan')
+                Forms\Components\TextInput::make('nohp_imam')
+                    ->required()
+                    ->maxLength(255)
+                    ->numeric(),
+                Forms\Components\TextArea::make('keterangan')
                     ->required()
                     ->maxLength(255),
             ]);
@@ -47,8 +44,9 @@ class SuratKategoriResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\TextColumn::make('nama_kategori')->label('Kategori Surat')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('keterangan_kategori')->label('Keterangan'),
+                Tables\Columns\TextColumn::make('nama_imam')->label('Nama Imam'),
+                Tables\Columns\TextColumn::make('nohp_imam')->label('No. Handphone'),
+                Tables\Columns\TextColumn::make('keterangan')->label('Keterangan'),
             ])
             ->filters([
                 //
@@ -73,9 +71,9 @@ class SuratKategoriResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSuratKategoris::route('/'),
-            'create' => Pages\CreateSuratKategori::route('/create'),
-            'edit' => Pages\EditSuratKategori::route('/{record}/edit'),
+            'index' => Pages\ListLayananImams::route('/'),
+            'create' => Pages\CreateLayananImam::route('/create'),
+            'edit' => Pages\EditLayananImam::route('/{record}/edit'),
         ];
     }
 }

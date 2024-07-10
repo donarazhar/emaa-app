@@ -45,8 +45,7 @@ class InventarisTransaksiResource extends Resource
                 Forms\Components\TextInput::make('stok_data_inventaris')->label('Banyak')
                     ->required()
                     ->maxLength(255)
-                    ->numeric()
-                    ->regex('/^\d+$/'),
+                    ->numeric(),
                 Forms\Components\TextArea::make('keterangan_data_inventaris')->label('Keterangan')
                     ->required()
                     ->maxLength(255),
