@@ -26,6 +26,7 @@ class MarbotFactory extends Factory
             'status_nikah' => $this->faker->randomElement(['Belum Menikah', 'Menikah', 'Cerai']),
             'status_pegawai' => $this->faker->randomElement(['KTD', 'Capeg', 'Kontrak']),
             'alamat' => $this->faker->address(),
+            'standard_id' => 1,
 
 
         ];

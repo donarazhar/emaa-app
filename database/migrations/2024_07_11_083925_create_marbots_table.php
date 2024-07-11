@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Standard;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->string('status_nikah');
             $table->string('status_pegawai');
             $table->string('alamat');
+            $table->foreignId('standard_id')->nullable()->constrained('standards');
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
