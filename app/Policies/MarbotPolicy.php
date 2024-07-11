@@ -13,7 +13,7 @@ class MarbotPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class MarbotPolicy
      */
     public function view(User $user, Marbot $marbot): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class MarbotPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class MarbotPolicy
      */
     public function update(User $user, Marbot $marbot): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class MarbotPolicy
      */
     public function delete(User $user, Marbot $marbot): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class MarbotPolicy
      */
     public function restore(User $user, Marbot $marbot): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -61,6 +61,6 @@ class MarbotPolicy
      */
     public function forceDelete(User $user, Marbot $marbot): bool
     {
-        //
+        return true;
     }
 }

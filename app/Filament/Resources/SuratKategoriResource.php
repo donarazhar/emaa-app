@@ -18,7 +18,7 @@ class SuratKategoriResource extends Resource
     protected static ?string $model = SuratKategori::class;
 
     protected static ?int $navigationSort = 2;
-    protected static ?string $navigationGroup = 'Surats';
+    protected static ?string $navigationGroup = 'Surat';
     protected static ?string $modelLabel = 'Kategori Surat';
     protected static ?string $navigationLabel = 'Data Kategori Surat';
     protected static ?string $navigationIcon = 'heroicon-o-tag';

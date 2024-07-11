@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             InventarisSatuanSeeder::class,
             SuratAsalSeeder::class,
             SuratKategoriSeeder::class,
+            MarbotSeeder::class,
         ]);
     }
 }

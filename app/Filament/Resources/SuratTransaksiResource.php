@@ -18,7 +18,7 @@ class SuratTransaksiResource extends Resource
     protected static ?string $model = SuratTransaksi::class;
 
     protected static ?int $navigationSort = 3;
-    protected static ?string $navigationGroup = 'Surats';
+    protected static ?string $navigationGroup = 'Surat';
     protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
     protected static ?string $modelLabel = 'Transaksi Surat';
 
