@@ -18,7 +18,8 @@ class InventarisMerkResource extends Resource
     protected static ?string $model = InventarisMerk::class;
 
     protected static ?string $navigationGroup = 'Inventaris';
-    protected static ?string $modelLabel = 'Inventaris Merks';
+    protected static ?string $modelLabel = 'Inventaris Merk';
+    protected static ?string $navigationLabel = 'Data Merk Inv';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
     protected static ?int $navigationSort = 7;
@@ -69,8 +70,8 @@ class InventarisMerkResource extends Resource
     {
         return [
             'index' => Pages\ListInventarisMerks::route('/'),
-            'create' => Pages\CreateInventarisMerk::route('/create'),
-            'edit' => Pages\EditInventarisMerk::route('/{record}/edit'),
+            // 'create' => Pages\CreateInventarisMerk::route('/create'),
+            // 'edit' => Pages\EditInventarisMerk::route('/{record}/edit'),
         ];
     }
 }

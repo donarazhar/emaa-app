@@ -18,7 +18,8 @@ class InventarisKategoriResource extends Resource
     protected static ?string $model = InventarisKategori::class;
 
     protected static ?string $navigationGroup = 'Inventaris';
-    protected static ?string $modelLabel = 'Inventaris Kategoris';
+    protected static ?string $modelLabel = 'Inventaris Kategori';
+    protected static ?string $navigationLabel = 'Data Kategori Inv';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
     protected static ?int $navigationSort = 6;
@@ -69,8 +70,8 @@ class InventarisKategoriResource extends Resource
     {
         return [
             'index' => Pages\ListInventarisKategoris::route('/'),
-            'create' => Pages\CreateInventarisKategori::route('/create'),
-            'edit' => Pages\EditInventarisKategori::route('/{record}/edit'),
+            // 'create' => Pages\CreateInventarisKategori::route('/create'),
+            // 'edit' => Pages\EditInventarisKategori::route('/{record}/edit'),
         ];
     }
 }

@@ -18,7 +18,8 @@ class InventarisSatuanResource extends Resource
     protected static ?string $model = InventarisSatuan::class;
 
     protected static ?string $navigationGroup = 'Inventaris';
-    protected static ?string $modelLabel = 'Inventaris Satuans';
+    protected static ?string $modelLabel = 'Inventaris Satuan';
+    protected static ?string $navigationLabel = 'Data Satuan Inv';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
     protected static ?int $navigationSort = 8;
@@ -74,8 +75,8 @@ class InventarisSatuanResource extends Resource
     {
         return [
             'index' => Pages\ListInventarisSatuans::route('/'),
-            'create' => Pages\CreateInventarisSatuan::route('/create'),
-            'edit' => Pages\EditInventarisSatuan::route('/{record}/edit'),
+            // 'create' => Pages\CreateInventarisSatuan::route('/create'),
+            // 'edit' => Pages\EditInventarisSatuan::route('/{record}/edit'),
         ];
     }
 }

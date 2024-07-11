@@ -18,7 +18,7 @@ class InventarisTransaksiResource extends Resource
     protected static ?string $model = InventarisTransaksi::class;
 
     protected static ?string $navigationGroup = 'Inventaris';
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
     protected static ?string $modelLabel = 'Transaksi Data Inventaris';
     protected static ?int $navigationSort = 9;
 
@@ -107,8 +107,8 @@ class InventarisTransaksiResource extends Resource
     {
         return [
             'index' => Pages\ListInventarisTransaksis::route('/'),
-            'create' => Pages\CreateInventarisTransaksi::route('/create'),
-            'edit' => Pages\EditInventarisTransaksi::route('/{record}/edit'),
+            // 'create' => Pages\CreateInventarisTransaksi::route('/create'),
+            // 'edit' => Pages\EditInventarisTransaksi::route('/{record}/edit'),
         ];
     }
 }

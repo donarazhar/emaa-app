@@ -19,6 +19,7 @@ class LayananJenisKonsultasiResource extends Resource
 
     protected static ?string $navigationGroup = 'Layanan';
     protected static ?string $modelLabel = 'Jenis Konsultasi';
+    protected static ?string $navigationLabel = 'Data Jenis Konsultasi';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Konsultasis';
 
@@ -68,8 +69,8 @@ class LayananJenisKonsultasiResource extends Resource
     {
         return [
             'index' => Pages\ListLayananJenisKonsultasis::route('/'),
-            'create' => Pages\CreateLayananJenisKonsultasi::route('/create'),
-            'edit' => Pages\EditLayananJenisKonsultasi::route('/{record}/edit'),
+            // 'create' => Pages\CreateLayananJenisKonsultasi::route('/create'),
+            // 'edit' => Pages\EditLayananJenisKonsultasi::route('/{record}/edit'),
         ];
     }
 }

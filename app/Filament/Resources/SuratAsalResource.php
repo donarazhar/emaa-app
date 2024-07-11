@@ -19,7 +19,8 @@ class SuratAsalResource extends Resource
 
     protected static ?int $navigationSort = 1;
     protected static ?string $navigationGroup = 'Surats';
-    protected static ?string $modelLabel = 'Asal Surats';
+    protected static ?string $modelLabel = 'Asal Surat';
+    protected static ?string $navigationLabel = 'Data Asal Surat';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Surats';
 

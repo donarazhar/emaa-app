@@ -19,8 +19,8 @@ class SuratTransaksiResource extends Resource
 
     protected static ?int $navigationSort = 3;
     protected static ?string $navigationGroup = 'Surats';
-    protected static ?string $navigationIcon = 'heroicon-o-document';
-    protected static ?string $modelLabel = 'Transaksi Surats';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
+    protected static ?string $modelLabel = 'Transaksi Surat';
 
     public static function getNavigationBadge(): ?string
     {

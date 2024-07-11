@@ -21,6 +21,8 @@ class UserResource extends Resource
     protected static ?int $navigationSort = 20;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $modelLabel = 'User';
+    protected static ?string $navigationLabel = 'User';
 
     public static function getNavigationBadge(): ?string
     {
@@ -94,8 +96,8 @@ class UserResource extends Resource
     {
         return [
             'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            // 'create' => Pages\CreateUser::route('/create'),
+            // 'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 

@@ -28,7 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('imam_id');
             $table->unsignedBigInteger('jeniskonsultasi_id');
             $table->timestamps();
-
             $table->foreign('imam_id')->references('id')->on('layanan_imams')->onDelete('cascade');
             $table->foreign('jeniskonsultasi_id')->references('id')->on('layanan_jenis_konsultasis')->onDelete('cascade');
         });

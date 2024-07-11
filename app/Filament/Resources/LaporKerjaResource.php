@@ -17,7 +17,9 @@ class LaporKerjaResource extends Resource
 {
     protected static ?string $model = LaporKerja::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-check-circle';
+    protected static ?string $navigationIcon = 'heroicon-o-camera';
+    protected static ?string $modelLabel = 'Lapor Kerja';
+    protected static ?string $navigationLabel = 'Lapor Kerja';
 
     public static function getNavigationBadge(): ?string
     {
@@ -84,8 +86,8 @@ class LaporKerjaResource extends Resource
     {
         return [
             'index' => Pages\ListLaporKerjas::route('/'),
-            'create' => Pages\CreateLaporKerja::route('/create'),
-            'edit' => Pages\EditLaporKerja::route('/{record}/edit'),
+            // 'create' => Pages\CreateLaporKerja::route('/create'),
+            // 'edit' => Pages\EditLaporKerja::route('/{record}/edit'),
         ];
     }
 }

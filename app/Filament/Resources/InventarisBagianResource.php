@@ -18,7 +18,8 @@ class InventarisBagianResource extends Resource
     protected static ?string $model = InventarisBagian::class;
 
     protected static ?string $navigationGroup = 'Inventaris';
-    protected static ?string $modelLabel = 'Inventaris Bagians';
+    protected static ?string $modelLabel = 'Inventaris Bagian';
+    protected static ?string $navigationLabel = 'Data Bagian Inv';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
     protected static ?int $navigationSort = 5;
@@ -73,8 +74,8 @@ class InventarisBagianResource extends Resource
     {
         return [
             'index' => Pages\ListInventarisBagians::route('/'),
-            'create' => Pages\CreateInventarisBagian::route('/create'),
-            'edit' => Pages\EditInventarisBagian::route('/{record}/edit'),
+            // 'create' => Pages\CreateInventarisBagian::route('/create'),
+            // 'edit' => Pages\EditInventarisBagian::route('/{record}/edit'),
         ];
     }
 }

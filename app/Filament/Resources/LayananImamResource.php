@@ -19,6 +19,7 @@ class LayananImamResource extends Resource
 
     protected static ?string $navigationGroup = 'Layanan';
     protected static ?string $modelLabel = 'Imams';
+    protected static ?string $navigationLabel = 'Data Imam';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Konsultasis';
 
@@ -72,8 +73,8 @@ class LayananImamResource extends Resource
     {
         return [
             'index' => Pages\ListLayananImams::route('/'),
-            'create' => Pages\CreateLayananImam::route('/create'),
-            'edit' => Pages\EditLayananImam::route('/{record}/edit'),
+            // 'create' => Pages\CreateLayananImam::route('/create'),
+            // 'edit' => Pages\EditLayananImam::route('/{record}/edit'),
         ];
     }
 }

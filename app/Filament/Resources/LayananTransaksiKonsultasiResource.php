@@ -18,7 +18,7 @@ class LayananTransaksiKonsultasiResource extends Resource
     protected static ?string $model = LayananTransaksiKonsultasi::class;
 
     protected static ?string $navigationGroup = 'Layanan';
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
     protected static ?string $modelLabel = 'Transaksi Konsultasi';
 
     public static function form(Form $form): Form
@@ -27,7 +27,12 @@ class LayananTransaksiKonsultasiResource extends Resource
             ->schema([
                 Forms\Components\DatePicker::make('tgl_booking')->label('Tanggal Konsultasi')
                     ->required(),
-                Forms\Components\TimePicker::make('jam_booking')->label('Jam')
+                Forms\Components\Select::make('jam_booking')
+                    ->options([
+                        '10:00' => '10:00',
+                        '12:30' => '12:30',
+                        '14:00' => '14:00',
+                    ])
                     ->required(),
                 Forms\Components\TextInput::make('nama_jamaah')->label('Nama')
                     ->required()
@@ -111,8 +116,8 @@ class LayananTransaksiKonsultasiResource extends Resource
     {
         return [
             'index' => Pages\ListLayananTransaksiKonsultasis::route('/'),
-            'create' => Pages\CreateLayananTransaksiKonsultasi::route('/create'),
-            'edit' => Pages\EditLayananTransaksiKonsultasi::route('/{record}/edit'),
+            // 'create' => Pages\CreateLayananTransaksiKonsultasi::route('/create'),
+            // 'edit' => Pages\EditLayananTransaksiKonsultasi::route('/{record}/edit'),
         ];
     }
 }
