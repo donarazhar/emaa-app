@@ -62,7 +62,7 @@ class MarbotResource extends Resource
                     'Kontrak' => 'Kontrak',
                 ]),
                 Forms\Components\TextInput::make('alamat'),
-                Forms\Components\Select::make('standard_id')->label('User Account')
+                Forms\Components\Select::make('standard_id')->label('Tahun Masuk')
                     ->relationship('standard', 'name'),
 
                 Forms\Components\Select::make('user_id')->label('User Account')
@@ -83,6 +83,23 @@ class MarbotResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+
+                // Menambahkan tombol aksi di tabel
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('Promote')
+                        ->action(function (Marbot $record) {
+                            $record->standard_id = $record->standard_id + 1;
+                            $record->save();
+                        })->color('success')->requiresConfirmation(),
+                    Tables\Actions\Action::make('Demote')
+                        ->action(function (Marbot $record) {
+                            if ($record->standard_id > 1) {
+                                $record->standard_id = $record->standard_id - 1;
+                                $record->save();
+                            }
+                        })->color('danger')->requiresConfirmation(),
+                ]),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

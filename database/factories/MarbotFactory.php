@@ -27,6 +27,7 @@ class MarbotFactory extends Factory
             'status_pegawai' => $this->faker->randomElement(['KTD', 'Capeg', 'Kontrak']),
             'alamat' => $this->faker->address(),
             'standard_id' => 1,
+            'user_id' => null,
 
 
         ];

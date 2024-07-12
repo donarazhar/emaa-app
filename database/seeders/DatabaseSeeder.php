@@ -3,10 +3,18 @@
 namespace Database\Seeders;
 
 
-use App\Models\Keluarga;
-use App\Models\Marbot;
 use App\Models\User;
+use App\Models\Marbot;
+use App\Models\Keluarga;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\SuratAsal;
+use App\Models\LayananImam;
+use App\Models\SuratKategori;
+use App\Models\InventarisMerk;
+use App\Models\InventarisBagian;
+use App\Models\InventarisSatuan;
+use App\Models\InventarisKategori;
+use App\Models\LayananJenisKonsultasi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +24,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Donar Azhar',
@@ -24,20 +31,19 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('1234'),
         ]);
 
-        Marbot::factory(10)
-            ->has(Keluarga::factory()->count(3))
-            ->create();
+        // Membuat beberapa entri dengan data palsu
+        Marbot::factory()->count(5)->has(Keluarga::factory()->count(3))->create();
+        InventarisBagian::factory()->count(2)->create();
+        InventarisKategori::factory()->count(3)->create();
+        InventarisMerk::factory()->count(5)->create();
+        InventarisSatuan::factory()->count(10)->create();
+        LayananImam::factory()->count(5)->create();
+        LayananJenisKonsultasi::factory()->count(3)->create();
+        SuratAsal::factory()->count(5)->create();
+        SuratKategori::factory()->count(3)->create();
+        Keluarga::factory()->count(3)->create();
 
         $this->call([
-            // LayananImamSeeder::class,
-            // LayananJenisKonsultasiSeeder::class,
-            // InventarisMerkSeeder::class,
-            // InventarisBagianSeeder::class,
-            // InventarisKategoriSeeder::class,
-            // InventarisSatuanSeeder::class,
-            // SuratAsalSeeder::class,
-            // SuratKategoriSeeder::class,
-            // MarbotSeeder::class,
             StandardSeeder::class,
         ]);
     }

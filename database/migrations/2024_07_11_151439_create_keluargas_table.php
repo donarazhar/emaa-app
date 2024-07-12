@@ -33,5 +33,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('keluargas');
+        Schema::dropIfExists('keluarga_marbot');
     }
 };
