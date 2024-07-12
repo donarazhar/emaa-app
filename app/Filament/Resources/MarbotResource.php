@@ -27,8 +27,8 @@ class MarbotResource extends Resource
     protected static ?string $modelLabel = 'Marbot';
 
 
-    // Menampilkan search
-    protected static ?string $recordTitleAttribute = 'nama';
+    // // Menampilkan search
+    // protected static ?string $recordTitleAttribute = 'nama';
 
     public static function getNavigationBadge(): ?string
     {
@@ -161,14 +161,14 @@ class MarbotResource extends Resource
     }
 
 
-    // Menampilkan search global
-    public static function getGlobalSearchResultActions(Model $record): array
-    {
-        return [
-            Action::make('Edit')
-                ->iconButton()
-                ->icon('heroicon-s-pencil')
-                ->url(static::getUrl('edit', ['record' => $record]))
-        ];
-    }
+    // // Menampilkan search global
+    // public static function getGlobalSearchResultActions(Model $record): array
+    // {
+    //     return [
+    //         Action::make('Edit')
+    //             ->iconButton()
+    //             ->icon('heroicon-s-pencil')
+    //             ->url(static::getUrl('edit', ['record' => $record]))
+    //     ];
+    // }
 }
