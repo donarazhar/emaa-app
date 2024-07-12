@@ -25,8 +25,7 @@ class MarbotResource extends Resource
     protected static ?string $navigationGroup = 'Marbot';
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $modelLabel = 'Marbot';
-
-
+    protected static ?string $navigationLabel = 'Marbot';
     // // Menampilkan search
     // protected static ?string $recordTitleAttribute = 'nama';
 

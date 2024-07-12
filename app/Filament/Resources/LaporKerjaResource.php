@@ -17,6 +17,7 @@ class LaporKerjaResource extends Resource
 {
     protected static ?string $model = LaporKerja::class;
 
+    protected static ?string $navigationGroup = 'Marbot';
     protected static ?string $navigationIcon = 'heroicon-o-camera';
     protected static ?string $modelLabel = 'Lapor Kerja';
     protected static ?string $navigationLabel = 'Lapor Kerja';
