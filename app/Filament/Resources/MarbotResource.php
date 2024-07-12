@@ -39,36 +39,55 @@ class MarbotResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama'),
-                Forms\Components\TextInput::make('nip'),
-                Forms\Components\TextInput::make('tlahir'),
-                Forms\Components\DatePicker::make('tgl_lahir'),
-                Forms\Components\Select::make('goldar')->options([
-                    'O' => 'O',
-                    'A' => 'A',
-                    'AB' => 'AB',
-                    'B' => 'B',
-                ]),
-                Forms\Components\Select::make('jenkel')->options([
-                    'Laki-Laki' => 'Laki-Laki',
-                    'Perempuan' => 'Perempuan',
-                ]),
-                Forms\Components\Select::make('status_nikah')->options([
-                    'Belum Menikah' => 'Belum Menikah',
-                    'Cerai' => 'Cerai',
-                    'Menikah' => 'Menikah',
-                ]),
-                Forms\Components\Select::make('status_pegawai')->options([
-                    'KTD' => 'KTD',
-                    'Capeg' => 'Capeg',
-                    'Kontrak' => 'Kontrak',
-                ]),
-                Forms\Components\TextInput::make('alamat'),
-                Forms\Components\Select::make('standard_id')->label('Tahun Masuk')
-                    ->relationship('standard', 'name'),
+                // Wizard Component
+                Forms\Components\Wizard::make([
+                    Forms\Components\Wizard\Step::make('Personal Information')
+                        ->schema([
+                            Forms\Components\TextInput::make('nama'),
+                            Forms\Components\TextInput::make('nip'),
+                            Forms\Components\Select::make('jenkel')->options([
+                                'Laki-Laki' => 'Laki-Laki',
+                                'Perempuan' => 'Perempuan',
+                            ]),
+                            Forms\Components\TextInput::make('tlahir'),
+                            Forms\Components\DatePicker::make('tgl_lahir'), Forms\Components\Select::make('goldar')->options([
+                                'O' => 'O',
+                                'A' => 'A',
+                                'AB' => 'AB',
+                                'B' => 'B',
+                            ]),
+                        ])
+                        ->description('Enter your details')
+                        ->icon('heroicon-o-users'),
+                    Forms\Components\Wizard\Step::make('Add Information')
+                        ->schema([
+                            Forms\Components\Select::make('status_nikah')->options([
+                                'Belum Menikah' => 'Belum Menikah',
+                                'Cerai' => 'Cerai',
+                                'Menikah' => 'Menikah',
+                            ]),
+                            Forms\Components\Select::make('status_pegawai')->options([
+                                'KTD' => 'KTD',
+                                'Capeg' => 'Capeg',
+                                'Kontrak' => 'Kontrak',
+                            ]),
+                            Forms\Components\TextInput::make('alamat'),
+                        ])
+                        ->description('Enter your add details')
+                        ->icon('heroicon-o-home'),
+                    Forms\Components\Wizard\Step::make('School Information')
+                        ->schema([
+                            Forms\Components\Select::make('standard_id')->label('Tahun Masuk')
+                                ->relationship('standard', 'name'),
 
-                Forms\Components\Select::make('user_id')->label('User Account')
-                    ->relationship('user', 'name'),
+                            Forms\Components\Select::make('user_id')->label('User Account')
+                                ->relationship('user', 'name'),
+                        ])
+                        ->description('Enter your school')
+                        ->icon('heroicon-o-academic-cap'),
+                ])
+                    ->columnSpanFull()
+                    ->skippable(),
             ]);
     }
 
