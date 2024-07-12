@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Events\PromoteMarbot;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Marbot;
@@ -11,10 +12,11 @@ use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Model;
 use Filament\GlobalSearch\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Collection;
 use App\Filament\Resources\MarbotResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\MarbotResource\RelationManagers;
-use Illuminate\Contracts\Support\Htmlable;
 
 class MarbotResource extends Resource
 {
@@ -26,7 +28,7 @@ class MarbotResource extends Resource
 
 
     // Menampilkan search
-    // protected static ?string $recordTitleAttribute = 'nama';
+    protected static ?string $recordTitleAttribute = 'nama';
 
     public static function getNavigationBadge(): ?string
     {
@@ -104,7 +106,22 @@ class MarbotResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-                ]),
+
+                    // Menambahkan bulk action
+                    Tables\Actions\BulkAction::make('Promote all')
+                        ->action(function (Collection $records) {
+                            $records->each(function ($record) {
+                                // //    event 1
+                                // $record->standard_id = $record->standard_id + 1;
+                                // $record->save();
+
+                                // event 2
+                                event(new PromoteMarbot($record));
+                            });
+                        })
+                        ->requiresConfirmation()
+                        ->deselectRecordsAfterCompletion()
+                ])
             ]);
     }
 
@@ -126,13 +143,13 @@ class MarbotResource extends Resource
 
 
     // Menampilkan search global
-    // public static function getGlobalSearchResultActions(Model $record): array
-    // {
-    //     return [
-    //         Action::make('Edit')
-    //             ->iconButton()
-    //             ->icon('heroicon-s-pencil')
-    //             ->url(static::getUrl('edit', ['record' => $record]))
-    //     ];
-    // }
+    public static function getGlobalSearchResultActions(Model $record): array
+    {
+        return [
+            Action::make('Edit')
+                ->iconButton()
+                ->icon('heroicon-s-pencil')
+                ->url(static::getUrl('edit', ['record' => $record]))
+        ];
+    }
 }
