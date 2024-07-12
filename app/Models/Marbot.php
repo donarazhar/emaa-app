@@ -10,6 +10,10 @@ class Marbot extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'kesehatan' => 'json'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

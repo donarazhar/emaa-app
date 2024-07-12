@@ -39,55 +39,85 @@ class MarbotResource extends Resource
     {
         return $form
             ->schema([
-                // Wizard Component
-                Forms\Components\Wizard::make([
-                    Forms\Components\Wizard\Step::make('Personal Information')
-                        ->schema([
-                            Forms\Components\TextInput::make('nama'),
-                            Forms\Components\TextInput::make('nip'),
-                            Forms\Components\Select::make('jenkel')->options([
-                                'Laki-Laki' => 'Laki-Laki',
-                                'Perempuan' => 'Perempuan',
-                            ]),
-                            Forms\Components\TextInput::make('tlahir'),
-                            Forms\Components\DatePicker::make('tgl_lahir'), Forms\Components\Select::make('goldar')->options([
-                                'O' => 'O',
-                                'A' => 'A',
-                                'AB' => 'AB',
-                                'B' => 'B',
-                            ]),
-                        ])
-                        ->description('Enter your details')
-                        ->icon('heroicon-o-users'),
-                    Forms\Components\Wizard\Step::make('Add Information')
-                        ->schema([
-                            Forms\Components\Select::make('status_nikah')->options([
-                                'Belum Menikah' => 'Belum Menikah',
-                                'Cerai' => 'Cerai',
-                                'Menikah' => 'Menikah',
-                            ]),
-                            Forms\Components\Select::make('status_pegawai')->options([
-                                'KTD' => 'KTD',
-                                'Capeg' => 'Capeg',
-                                'Kontrak' => 'Kontrak',
-                            ]),
-                            Forms\Components\TextInput::make('alamat'),
-                        ])
-                        ->description('Enter your add details')
-                        ->icon('heroicon-o-home'),
-                    Forms\Components\Wizard\Step::make('School Information')
-                        ->schema([
-                            Forms\Components\Select::make('standard_id')->label('Tahun Masuk')
-                                ->relationship('standard', 'name'),
 
-                            Forms\Components\Select::make('user_id')->label('User Account')
-                                ->relationship('user', 'name'),
+                // Section 1
+                Forms\Components\Section::make('Personal Information')
+                    ->description('Masukkan semua data pribadi')
+                    ->collapsible()
+                    ->schema([
+
+                        // Wizard Component - Membuat Tabs Menu
+                        Forms\Components\Wizard::make([
+                            Forms\Components\Wizard\Step::make('First Information')
+                                ->schema([
+                                    Forms\Components\TextInput::make('nama'),
+                                    Forms\Components\TextInput::make('nip'),
+                                    Forms\Components\Select::make('jenkel')->options([
+                                        'Laki-Laki' => 'Laki-Laki',
+                                        'Perempuan' => 'Perempuan',
+                                    ]),
+                                    Forms\Components\TextInput::make('tlahir'),
+                                    Forms\Components\DatePicker::make('tgl_lahir'), Forms\Components\Select::make('goldar')->options([
+                                        'O' => 'O',
+                                        'A' => 'A',
+                                        'AB' => 'AB',
+                                        'B' => 'B',
+                                    ]),
+                                ])
+                                ->description('Enter your details')
+                                ->icon('heroicon-o-users'),
+                            Forms\Components\Wizard\Step::make('Twice Information')
+                                ->schema([
+                                    Forms\Components\Select::make('status_nikah')->options([
+                                        'Belum Menikah' => 'Belum Menikah',
+                                        'Cerai' => 'Cerai',
+                                        'Menikah' => 'Menikah',
+                                    ]),
+                                    Forms\Components\Select::make('status_pegawai')->options([
+                                        'KTD' => 'KTD',
+                                        'Capeg' => 'Capeg',
+                                        'Kontrak' => 'Kontrak',
+                                    ]),
+                                    Forms\Components\TextInput::make('alamat'),
+                                ])
+                                ->description('Enter your add details')
+                                ->icon('heroicon-o-home'),
+                            Forms\Components\Wizard\Step::make('Third Information')
+                                ->schema([
+                                    Forms\Components\Select::make('standard_id')->label('Tahun Masuk')
+                                        ->relationship('standard', 'name'),
+
+                                    Forms\Components\Select::make('user_id')->label('User Account')
+                                        ->relationship('user', 'name'),
+                                ])
+                                ->description('Enter your school')
+                                ->icon('heroicon-o-academic-cap'),
+
                         ])
-                        ->description('Enter your school')
-                        ->icon('heroicon-o-academic-cap'),
-                ])
-                    ->columnSpanFull()
-                    ->skippable(),
+                            ->columnSpanFull()
+                            ->skippable(),
+
+                    ]),
+
+                // Section 2
+                Forms\Components\Section::make('Riwayat Kesehatan')
+                    ->description('Masukkan semua riwayat kesehatan')
+                    ->collapsible()
+                    ->collapsed()
+                    ->schema([
+                        Forms\Components\Repeater::make('kesehatan')->label('Riwayat Kesehatan')
+                            ->schema([
+
+                                Forms\Components\Select::make('name')->options(config('mm_config.kesehatan'))
+                                    ->required(),
+                                Forms\Components\TextInput::make('value')->required()->maxLength(255),
+                            ])
+                            ->columns([
+                                'xl' => 2,
+                            ])
+                    ])
+
+                // Akhir schema
             ]);
     }
 
@@ -104,7 +134,6 @@ class MarbotResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-
                 // Menambahkan tombol aksi di tabel
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\Action::make('Promote')
@@ -147,6 +176,8 @@ class MarbotResource extends Resource
     public static function getRelations(): array
     {
         return [
+
+            // Menambahkan data keluarga
             RelationManagers\KeluargasRelationManager::class
         ];
     }

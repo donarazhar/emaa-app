@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('status_nikah');
             $table->string('status_pegawai');
             $table->string('alamat');
+            $table->json('kesehatan')->nullable();
             $table->foreignIdFor(Standard::class);
             $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
