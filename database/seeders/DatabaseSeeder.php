@@ -29,6 +29,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Donar Azhar',
             'email' => 'donar@email.com',
             'password' => bcrypt('1234'),
+            'foto' => 'file-user/avatar.png',
+            'role' => 'admin',
+            'phone' => '088214740182',
         ]);
 
         // Membuat beberapa entri dengan data palsu

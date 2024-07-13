@@ -67,10 +67,11 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\ImageColumn::make('foto')->label('Gambar')->circular(),
+                Tables\Columns\ImageColumn::make('foto')->width(100)->height(100)->label('Gambar'),
                 Tables\Columns\TextColumn::make('name')->label('Nama'),
                 Tables\Columns\TextColumn::make('email')->label('Email'),
                 Tables\Columns\TextColumn::make('phone')->label('No. HP'),
+                Tables\Columns\TextColumn::make('role')->label('Role'),
             ])
             ->filters([
                 //

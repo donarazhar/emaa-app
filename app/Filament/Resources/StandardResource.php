@@ -22,6 +22,11 @@ class StandardResource extends Resource
     protected static ?string $modelLabel = 'Data Standard';
     protected static ?string $navigationLabel = 'Data Standard';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form

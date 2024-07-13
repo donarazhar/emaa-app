@@ -22,6 +22,11 @@ class SertifikatResource extends Resource
     protected static ?string $modelLabel = 'Data Sertifikat';
     protected static ?string $navigationLabel = 'Data Sertifikat';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
 
     public static function form(Form $form): Form
     {

@@ -45,6 +45,7 @@ class LaporKerjaResource extends Resource
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('foto')
                     ->image()
+                    ->openable()
                     ->multiple()
                     ->maxSize(1024)
                     ->directory('file-laporkerja')
@@ -57,7 +58,8 @@ class LaporKerjaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\ImageColumn::make('foto')->label('Gambar')->circular(),
+                Tables\Columns\ImageColumn::make('foto')->label('Gambar')
+                    ->stacked()->size(100)->square()->limit(3)->limitedRemainingText(),
                 Tables\Columns\TextColumn::make('user.name')->label('Nama Pelapor'),
                 Tables\Columns\TextColumn::make('tgl')->dateTime('d/m/Y')->label('Tgl. Lapor'),
                 Tables\Columns\TextColumn::make('judul')->label('Judul'),
