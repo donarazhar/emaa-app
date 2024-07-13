@@ -28,6 +28,11 @@ class Marbot extends Model
         return $this->belongsToMany(Keluarga::class);
     }
 
+    public function riwayatkepegawaians()
+    {
+        return $this->belongsToMany(RiwayatKepegawaian::class, 'riwayat_kepegawaian_marbot');
+    }
+
     public function sertifikats()
     {
         return $this->hasMany(SertifikatMarbot::class);

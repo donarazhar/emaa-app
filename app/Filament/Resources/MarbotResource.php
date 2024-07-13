@@ -200,9 +200,12 @@ class MarbotResource extends Resource
         return [
 
             // Menambahkan data keluarga
-            RelationManagers\KeluargasRelationManager::class
+            RelationManagers\KeluargasRelationManager::class,
+            // Menambahkan data riwayat kepegawaian
+            RelationManagers\RiwayatkepegawaianRelationManager::class,
         ];
     }
+
 
     public static function getPages(): array
     {

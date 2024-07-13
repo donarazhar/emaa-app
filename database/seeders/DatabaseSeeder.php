@@ -15,6 +15,8 @@ use App\Models\InventarisBagian;
 use App\Models\InventarisSatuan;
 use App\Models\InventarisKategori;
 use App\Models\LayananJenisKonsultasi;
+use App\Models\RiwayatKepegawaian;
+use App\Models\Sertifikat;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -35,16 +37,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Membuat beberapa entri dengan data palsu
-        Marbot::factory()->count(5)->has(Keluarga::factory()->count(3))->create();
+        Marbot::factory()->count(2)->has(Keluarga::factory()->count(2))->create();
+        Marbot::factory()->count(2)->has(RiwayatKepegawaian::factory()->count(2))->create();
         InventarisBagian::factory()->count(2)->create();
         InventarisKategori::factory()->count(3)->create();
         InventarisMerk::factory()->count(5)->create();
-        InventarisSatuan::factory()->count(10)->create();
+        InventarisSatuan::factory()->count(5)->create();
         LayananImam::factory()->count(5)->create();
         LayananJenisKonsultasi::factory()->count(3)->create();
         SuratAsal::factory()->count(5)->create();
         SuratKategori::factory()->count(3)->create();
+        Sertifikat::factory()->count(3)->create();
         Keluarga::factory()->count(3)->create();
+        RiwayatKepegawaian::factory()->count(3)->create();
 
         $this->call([
             StandardSeeder::class,
