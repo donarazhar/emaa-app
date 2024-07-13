@@ -19,9 +19,14 @@ class KasKecilAasResource extends Resource
 
     protected static ?string $navigationGroup = 'Kas Kecil';
     protected static ?string $modelLabel = 'Akun AAs';
-    protected static ?string $navigationLabel = 'Akun AAs';
+    protected static ?string $navigationLabel = 'Akun AAS';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Kas Kecils';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -33,15 +38,15 @@ class KasKecilAasResource extends Resource
                 Forms\Components\TextInput::make('nama_aas')
                     ->label('Nama AAS'),
 
-                Forms\Components\Select::make('status')
-                    ->label('Status')
+                Forms\Components\Select::make('kategori')
+                    ->label('Kategori')
                     ->options([
                         'pembentukan' => 'Pembentukan',
                         'pengisian' => 'Pengisian',
                         'pengeluaran' => 'Pengeluaran',
                     ]),
-                Forms\Components\Select::make('kategori')
-                    ->label('Kategori')
+                Forms\Components\Select::make('status')
+                    ->label('Status')
                     ->options([
                         'debit' => 'Debit',
                         'kredit' => 'Kredit',

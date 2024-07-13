@@ -19,16 +19,21 @@ class KasKecilMatanggaranResource extends Resource
 
     protected static ?string $navigationGroup = 'Kas Kecil';
     protected static ?string $modelLabel = 'Akun Matanggarans';
-    protected static ?string $navigationLabel = 'Akun Matanggarans';
+    protected static ?string $navigationLabel = 'Akun Matanggaran';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $navigationParentItem = 'Transaksi Kas Kecils';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('kode_matanggaran')->label('Kode Matanggaran'),
-                Forms\Components\Select::make('kas_kecil_aas_id')->label('Akun AAS')
+                Forms\Components\Select::make('aas_id')->label('Akun AAS')
                     ->relationship('aas', 'nama_aas')
                     ->required(),
                 Forms\Components\TextInput::make('saldo')->label('Saldo'),

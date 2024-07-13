@@ -21,6 +21,11 @@ class KasKecilTransaksiResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $modelLabel = 'Transaksi Kas Kecils';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -37,8 +42,7 @@ class KasKecilTransaksiResource extends Resource
                     ])
                     ->required(),
                 Forms\Components\Datepicker::make('tgl_transaksi')
-                    ->label('Tanggal Transaksi')
-                    ->format('YYYY-MM-DD'),
+                    ->label('Tanggal Transaksi'),
                 Forms\Components\Select::make('matanggaran_id')->label('Mata Anggaran')
                     ->relationship('aas', 'nama_aas')
                     ->required(),
