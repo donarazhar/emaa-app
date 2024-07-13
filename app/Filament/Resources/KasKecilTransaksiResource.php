@@ -27,19 +27,21 @@ class KasKecilTransaksiResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('perincian')
                     ->label('Perincian'),
-
                 Forms\Components\TextInput::make('jumlah')
                     ->label('Jumlah'),
-
-                Forms\Components\TextInput::make('kategori')
-                    ->label('Kategori'),
+                Forms\Components\Select::make('kategori')
+                    ->options([
+                        'pembentukan' => 'Pembentukan',
+                        'pengeluaran' => 'Pengeluaran',
+                        'pengisian' => 'Pengisian',
+                    ])
+                    ->required(),
                 Forms\Components\Datepicker::make('tgl_transaksi')
                     ->label('Tanggal Transaksi')
                     ->format('YYYY-MM-DD'),
                 Forms\Components\Select::make('matanggaran_id')->label('Mata Anggaran')
-                    ->relationship('matanggaran', 'kode_matanggaran')
+                    ->relationship('aas', 'nama_aas')
                     ->required(),
-
             ]);
     }
 
@@ -51,7 +53,6 @@ class KasKecilTransaksiResource extends Resource
                 Tables\Columns\TextColumn::make('jumlah')->label('Jumlah'),
                 Tables\Columns\TextColumn::make('kategori')->label('Kategori'),
                 Tables\Columns\TextColumn::make('tgl_transaksi')->label('Tanggal Transaksi'),
-                Tables\Columns\TextColumn::make('pengisian_id')->label('Pengisian ID'),
                 Tables\Columns\TextColumn::make('matanggaran.kode_matanggaran')->label('Mata Anggaran'),
             ])
             ->filters([

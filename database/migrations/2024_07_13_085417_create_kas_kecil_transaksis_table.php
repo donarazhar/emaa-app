@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->enum('kategori', ['pembentukan', 'pengisian', 'pengeluaran']);
             $table->date('tgl_transaksi');
-            $table->foreignId('matanggaran_id')->constrained('kas_kecil_matanggaran');
+            $table->foreignId('matanggaran_id')->constrained('kas_kecil_matanggarans');
             $table->timestamps();
         });
     }

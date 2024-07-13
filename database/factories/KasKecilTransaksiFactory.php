@@ -19,18 +19,12 @@ class KasKecilTransaksiFactory extends Factory
      */
     public function definition(): array
     {
-        $kategori = $this->faker->randomElement(['debit', 'kredit']);
-        $tgl_transaksi = $this->faker->dateTimeThisMonth();
-
-        // Ambil random ID dari kas_kecil_matanggaran
-        $matanggaran_id = KasKecilMatanggaran::inRandomOrder()->first()->id;
-
         return [
             'perincian' => $this->faker->sentence(),
             'jumlah' => $this->faker->numberBetween(0, 1000000),
-            'kategori' => null,
+            'kategori' => $this->faker->randomElement(['pembentukan', 'pengeluaran', 'pengisian']),
             'tgl_transaksi' => now(),
-            'matanggaran_id' => $matanggaran_id,
+            'matanggaran_id' => KasKecilMatanggaran::inRandomOrder()->first()->id,
         ];
     }
 }
