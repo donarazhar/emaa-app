@@ -4,9 +4,11 @@ namespace App\Enums;
 
 enum RiwayatKepegawaian: string
 {
-    case JABATAN = 'Jabatan';
-    case PENUGASAN = 'Penugasan';
-    case PELANGGARAN = 'Pelanggaran';
+    case JABATAN = 'Riwayat Jabatan';
+    case PENUGASAN = 'Riwayat Penugasan';
+    case PELANGGARAN = 'Riwayat Pelanggaran';
+    case BASAHA = 'Penguasaan Bahasa';
+    case SEKOLAH = 'Riwayat Sekolah';
 
     public static function getValues(): array
     {

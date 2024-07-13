@@ -17,10 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('foto')->nullable();
-            $table->string('jabatan')->nullable();
-            $table->string('golongan')->nullable();
             $table->string('keterangan')->nullable();
-            $table->string('tipe_hubungan')->index();
+            $table->string('jenis_riwayat')->index();
             $table->timestamps();
         });
         Schema::create('riwayat_kepegawaian_marbot', function (Blueprint $table) {

@@ -32,6 +32,9 @@ class KeluargasRelationManager extends RelationManager
             ->recordTitleAttribute('id')
 
             ->columns([
+                Tables\Columns\TextColumn::make('row_number')
+                    ->label('No.')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('nama'),
                 Tables\Columns\TextColumn::make('no_kontak'),
                 Tables\Columns\TextColumn::make('tipe_hubungan'),

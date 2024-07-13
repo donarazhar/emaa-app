@@ -8,16 +8,19 @@ use App\Models\Marbot;
 use App\Models\Keluarga;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\SuratAsal;
+use App\Models\Sertifikat;
+use App\Models\KasKecilAas;
 use App\Models\LayananImam;
 use App\Models\SuratKategori;
 use App\Models\InventarisMerk;
+use Illuminate\Database\Seeder;
 use App\Models\InventarisBagian;
 use App\Models\InventarisSatuan;
+use App\Models\KasKecilTransaksi;
 use App\Models\InventarisKategori;
-use App\Models\LayananJenisKonsultasi;
 use App\Models\RiwayatKepegawaian;
-use App\Models\Sertifikat;
-use Illuminate\Database\Seeder;
+use App\Models\KasKecilMatanggaran;
+use App\Models\LayananJenisKonsultasi;
 
 class DatabaseSeeder extends Seeder
 {
@@ -50,6 +53,9 @@ class DatabaseSeeder extends Seeder
         Sertifikat::factory()->count(3)->create();
         Keluarga::factory()->count(3)->create();
         RiwayatKepegawaian::factory()->count(3)->create();
+        KasKecilAas::factory()->count(5)->create();
+        KasKecilMatanggaran::factory()->count(5)->create();
+        KasKecilTransaksi::factory()->count(5)->create();
 
         $this->call([
             StandardSeeder::class,

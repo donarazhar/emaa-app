@@ -147,9 +147,15 @@ class MarbotResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('row_number')
+                    ->label('No.')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('nama')->label('Nama Marbot'),
-                Tables\Columns\TextColumn::make('standard.name'),
+                Tables\Columns\TextColumn::make('jenkel')->label('Jenkel'),
+                Tables\Columns\TextColumn::make('tlahir')->label('Tlahir'),
+                Tables\Columns\TextColumn::make('tgl_lahir')->dateTime('d/m/Y')->label('Tgl. Lahir'),
+                Tables\Columns\TextColumn::make('status_nikah'),
+                Tables\Columns\TextColumn::make('status_pegawai'),
             ])
             ->filters([
                 //

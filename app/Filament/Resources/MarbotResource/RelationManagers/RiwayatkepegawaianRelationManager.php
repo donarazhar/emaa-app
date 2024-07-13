@@ -26,8 +26,6 @@ class RiwayatkepegawaianRelationManager extends RelationManager
                     ->maxLength(255),
                 Forms\Components\TextArea::make('keterangan')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('jabatan')
-                    ->maxLength(255),
                 Forms\Components\FileUpload::make('foto')
                     ->image()
                     ->maxSize(1024)
@@ -46,7 +44,6 @@ class RiwayatkepegawaianRelationManager extends RelationManager
                     ->rowIndex(),
                 Tables\Columns\TextColumn::make('tipe_hubungan')->label('Jenis Riwayat')->sortable(),
                 Tables\Columns\TextColumn::make('nama')->label('Nama Riwayat'),
-                Tables\Columns\TextColumn::make('jabatan'),
                 Tables\Columns\TextColumn::make('keterangan'),
                 Tables\Columns\ImageColumn::make('foto')->width(100)->height(100)->label('File'),
             ])
