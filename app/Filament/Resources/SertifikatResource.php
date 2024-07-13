@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\StandardResource\Pages;
-use App\Filament\Resources\StandardResource\RelationManagers;
-use App\Models\Standard;
+use App\Filament\Resources\SertifikatResource\Pages;
+use App\Filament\Resources\SertifikatResource\RelationManagers;
+use App\Models\Sertifikat;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,21 +13,22 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class StandardResource extends Resource
+class SertifikatResource extends Resource
 {
-    protected static ?string $model = Standard::class;
+    protected static ?string $model = Sertifikat::class;
 
     protected static ?string $navigationGroup = 'Marbot';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $modelLabel = 'Data Standard';
-    protected static ?string $navigationLabel = 'Data Standard';
+    protected static ?string $modelLabel = 'Data Sertifikat';
+    protected static ?string $navigationLabel = 'Data Sertifikat';
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name'),
-                Forms\Components\TextInput::make('class_number'),
+                Forms\Components\TextInput::make('nama'),
+                Forms\Components\TextInput::make('deskripsi'),
             ]);
     }
 
@@ -35,8 +36,9 @@ class StandardResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('class_number'),
+                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('nama'),
+                Tables\Columns\TextColumn::make('deskripsi'),
             ])
             ->filters([
                 //
@@ -61,9 +63,9 @@ class StandardResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStandards::route('/'),
-            // 'create' => Pages\CreateStandard::route('/create'),
-            // 'edit' => Pages\EditStandard::route('/{record}/edit'),
+            'index' => Pages\ListSertifikats::route('/'),
+            'create' => Pages\CreateSertifikat::route('/create'),
+            'edit' => Pages\EditSertifikat::route('/{record}/edit'),
         ];
     }
 }

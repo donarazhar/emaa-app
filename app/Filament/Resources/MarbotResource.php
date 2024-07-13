@@ -2,12 +2,13 @@
 
 namespace App\Filament\Resources;
 
-use App\Events\PromoteMarbot;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Marbot;
 use Filament\Forms\Form;
+use App\Models\Sertifikat;
 use Filament\Tables\Table;
+use App\Events\PromoteMarbot;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Model;
 use Filament\GlobalSearch\Actions\Action;
@@ -39,7 +40,7 @@ class MarbotResource extends Resource
         return $form
             ->schema([
 
-                // Section 1
+                // Section 1 Data Personal
                 Forms\Components\Section::make('Personal Information')
                     ->description('Masukkan semua data pribadi')
                     ->collapsible()
@@ -93,12 +94,15 @@ class MarbotResource extends Resource
                                 ->icon('heroicon-o-academic-cap'),
 
                         ])
-                            ->columnSpanFull()
+                            ->columns([
+                                'xl' => 3,
+                            ])
                             ->skippable(),
 
                     ]),
 
-                // Section 2
+
+                // Section 2 Riwayat Kesehatan
                 Forms\Components\Section::make('Riwayat Kesehatan')
                     ->description('Masukkan semua riwayat kesehatan')
                     ->collapsible()
@@ -106,13 +110,32 @@ class MarbotResource extends Resource
                     ->schema([
                         Forms\Components\Repeater::make('kesehatan')->label('Riwayat Kesehatan')
                             ->schema([
-
-                                Forms\Components\Select::make('name')->options(config('mm_config.kesehatan'))
-                                    ->required(),
-                                Forms\Components\TextInput::make('value')->required()->maxLength(255),
+                                Forms\Components\Select::make('name')->options(config('mm_config.kesehatan')),
+                                Forms\Components\TextInput::make('value')->maxLength(255),
                             ])
                             ->columns([
                                 'xl' => 2,
+                            ])
+                    ]),
+
+                // Section 3 Sertifikat
+                Forms\Components\Section::make('Sertifikat & Penghargaan')
+                    ->description('Masukkan Sertifikat & Penghargaan')
+                    ->collapsible()
+                    ->collapsed()
+                    ->schema([
+                        Forms\Components\Repeater::make('sertifikats')->label('Sertifikat & Penghargaan')
+                            ->relationship()
+                            ->schema([
+                                Forms\Components\Select::make('sertifikat_id')->label('Jenis Sertifikat')
+                                    ->options(Sertifikat::all()->pluck('nama', 'id'))
+                                    ->searchable(),
+                                Forms\Components\TextArea::make('deskripsi'),
+                                Forms\Components\FileUpload::make('foto')
+                                    ->image()->openable()->downloadable()->directory('file-sertifikat'),
+                            ])
+                            ->columns([
+                                'xl' => 3,
                             ])
                     ])
 

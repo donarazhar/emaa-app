@@ -1,8 +1,8 @@
 <?php
 return [
     'kesehatan' => [
-        'darah group' => 'Darah group',
-        'medis history' => 'Medis history',
-        'alergi' => 'Alergi',
+        'golongan darah' => 'Golongan Darah',
+        'riwayat medis' => 'Riwayat Medis',
+        'penyakit bawaan' => 'Penyakit Bawaan',
     ]
 ];

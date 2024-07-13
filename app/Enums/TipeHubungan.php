@@ -6,8 +6,11 @@ enum TipeHubungan: string
 {
     case AYAH = 'Ayah';
     case IBU = 'Ibu';
-    case KAKAK = 'Kakak';
-    case ANAK = 'Anak';
+    case ISTRI = 'Istri';
+    case SUAMI = 'Suami';
+    case ANAK = 'Anak Kandung';
+    case ANAKANGKAT = 'Anak Angkat';
+    case SAUDARA = 'Saudara Kandung';
 
     public static function getValues(): array
     {

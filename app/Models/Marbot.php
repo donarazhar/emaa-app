@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Marbot extends Model
 {
@@ -27,5 +26,10 @@ class Marbot extends Model
     public function keluargas()
     {
         return $this->belongsToMany(Keluarga::class);
+    }
+
+    public function sertifikats()
+    {
+        return $this->hasMany(SertifikatMarbot::class);
     }
 }
