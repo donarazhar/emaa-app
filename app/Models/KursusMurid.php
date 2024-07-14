@@ -11,7 +11,7 @@ class KursusMurid extends Model
 
     public function pendaftarans()
     {
-        return $this->hasMany(KursusPendaftaran::class);
+        return $this->hasMany(KursusPendaftaran::class, 'kursus_murid_id');
     }
 
     public function absensis()

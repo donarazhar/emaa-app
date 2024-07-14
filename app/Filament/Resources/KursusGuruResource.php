@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\KursusMuridResource\Pages;
-use App\Filament\Resources\KursusMuridResource\RelationManagers;
-use App\Models\KursusMurid;
+use App\Filament\Resources\KursusGuruResource\Pages;
+use App\Filament\Resources\KursusGuruResource\RelationManagers;
+use App\Models\KursusGuru;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,15 +15,15 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
-class KursusMuridResource extends Resource
+class KursusGuruResource extends Resource
 {
-    protected static ?string $model = KursusMurid::class;
+    protected static ?string $model = KursusGuru::class;
 
     protected static ?string $navigationGroup = 'Kursus';
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $modelLabel = 'Murids';
-    protected static ?string $navigationLabel = 'Murid';
-    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $modelLabel = 'Guru';
+    protected static ?string $navigationLabel = 'Guru';
+    protected static ?int $navigationSort = 3;
 
     public static function getNavigationBadge(): ?string
     {
@@ -34,25 +34,25 @@ class KursusMuridResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('tanggal_daftar')
-                    ->required(),
                 Forms\Components\TextInput::make('nama')
                     ->required()
-                    ->maxLength(100),
-                Forms\Components\TextInput::make('email')
-                    ->required()
-                    ->email()
-                    ->maxLength(100),
-                Forms\Components\TextInput::make('nomor_telepon')
-                    ->numeric()
-                    ->required()
-                    ->maxLength(13),
-                Forms\Components\TextArea::make('alamat')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('alamat')
                     ->required()
                     ->maxLength(255),
-            ])
-            ->columns([
-                'xl' => 2,
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->unique(ignoreRecord: true),
+                Forms\Components\TextInput::make('nomor_telepon')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('bidang_keahlian')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('pengalaman')
+                    ->numeric()
+                    ->required(),
             ]);
     }
 
@@ -60,16 +60,16 @@ class KursusMuridResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('tanggal_daftar')->label('Daftar')->dateTime('d/m/Y')->sortable(),
-                Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('alamat')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('nomor_telepon')->label('No.HP')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('nama'),
+                Tables\Columns\TextColumn::make('alamat'),
+                Tables\Columns\TextColumn::make('email'),
+                Tables\Columns\TextColumn::make('nomor_telepon'),
+                Tables\Columns\TextColumn::make('bidang_keahlian'),
+                Tables\Columns\TextColumn::make('pengalaman'),
 
             ])
             ->filters([
-                DateRangeFilter::make('tanggal_daftar'),
+                // 
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
@@ -96,9 +96,9 @@ class KursusMuridResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListKursusMurids::route('/'),
-            // 'create' => Pages\CreateKursusMurid::route('/create'),
-            // 'edit' => Pages\EditKursusMurid::route('/{record}/edit'),
+            'index' => Pages\ListKursusGurus::route('/'),
+            // 'create' => Pages\CreateKursusGuru::route('/create'),
+            // 'edit' => Pages\EditKursusGuru::route('/{record}/edit'),
         ];
     }
 }

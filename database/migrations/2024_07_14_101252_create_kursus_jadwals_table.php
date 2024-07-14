@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kursus_jadwals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kursus_kategori_id')->constrained('kursus_kategoris')->onDelete('cascade');
-            $table->date('tanggal');
+            $table->string('hari');
             $table->time('waktu_mulai');
             $table->time('waktu_selesai');
             $table->timestamps();

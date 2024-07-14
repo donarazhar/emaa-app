@@ -11,12 +11,12 @@ class KursusPendaftaran extends Model
 
     public function murid()
     {
-        return $this->belongsTo(KursusMurid::class);
+        return $this->belongsTo(KursusMurid::class, 'kursus_murid_id');
     }
 
-    public function kursuskategoris()
+    public function jadwals()
     {
-        return $this->belongsTo(KursusKategori::class);
+        return $this->belongsTo(KursusJadwal::class, 'kursus_jadwal_id');
     }
 
     public function pembayarans()

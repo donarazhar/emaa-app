@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\KursusKategori;
+use App\Models\KursusJadwal;
 use App\Models\KursusMurid;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +20,7 @@ class KursusPendaftaranFactory extends Factory
     {
         return [
             'kursus_murid_id' => KursusMurid::factory(),
-            'kursus_kategori_id' => KursusKategori::factory(),
+            'kursus_jadwal_id' => KursusJadwal::factory(),
             'tanggal_pendaftaran' => $this->faker->date,
             'status' => 'aktif',
         ];

@@ -65,14 +65,14 @@ class DatabaseSeeder extends Seeder
         KasKecilMatanggaran::factory()->count(2)->create();
         KasKecilTransaksi::factory()->count(2)->create();
 
-        KursusMurid::factory()->count(10)->create();
-        KursusGuru::factory()->count(5)->create();
-        KursusKategori::factory()->count(10)->create();
-        KursusJadwal::factory()->count(20)->create();
-        KursusPendaftaran::factory()->count(15)->create();
-        KursusPembayaran::factory()->count(15)->create();
-        KursusAbsensi::factory()->count(30)->create();
-        KursusPenilaian::factory()->count(15)->create();
+        KursusMurid::factory()->count(2)->create();
+        KursusGuru::factory()->count(2)->create();
+        KursusKategori::factory()->count(2)->create();
+        KursusJadwal::factory()->count(2)->create();
+        KursusPendaftaran::factory()->count(2)->create();
+        KursusPembayaran::factory()->count(2)->create();
+        KursusAbsensi::factory()->count(2)->create();
+        KursusPenilaian::factory()->count(2)->create();
 
         $this->call([
             StandardSeeder::class,

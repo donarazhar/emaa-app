@@ -11,12 +11,12 @@ class KursusKategori extends Model
 
     public function guru()
     {
-        return $this->belongsTo(KursusGuru::class);
+        return $this->belongsTo(KursusGuru::class, 'kursus_guru_id');
     }
 
     public function jadwals()
     {
-        return $this->hasMany(KursusJadwal::class);
+        return $this->hasMany(KursusJadwal::class, 'kursus_kategori_id');
     }
 
     public function pendaftarans()
