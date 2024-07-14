@@ -19,7 +19,7 @@ class RiwayatKepegawaianFactory extends Factory
     {
         return [
             'nama' => $this->faker->name(),
-            'foto' => 'file-user/no-image.png',
+            'foto_riwayatkepegawaian' => 'file-user/no-image.png',
             'keterangan' => $this->faker->word(3),
             'jenis_riwayat' => $this->faker->randomElement(RiwayatKepegawaian::getValues()),
         ];

@@ -19,18 +19,18 @@ class RiwayatkepegawaianRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('tipe_hubungan')
+                Forms\Components\Select::make('jenis_riwayat')
                     ->options(RiwayatKepegawaian::getKeyValues())->label('Jenis Riwayat')->required(),
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextArea::make('keterangan')
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('foto')
+                Forms\Components\FileUpload::make('foto_riwayatkepegawaian')
                     ->image()
                     ->maxSize(1024)
-                    ->directory('file-user')
-                    ->label('Gambar'),
+                    ->directory('file-riwayatkepegawaian')
+                    ->label('Lampiran'),
             ]);
     }
 
@@ -42,10 +42,10 @@ class RiwayatkepegawaianRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('row_number')
                     ->label('No.')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('tipe_hubungan')->label('Jenis Riwayat')->sortable(),
+                Tables\Columns\TextColumn::make('jenis_riwayat')->label('Jenis Riwayat')->sortable(),
                 Tables\Columns\TextColumn::make('nama')->label('Nama Riwayat'),
                 Tables\Columns\TextColumn::make('keterangan'),
-                Tables\Columns\ImageColumn::make('foto')->width(100)->height(100)->label('File'),
+                Tables\Columns\ImageColumn::make('foto_riwayatkepegawaian')->width(100)->height(100)->label('File'),
             ])
             ->filters([
                 //

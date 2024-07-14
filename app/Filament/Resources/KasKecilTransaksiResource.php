@@ -6,7 +6,6 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 use Filament\Resources\Resource;
 use App\Models\KasKecilTransaksi;
 use App\Models\KasKecilMatanggaran;
@@ -14,6 +13,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\KasKecilTransaksiResource\Pages;
 use App\Filament\Resources\KasKecilTransaksiResource\RelationManagers;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class KasKecilTransaksiResource extends Resource
 {
@@ -32,17 +33,8 @@ class KasKecilTransaksiResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('perincian')
-                    ->label('Perincian'),
-                Forms\Components\TextInput::make('jumlah')
-                    ->label('Jumlah'),
-                Forms\Components\Select::make('kategori')
-                    ->options([
-                        'pengeluaran' => 'Pengeluaran',
-                    ])
-                    ->required(),
-                Forms\Components\Datepicker::make('tgl_transaksi')
-                    ->label('Tanggal Transaksi'),
+                Forms\Components\TextInput::make('kategori')
+                    ->default('pengeluaran')->readonly(),
                 Forms\Components\Select::make('matanggaran_id')->label('Mata Anggaran')
                     ->label('Mata Anggaran')
                     ->options(function () {
@@ -52,6 +44,17 @@ class KasKecilTransaksiResource extends Resource
                             ->pluck('aas.nama_aas', 'id');
                     })
                     ->required(),
+                Forms\Components\TextInput::make('jumlah')->required()
+                    ->label('Jumlah'),
+                Forms\Components\Datepicker::make('tgl_transaksi')->required()
+                    ->label('Tanggal Transaksi'),
+                Forms\Components\TextArea::make('perincian')->required()
+                    ->label('Perincian'),
+                Forms\Components\FileUpload::make('foto_kaskecil')
+                    ->image()
+                    ->multiple()
+                    ->directory('file-kaskecil')
+                    ->label('Lampiran'),
             ]);
     }
 
@@ -59,9 +62,7 @@ class KasKecilTransaksiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('row_number')
-                    ->label('No.')
-                    ->rowIndex(),
+                Tables\Columns\TextColumn::make('id')->label('ID'),
                 Tables\Columns\TextColumn::make('tgl_transaksi')->dateTime('d/m/Y')->label('Tgl')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('matanggaran.aas.kode_aas')->label('Akun AAS')->searchable(),
                 Tables\Columns\TextColumn::make('matanggaran.kode_matanggaran')->label('Mata Anggaran')->searchable(),
@@ -69,15 +70,18 @@ class KasKecilTransaksiResource extends Resource
                 Tables\Columns\TextColumn::make('perincian')->label('Perincian')->searchable(),
                 Tables\Columns\TextColumn::make('matanggaran.aas.status')->label('D/K'),
                 Tables\Columns\TextColumn::make('jumlah')->label('Jumlah (Rp)'),
+                Tables\Columns\ImageColumn::make('foto_kaskecil')->label('Lampiran')
+                    ->stacked()->size(100)->square()->limit(3)->limitedRemainingText(),
             ])
             ->filters([
-                DateRangeFilter::make('created_at'),
+                DateRangeFilter::make('tgl_transaksi'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make(),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

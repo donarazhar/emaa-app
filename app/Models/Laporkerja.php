@@ -11,7 +11,7 @@ class Laporkerja extends Model
 
 
     protected $casts = [
-        'foto' => 'array',
+        'foto_laporkerja' => 'array',
     ];
     // Relasi dengan user
     public function user()

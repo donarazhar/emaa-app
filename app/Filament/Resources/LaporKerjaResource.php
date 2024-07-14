@@ -43,11 +43,9 @@ class LaporKerjaResource extends Resource
                 Forms\Components\TextArea::make('isi')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('foto')
+                Forms\Components\FileUpload::make('foto_laporkerja')
                     ->image()
-                    ->openable()
                     ->multiple()
-                    ->maxSize(1024)
                     ->directory('file-laporkerja')
                     ->label('Gambar'),
             ]);
@@ -58,7 +56,7 @@ class LaporKerjaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\ImageColumn::make('foto')->label('Gambar')
+                Tables\Columns\ImageColumn::make('foto_laporkerja')->label('Gambar')
                     ->stacked()->size(100)->square()->limit(3)->limitedRemainingText(),
                 Tables\Columns\TextColumn::make('user.name')->label('Nama Pelapor'),
                 Tables\Columns\TextColumn::make('tgl')->dateTime('d/m/Y')->label('Tgl. Lapor'),

@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class KasKecilTransaksi extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'foto_kaskecil' => 'array',
+    ];
 
     public function matanggaran()
     {

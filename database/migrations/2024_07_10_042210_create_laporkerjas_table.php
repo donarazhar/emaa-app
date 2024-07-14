@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('tgl');
             $table->string('judul');
             $table->text('isi');
-            $table->string('foto')->nullable();
+            $table->text('foto_laporkerja')->nullable();
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

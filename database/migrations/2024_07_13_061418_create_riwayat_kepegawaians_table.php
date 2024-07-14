@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('riwayat_kepegawaians', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('foto')->nullable();
+            $table->string('foto_riwayatkepegawaian')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('jenis_riwayat')->index();
             $table->timestamps();

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignIdFor(Marbot::class)->index();
             $table->foreignIdFor(Sertifikat::class)->index();
             $table->string('deskripsi');
-            $table->string('foto')->nullable();
+            $table->string('foto_sertifikat')->nullable();
             $table->timestamps();
         });
     }

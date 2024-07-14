@@ -25,6 +25,7 @@ class KasKecilTransaksiFactory extends Factory
             'kategori' => $this->faker->randomElement(['pembentukan', 'pengeluaran', 'pengisian']),
             'tgl_transaksi' => now(),
             'matanggaran_id' => KasKecilMatanggaran::inRandomOrder()->first()->id,
+            'foto_kaskecil' => "file-user/avatar.png",
         ];
     }
 }
