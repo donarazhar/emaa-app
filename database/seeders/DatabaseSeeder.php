@@ -44,18 +44,18 @@ class DatabaseSeeder extends Seeder
         Marbot::factory()->count(2)->has(RiwayatKepegawaian::factory()->count(2))->create();
         InventarisBagian::factory()->count(2)->create();
         InventarisKategori::factory()->count(3)->create();
-        InventarisMerk::factory()->count(5)->create();
-        InventarisSatuan::factory()->count(5)->create();
-        LayananImam::factory()->count(5)->create();
+        InventarisMerk::factory()->count(2)->create();
+        InventarisSatuan::factory()->count(2)->create();
+        LayananImam::factory()->count(2)->create();
         LayananJenisKonsultasi::factory()->count(3)->create();
-        SuratAsal::factory()->count(5)->create();
+        SuratAsal::factory()->count(2)->create();
         SuratKategori::factory()->count(3)->create();
         Sertifikat::factory()->count(3)->create();
         Keluarga::factory()->count(3)->create();
         RiwayatKepegawaian::factory()->count(3)->create();
-        KasKecilAas::factory()->count(5)->create();
-        KasKecilMatanggaran::factory()->count(5)->create();
-        KasKecilTransaksi::factory()->count(5)->create();
+        KasKecilAas::factory()->count(2)->create();
+        KasKecilMatanggaran::factory()->count(2)->create();
+        KasKecilTransaksi::factory()->count(2)->create();
 
         $this->call([
             StandardSeeder::class,

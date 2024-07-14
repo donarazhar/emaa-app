@@ -11,6 +11,6 @@ class KasKecilAas extends Model
 
     public function matanggaran()
     {
-        return $this->hasMany(KasKecilMatanggaran::class, 'aas_id', 'id');
+        return $this->hasMany(KasKecilMatanggaran::class, 'aas_id');
     }
 }

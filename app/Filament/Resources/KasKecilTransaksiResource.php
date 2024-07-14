@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\KasKecilTransaksiResource\Pages;
-use App\Filament\Resources\KasKecilTransaksiResource\RelationManagers;
-use App\Models\KasKecilTransaksi;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use Filament\Resources\Resource;
+use App\Models\KasKecilTransaksi;
+use App\Models\KasKecilMatanggaran;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\KasKecilTransaksiResource\Pages;
+use App\Filament\Resources\KasKecilTransaksiResource\RelationManagers;
 
 class KasKecilTransaksiResource extends Resource
 {
@@ -36,15 +38,19 @@ class KasKecilTransaksiResource extends Resource
                     ->label('Jumlah'),
                 Forms\Components\Select::make('kategori')
                     ->options([
-                        'pembentukan' => 'Pembentukan',
                         'pengeluaran' => 'Pengeluaran',
-                        'pengisian' => 'Pengisian',
                     ])
                     ->required(),
                 Forms\Components\Datepicker::make('tgl_transaksi')
                     ->label('Tanggal Transaksi'),
                 Forms\Components\Select::make('matanggaran_id')->label('Mata Anggaran')
-                    ->relationship('aas', 'nama_aas')
+                    ->label('Mata Anggaran')
+                    ->options(function () {
+                        // Ambil semua akun anggaran beserta nama akun primary yang terkait
+                        return KasKecilMatanggaran::with('aas')
+                            ->get()
+                            ->pluck('aas.nama_aas', 'id');
+                    })
                     ->required(),
             ]);
     }
@@ -53,14 +59,19 @@ class KasKecilTransaksiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('perincian')->label('Perincian'),
-                Tables\Columns\TextColumn::make('jumlah')->label('Jumlah'),
-                Tables\Columns\TextColumn::make('kategori')->label('Kategori'),
-                Tables\Columns\TextColumn::make('tgl_transaksi')->label('Tanggal Transaksi'),
-                Tables\Columns\TextColumn::make('matanggaran.kode_matanggaran')->label('Mata Anggaran'),
+                Tables\Columns\TextColumn::make('row_number')
+                    ->label('No.')
+                    ->rowIndex(),
+                Tables\Columns\TextColumn::make('tgl_transaksi')->dateTime('d/m/Y')->label('Tgl')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('matanggaran.aas.kode_aas')->label('Akun AAS')->searchable(),
+                Tables\Columns\TextColumn::make('matanggaran.kode_matanggaran')->label('Mata Anggaran')->searchable(),
+                Tables\Columns\TextColumn::make('matanggaran.aas.nama_aas')->label('Nama Akun'),
+                Tables\Columns\TextColumn::make('perincian')->label('Perincian')->searchable(),
+                Tables\Columns\TextColumn::make('matanggaran.aas.status')->label('D/K'),
+                Tables\Columns\TextColumn::make('jumlah')->label('Jumlah (Rp)'),
             ])
             ->filters([
-                //
+                DateRangeFilter::make('created_at'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
