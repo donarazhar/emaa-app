@@ -19,7 +19,7 @@ class InventarisMerkFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_merk' => $this->faker->sentence(2),
+            'nama_merk' => $this->faker->randomElement(['Toshiba', 'Sharp', 'Samsung']),
             'keterangan_merk' => $this->faker->sentence,
         ];
     }

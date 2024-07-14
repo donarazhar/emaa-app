@@ -87,7 +87,11 @@ class SuratTransaksiResource extends Resource
                     ->preload()
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info'),
+                    Tables\Actions\EditAction::make()->color('primary'),
+                    Tables\Actions\DeleteAction::make()->color('danger'),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

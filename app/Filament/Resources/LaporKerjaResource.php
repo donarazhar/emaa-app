@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class LaporKerjaResource extends Resource
 {
@@ -31,10 +33,15 @@ class LaporKerjaResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')->label('Nama Pelapor')
+                Forms\Components\FileUpload::make('foto_laporkerja')
+                    ->image()
+                    ->multiple()
+                    ->directory('file-laporkerja')
+                    ->label('Gambar'),
+                Forms\Components\Select::make('user_id')->label('Nama Pelapor')->sortable()->searchable()
                     ->relationship('user', 'name')
                     ->required(),
-                Forms\Components\DatePicker::make('tgl')->label('Tgl. Lapor')
+                Forms\Components\DatePicker::make('tgl')->label('Tgl. Lapor')->sortable()
                     ->required()
                     ->maxDate(now()),
                 Forms\Components\TextInput::make('judul')
@@ -43,11 +50,7 @@ class LaporKerjaResource extends Resource
                 Forms\Components\TextArea::make('isi')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\FileUpload::make('foto_laporkerja')
-                    ->image()
-                    ->multiple()
-                    ->directory('file-laporkerja')
-                    ->label('Gambar'),
+
             ]);
     }
 
@@ -64,13 +67,18 @@ class LaporKerjaResource extends Resource
                 Tables\Columns\TextColumn::make('isi')->label('Deskripsi Kerja'),
             ])
             ->filters([
-                //
+                DateRangeFilter::make('tgl'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info'),
+                    Tables\Actions\EditAction::make()->color('primary'),
+                    Tables\Actions\DeleteAction::make()->color('danger'),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()->color('info'),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

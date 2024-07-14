@@ -90,8 +90,8 @@ class KasKecilAasResource extends Resource
     {
         return [
             'index' => Pages\ListKasKecilAas::route('/'),
-            'create' => Pages\CreateKasKecilAas::route('/create'),
-            'edit' => Pages\EditKasKecilAas::route('/{record}/edit'),
+            // 'create' => Pages\CreateKasKecilAas::route('/create'),
+            // 'edit' => Pages\EditKasKecilAas::route('/{record}/edit'),
         ];
     }
 }

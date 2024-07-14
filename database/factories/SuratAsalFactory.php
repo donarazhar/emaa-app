@@ -21,6 +21,7 @@ class SuratAsalFactory extends Factory
     {
         return [
             'nama_asal_surat' => $this->faker->sentence(2),
+            'nama_asal_surat' => $this->faker->randomElement(['Surat Internal', 'Surat Eksternal']),
             'keterangan_asal_surat' => $this->faker->sentence,
         ];
     }

@@ -73,8 +73,8 @@ class KasKecilMatanggaranResource extends Resource
     {
         return [
             'index' => Pages\ListKasKecilMatanggarans::route('/'),
-            'create' => Pages\CreateKasKecilMatanggaran::route('/create'),
-            'edit' => Pages\EditKasKecilMatanggaran::route('/{record}/edit'),
+            // 'create' => Pages\CreateKasKecilMatanggaran::route('/create'),
+            // 'edit' => Pages\EditKasKecilMatanggaran::route('/{record}/edit'),
         ];
     }
 }

@@ -161,21 +161,24 @@ class MarbotResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+
                 // Menambahkan tombol aksi di tabel
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\Action::make('Promote')
-                        ->action(function (Marbot $record) {
-                            $record->standard_id = $record->standard_id + 1;
-                            $record->save();
-                        })->color('success')->requiresConfirmation(),
-                    Tables\Actions\Action::make('Demote')
-                        ->action(function (Marbot $record) {
-                            if ($record->standard_id > 1) {
-                                $record->standard_id = $record->standard_id - 1;
-                                $record->save();
-                            }
-                        })->color('danger')->requiresConfirmation(),
+                    // Tables\Actions\Action::make('Promote')
+                    //     ->action(function (Marbot $record) {
+                    //         $record->standard_id = $record->standard_id + 1;
+                    //         $record->save();
+                    //     })->color('success')->requiresConfirmation(),
+                    // Tables\Actions\Action::make('Demote')
+                    //     ->action(function (Marbot $record) {
+                    //         if ($record->standard_id > 1) {
+                    //             $record->standard_id = $record->standard_id - 1;
+                    //             $record->save();
+                    //         }
+                    //     })->color('danger')->requiresConfirmation(),
+                    Tables\Actions\ViewAction::make()->color('info'),
+                    Tables\Actions\EditAction::make()->color('primary'),
+                    Tables\Actions\DeleteAction::make()->color('danger'),
                 ]),
 
             ])
@@ -217,8 +220,8 @@ class MarbotResource extends Resource
     {
         return [
             'index' => Pages\ListMarbots::route('/'),
-            'create' => Pages\CreateMarbot::route('/create'),
-            'edit' => Pages\EditMarbot::route('/{record}/edit'),
+            // 'create' => Pages\CreateMarbot::route('/create'),
+            // 'edit' => Pages\EditMarbot::route('/{record}/edit'),
         ];
     }
 

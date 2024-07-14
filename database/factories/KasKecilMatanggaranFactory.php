@@ -19,7 +19,7 @@ class KasKecilMatanggaranFactory extends Factory
     {
         return [
             //
-            'kode_matanggaran' => $this->faker->unique()->word,
+            'kode_matanggaran' => $this->faker->unique()->word(1),
             'aas_id' => KasKecilAas::factory()->create()->id,
             'saldo' => $this->faker->numberBetween(0, 1000000),
         ];

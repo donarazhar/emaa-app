@@ -20,6 +20,14 @@ use App\Models\KasKecilTransaksi;
 use App\Models\InventarisKategori;
 use App\Models\RiwayatKepegawaian;
 use App\Models\KasKecilMatanggaran;
+use App\Models\KursusAbsensi;
+use App\Models\KursusGuru;
+use App\Models\KursusJadwal;
+use App\Models\KursusKategori;
+use App\Models\KursusMurid;
+use App\Models\KursusPembayaran;
+use App\Models\KursusPendaftaran;
+use App\Models\KursusPenilaian;
 use App\Models\LayananJenisKonsultasi;
 
 class DatabaseSeeder extends Seeder
@@ -43,19 +51,28 @@ class DatabaseSeeder extends Seeder
         Marbot::factory()->count(2)->has(Keluarga::factory()->count(2))->create();
         Marbot::factory()->count(2)->has(RiwayatKepegawaian::factory()->count(2))->create();
         InventarisBagian::factory()->count(2)->create();
-        InventarisKategori::factory()->count(3)->create();
+        InventarisKategori::factory()->count(2)->create();
         InventarisMerk::factory()->count(2)->create();
         InventarisSatuan::factory()->count(2)->create();
         LayananImam::factory()->count(2)->create();
         LayananJenisKonsultasi::factory()->count(3)->create();
         SuratAsal::factory()->count(2)->create();
-        SuratKategori::factory()->count(3)->create();
-        Sertifikat::factory()->count(3)->create();
-        Keluarga::factory()->count(3)->create();
+        SuratKategori::factory()->count(2)->create();
+        Sertifikat::factory()->count(2)->create();
+        Keluarga::factory()->count(2)->create();
         RiwayatKepegawaian::factory()->count(3)->create();
         KasKecilAas::factory()->count(2)->create();
         KasKecilMatanggaran::factory()->count(2)->create();
         KasKecilTransaksi::factory()->count(2)->create();
+
+        KursusMurid::factory()->count(10)->create();
+        KursusGuru::factory()->count(5)->create();
+        KursusKategori::factory()->count(10)->create();
+        KursusJadwal::factory()->count(20)->create();
+        KursusPendaftaran::factory()->count(15)->create();
+        KursusPembayaran::factory()->count(15)->create();
+        KursusAbsensi::factory()->count(30)->create();
+        KursusPenilaian::factory()->count(15)->create();
 
         $this->call([
             StandardSeeder::class,

@@ -19,7 +19,7 @@ class InventarisBagianFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_bagian' => $this->faker->sentence(2),
+            'nama_bagian' => $this->faker->randomElement(['Ruang Utama', 'Ruang Kantor', 'Gudang Marbot', 'Gudang Teknisi']),
             'keterangan_bagian' => $this->faker->sentence,
         ];
     }

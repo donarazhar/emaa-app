@@ -17,7 +17,7 @@ class KasKecilAasFactory extends Factory
     public function definition(): array
     {
         return [
-            'kode_aas' => $this->faker->unique()->word,
+            'kode_aas' => $this->faker->unique()->word(1),
             'nama_aas' => $this->faker->name,
             'kategori' => $this->faker->randomElement(['pembentukan', 'pengisian', 'pengeluaran']),
             'status' => $this->faker->randomElement(['debit', 'kredit']),

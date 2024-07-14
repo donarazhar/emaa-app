@@ -64,9 +64,9 @@ class KasKecilTransaksiResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
                 Tables\Columns\TextColumn::make('tgl_transaksi')->dateTime('d/m/Y')->label('Tgl')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('matanggaran.aas.kode_aas')->label('Akun AAS')->searchable(),
-                Tables\Columns\TextColumn::make('matanggaran.kode_matanggaran')->label('Mata Anggaran')->searchable(),
-                Tables\Columns\TextColumn::make('matanggaran.aas.nama_aas')->label('Nama Akun'),
+                Tables\Columns\TextColumn::make('matanggaran.aas.kode_aas')->label('Akun AAS')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('matanggaran.kode_matanggaran')->label('Mata Anggaran')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('matanggaran.aas.nama_aas')->label('Nama Akun')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('perincian')->label('Perincian')->searchable(),
                 Tables\Columns\TextColumn::make('matanggaran.aas.status')->label('D/K'),
                 Tables\Columns\TextColumn::make('jumlah')->label('Jumlah (Rp)'),
@@ -77,11 +77,16 @@ class KasKecilTransaksiResource extends Resource
                 DateRangeFilter::make('tgl_transaksi'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info'),
+                    Tables\Actions\EditAction::make()->color('primary'),
+                    Tables\Actions\DeleteAction::make()->color('danger'),
+                ])
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    ExportBulkAction::make(),
+                    ExportBulkAction::make()->color('info'),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
@@ -98,8 +103,8 @@ class KasKecilTransaksiResource extends Resource
     {
         return [
             'index' => Pages\ListKasKecilTransaksis::route('/'),
-            'create' => Pages\CreateKasKecilTransaksi::route('/create'),
-            'edit' => Pages\EditKasKecilTransaksi::route('/{record}/edit'),
+            // 'create' => Pages\CreateKasKecilTransaksi::route('/create'),
+            // 'edit' => Pages\EditKasKecilTransaksi::route('/{record}/edit'),
         ];
     }
 }

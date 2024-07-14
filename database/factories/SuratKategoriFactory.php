@@ -19,7 +19,7 @@ class SuratKategoriFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_kategori' => $this->faker->sentence(1),
+            'nama_kategori' => $this->faker->randomElement(['Surat Biasa', 'Surat Penting', 'Surat Tak Dikenal']),
             'keterangan_kategori' => $this->faker->sentence,
         ];
     }

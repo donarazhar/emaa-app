@@ -20,6 +20,7 @@ class InventarisKategoriFactory extends Factory
     {
         return [
             'nama_kategori' => $this->faker->sentence(2),
+            'nama_kategori' => $this->faker->randomElement(['Barang Lambat', 'Barang Cepat']),
             'keterangan_kategori' => $this->faker->sentence,
         ];
     }

@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class InventarisTransaksiResource extends Resource
 {
@@ -84,13 +86,16 @@ class InventarisTransaksiResource extends Resource
                 Tables\Columns\TextColumn::make('keterangan_data_inventaris')->label('Keterangan'),
             ])
             ->filters([
-                //
+                DateRangeFilter::make('tgl_data_inventaris'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()->color('info'),
+                Tables\Actions\EditAction::make()->color('primary'),
+                Tables\Actions\DeleteAction::make()->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()->color('info'),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

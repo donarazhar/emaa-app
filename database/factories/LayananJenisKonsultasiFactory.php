@@ -21,6 +21,7 @@ class LayananJenisKonsultasiFactory extends Factory
     {
         return [
             'nama_jenis_konsultasi' => $this->faker->sentence(2), // Menghasilkan kalimat dengan 3 kata
+            'nama_jenis_konsultasi' => $this->faker->randomElement(['Konsultasi Waris', 'Konsultasi Pernikahan']),
             'deskripsi' => $this->faker->sentence,
         ];
     }

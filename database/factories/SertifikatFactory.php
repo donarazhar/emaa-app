@@ -18,6 +18,7 @@ class SertifikatFactory extends Factory
     {
         return [
             'nama' => $this->faker->sentence(2),
+            'nama' => $this->faker->randomElement(['Sertifikat Internal', 'Sertifikat Eksternal']),
             'deskripsi' => $this->faker->sentence,
         ];
     }

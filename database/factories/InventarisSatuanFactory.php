@@ -19,7 +19,7 @@ class InventarisSatuanFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_satuan' => ucfirst($this->faker->word), // Menghasilkan satu kata dengan huruf pertama kapital
+            'nama_satuan' => $this->faker->randomElement(['Pcs', 'Kg', 'Cm']),
             'keterangan_satuan' => $this->faker->sentence,
         ];
     }
