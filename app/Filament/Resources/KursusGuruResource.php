@@ -20,7 +20,7 @@ class KursusGuruResource extends Resource
     protected static ?string $model = KursusGuru::class;
 
     protected static ?string $navigationGroup = 'Kursus';
-    protected static ?string $navigationIcon = 'heroicon-o-user';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $modelLabel = 'Guru';
     protected static ?string $navigationLabel = 'Guru';
     protected static ?int $navigationSort = 3;
@@ -37,7 +37,7 @@ class KursusGuruResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('alamat')
+                Forms\Components\TextArea::make('alamat')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
@@ -47,10 +47,10 @@ class KursusGuruResource extends Resource
                 Forms\Components\TextInput::make('nomor_telepon')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('bidang_keahlian')
+                Forms\Components\TextArea::make('bidang_keahlian')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('pengalaman')
+                Forms\Components\TextInput::make('sejak')
                     ->numeric()
                     ->required(),
             ]);
@@ -65,7 +65,7 @@ class KursusGuruResource extends Resource
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('nomor_telepon'),
                 Tables\Columns\TextColumn::make('bidang_keahlian'),
-                Tables\Columns\TextColumn::make('pengalaman'),
+                Tables\Columns\TextColumn::make('sejak'),
 
             ])
             ->filters([

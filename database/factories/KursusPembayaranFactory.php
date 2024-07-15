@@ -19,10 +19,11 @@ class KursusPembayaranFactory extends Factory
     {
         return [
             'kursus_pendaftaran_id' => KursusPendaftaran::factory(),
-            'tanggal_pembayaran' => $this->faker->date,
+            'tanggal' => $this->faker->date,
             'jumlah' => $this->faker->randomFloat(2, 100, 1000),
             'metode_pembayaran' => $this->faker->randomElement(['transfer bank', 'kartu kredit', 'e-wallet']),
             'status' => 'lunas',
+            'foto' => 'file-user/avatar.png',
         ];
     }
 }

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('kursus_pembayarans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kursus_pendaftaran_id')->constrained('kursus_pendaftarans')->onDelete('cascade');
-            $table->date('tanggal_pembayaran');
+            $table->date('tanggal');
             $table->decimal('jumlah', 10, 2);
             $table->string('metode_pembayaran');
             $table->string('status');
+            $table->text('foto')->nullable();
             $table->timestamps();
         });
     }

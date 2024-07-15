@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kursus');
             $table->text('deskripsi');
-            $table->integer('durasi');
+            $table->string('durasi');
             $table->decimal('biaya', 10, 2);
             $table->foreignId('kursus_guru_id')->constrained('kursus_gurus')->onDelete('cascade');
             $table->timestamps();

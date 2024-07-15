@@ -20,7 +20,7 @@ class KursusKategoriFactory extends Factory
         return [
             'nama_kursus' => $this->faker->word,
             'deskripsi' => $this->faker->paragraph,
-            'durasi' => $this->faker->numberBetween(1, 12),
+            'durasi' => '90 menit',
             'biaya' => $this->faker->randomFloat(2, 100, 1000),
             'kursus_guru_id' => KursusGuru::factory(),
         ];

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kursus_murid_id')->constrained('kursus_murids')->onDelete('cascade');
             $table->foreignId('kursus_jadwal_id')->constrained('kursus_jadwals')->onDelete('cascade');
-            $table->date('tanggal_pendaftaran');
+            $table->date('tanggal');
             $table->string('status');
             $table->timestamps();
         });

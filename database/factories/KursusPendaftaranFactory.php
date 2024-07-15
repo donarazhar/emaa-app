@@ -21,7 +21,7 @@ class KursusPendaftaranFactory extends Factory
         return [
             'kursus_murid_id' => KursusMurid::factory(),
             'kursus_jadwal_id' => KursusJadwal::factory(),
-            'tanggal_pendaftaran' => $this->faker->date,
+            'tanggal' => $this->faker->date,
             'status' => 'aktif',
         ];
     }

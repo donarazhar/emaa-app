@@ -22,7 +22,7 @@ class KursusGuruFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'nomor_telepon' => $this->faker->phoneNumber,
             'bidang_keahlian' => $this->faker->word,
-            'pengalaman' => $this->faker->numberBetween(1, 20),
+            'sejak' => '2000',
         ];
     }
 }

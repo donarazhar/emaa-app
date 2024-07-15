@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kursus_kategori_id')->constrained('kursus_kategoris')->onDelete('cascade');
             $table->string('hari');
-            $table->time('waktu_mulai');
-            $table->time('waktu_selesai');
+            $table->time('jam_mulai');
+            $table->time('jam_selesai');
             $table->timestamps();
         });
     }

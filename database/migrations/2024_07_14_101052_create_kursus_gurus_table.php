@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('nomor_telepon');
             $table->string('bidang_keahlian');
-            $table->tinyInteger('pengalaman');
+            $table->integer('sejak');
             $table->timestamps();
         });
     }

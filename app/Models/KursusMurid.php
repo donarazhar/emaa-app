@@ -8,19 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class KursusMurid extends Model
 {
     use HasFactory;
-
-    public function pendaftarans()
-    {
-        return $this->hasMany(KursusPendaftaran::class, 'kursus_murid_id');
-    }
-
-    public function absensis()
-    {
-        return $this->hasMany(KursusAbsensi::class);
-    }
-
-    public function penilaians()
-    {
-        return $this->hasMany(KursusPenilaian::class);
-    }
 }

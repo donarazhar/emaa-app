@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('email')->unique();
             $table->string('nomor_telepon');
-            $table->date('tanggal_daftar');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }

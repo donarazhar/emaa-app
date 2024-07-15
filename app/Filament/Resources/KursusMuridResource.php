@@ -20,7 +20,7 @@ class KursusMuridResource extends Resource
     protected static ?string $model = KursusMurid::class;
 
     protected static ?string $navigationGroup = 'Kursus';
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $modelLabel = 'Murids';
     protected static ?string $navigationLabel = 'Murid';
     protected static ?int $navigationSort = 2;
@@ -34,7 +34,7 @@ class KursusMuridResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('tanggal_daftar')
+                Forms\Components\DatePicker::make('tanggal')
                     ->required(),
                 Forms\Components\TextInput::make('nama')
                     ->required()
@@ -61,7 +61,7 @@ class KursusMuridResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('tanggal_daftar')->label('Daftar')->dateTime('d/m/Y')->sortable(),
+                Tables\Columns\TextColumn::make('tanggal')->label('Tgl')->dateTime('d/m/Y')->sortable(),
                 Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('alamat')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('email')->sortable()->searchable(),

@@ -19,9 +19,9 @@ class KursusJadwalFactory extends Factory
     {
         return [
             'kursus_kategori_id' => KursusKategori::factory(),
-            'hari' => $this->faker->randomElement(['senin', 'selasa']),
-            'waktu_mulai' => $this->faker->time,
-            'waktu_selesai' => $this->faker->time,
+            'hari' => $this->faker->randomElement(['Senin & Selasa']),
+            'jam_mulai' => $this->faker->time,
+            'jam_selesai' => $this->faker->time,
         ];
     }
 }

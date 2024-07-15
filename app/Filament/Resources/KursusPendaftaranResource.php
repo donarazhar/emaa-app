@@ -20,9 +20,9 @@ class KursusPendaftaranResource extends Resource
     protected static ?string $model = KursusPendaftaran::class;
 
     protected static ?string $navigationGroup = 'Kursus';
-    protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
-    protected static ?string $modelLabel = 'Transaksi Pendaftaran';
-    protected static ?string $navigationLabel = 'Transaksi Pendaftaran';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $modelLabel = 'Transaksi Kursus';
+    protected static ?string $navigationLabel = 'Transaksi Kursus';
     protected static ?int $navigationSort = 0;
 
     public static function getNavigationBadge(): ?string
@@ -34,6 +34,8 @@ class KursusPendaftaranResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\DatePicker::make('tanggal')->label('Tgl')
+                    ->required(),
                 Forms\Components\Select::make('kursus_murid_id')
                     ->relationship('murid', 'nama')
                     ->required(),
@@ -43,8 +45,7 @@ class KursusPendaftaranResource extends Resource
                     })
                     ->label('Pilih Jadwal')
                     ->required(),
-                Forms\Components\DatePicker::make('tanggal_pendaftaran')
-                    ->required(),
+
                 Forms\Components\Select::make('status')->options([
                     'Aktif' => 'Aktif',
                     'Tidak Aktif' => 'Tidak Aktif',
@@ -58,16 +59,17 @@ class KursusPendaftaranResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label('Id'),
+                Tables\Columns\TextColumn::make('tanggal')->sortable()->searchable()
+                    ->dateTime('d/m/Y'),
                 Tables\Columns\TextColumn::make('murid.nama')->sortable()->searchable()
                     ->label('Murid'),
-                Tables\Columns\TextColumn::make('jadwals.combined_info')->sortable()->searchable()
+                Tables\Columns\TextColumn::make('jadwal.combined_info')->sortable()->searchable()
                     ->label('Jadwal'),
-                Tables\Columns\TextColumn::make('tanggal_pendaftaran')->sortable()->searchable()
-                    ->dateTime('d/m/Y'),
+
                 Tables\Columns\TextColumn::make('status'),
             ])
             ->filters([
-                DateRangeFilter::make('tanggal_pendaftaran'),
+                DateRangeFilter::make('tanggal'),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([

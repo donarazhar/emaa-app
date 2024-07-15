@@ -21,7 +21,7 @@ class KursusJadwalResource extends Resource
     protected static ?string $model = KursusJadwal::class;
 
     protected static ?string $navigationGroup = 'Kursus';
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $modelLabel = 'Jadwal Kursus';
     protected static ?string $navigationLabel = 'Jadwal Kursus';
     protected static ?int $navigationSort = 5;
@@ -39,7 +39,7 @@ class KursusJadwalResource extends Resource
                     ->label('Hari kursus')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TimePicker::make('waktu_mulai')
+                Forms\Components\TimePicker::make('jam_mulai')
                     ->label('Dari jam')
                     ->datalist([
                         '09:00',
@@ -51,7 +51,7 @@ class KursusJadwalResource extends Resource
                         '12:00',
                     ])
                     ->required(),
-                Forms\Components\TimePicker::make('waktu_selesai')
+                Forms\Components\TimePicker::make('jam_selesai')
                     ->label('Sampai jam')
                     ->datalist([
                         '09:00',
@@ -64,7 +64,7 @@ class KursusJadwalResource extends Resource
                     ])
                     ->required(),
                 Forms\Components\Select::make('kursus_kategori_id')
-                    ->relationship('kursuskategoris', 'nama_kursus')
+                    ->relationship('kursuskategori', 'nama_kursus')
                     ->required()
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set) {
@@ -85,13 +85,13 @@ class KursusJadwalResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('hari'),
-                Tables\Columns\TextColumn::make('waktu_mulai')->label('Mulai')
+                Tables\Columns\TextColumn::make('jam_mulai')->label('Mulai')
                     ->time(),
-                Tables\Columns\TextColumn::make('waktu_selesai')->label('Selesai')
+                Tables\Columns\TextColumn::make('jam_selesai')->label('Selesai')
                     ->time(),
-                Tables\Columns\TextColumn::make('kursuskategoris.nama_kursus')
+                Tables\Columns\TextColumn::make('kursuskategori.nama_kursus')
                     ->label('Jenis Kursus'),
-                Tables\Columns\TextColumn::make('kursuskategoris.guru.nama')
+                Tables\Columns\TextColumn::make('kursuskategori.guru.nama')
                     ->label('Nama Guru'),
 
             ])

@@ -21,7 +21,7 @@ class KursusMuridFactory extends Factory
             'alamat' => $this->faker->address,
             'email' => $this->faker->unique()->safeEmail,
             'nomor_telepon' => $this->faker->phoneNumber,
-            'tanggal_daftar' => $this->faker->date,
+            'tanggal' => $this->faker->date,
         ];
     }
 }
