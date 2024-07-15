@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UserResource\RelationManagers;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class UserResource extends Resource
 {
@@ -59,6 +61,10 @@ class UserResource extends Resource
                     })
                     ->dehydrated(fn ($state) => filled($state)) // Dehydrate only if the state is filled
                     ->label('Password'),
+                Forms\Components\Select::make('role')->options([
+                    'Admin' => 'Admin',
+                    'Web' => 'Web',
+                ])->required(),
             ]);
     }
 
@@ -74,13 +80,18 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('role')->label('Role'),
             ])
             ->filters([
-                //
+                //   
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info'),
+                    Tables\Actions\EditAction::make()->color('primary'),
+                    Tables\Actions\DeleteAction::make()->color('danger'),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()->color('info'),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

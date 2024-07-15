@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Laporkerja extends Model
+class LaporKerja extends Model
 {
     use HasFactory;
 
+    protected $table = 'laporkerjas';
 
     protected $casts = [
         'foto_laporkerja' => 'array',

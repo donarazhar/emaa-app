@@ -35,13 +35,14 @@ class LaporKerjaResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('foto_laporkerja')
                     ->image()
+                    ->openable()
                     ->multiple()
                     ->directory('file-laporkerja')
                     ->label('Gambar'),
-                Forms\Components\Select::make('user_id')->label('Nama Pelapor')->sortable()->searchable()
+                Forms\Components\Select::make('user_id')->label('Nama Pelapor')
                     ->relationship('user', 'name')
                     ->required(),
-                Forms\Components\DatePicker::make('tgl')->label('Tgl. Lapor')->sortable()
+                Forms\Components\DatePicker::make('tgl')->label('Tgl. Lapor')
                     ->required()
                     ->maxDate(now()),
                 Forms\Components\TextInput::make('judul')
