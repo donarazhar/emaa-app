@@ -12,6 +12,7 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class MarbotTable extends BaseWidget
 {
     protected static ?string $heading = 'Datatable Marbot';
+    protected int | string | array $columnSpan = 'full';
     public function table(Table $table): Table
     {
         return $table

@@ -7,6 +7,7 @@ use Filament\Widgets\ChartWidget;
 class KursusChart extends ChartWidget
 {
     protected static ?string $heading = 'Data Kursus';
+    protected int | string | array $columnSpan = 'full';
 
     protected function getData(): array
     {

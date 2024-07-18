@@ -33,7 +33,12 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'danger' => Color::Red,
+                'gray' => Color::Zinc,
+                'info' => Color::Amber,
+                'primary' => Color::Blue,
+                'success' => Color::Green,
+                'warning' => Color::Amber,
             ])
             ->topNavigation() // Bilah Top Navigasi
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
