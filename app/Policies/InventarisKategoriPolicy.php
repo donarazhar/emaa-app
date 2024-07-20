@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Standard;
+use App\Models\InventarisKategori;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class StandardPolicy
+class InventarisKategoriPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class StandardPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_standard');
+        return $user->can('view_any_inventaris::kategori');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Standard $standard): bool
+    public function view(User $user, InventarisKategori $inventarisKategori): bool
     {
-        return $user->can('view_standard');
+        return $user->can('view_inventaris::kategori');
     }
 
     /**
@@ -31,23 +31,23 @@ class StandardPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_standard');
+        return $user->can('create_inventaris::kategori');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Standard $standard): bool
+    public function update(User $user, InventarisKategori $inventarisKategori): bool
     {
-        return $user->can('update_standard');
+        return $user->can('update_inventaris::kategori');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Standard $standard): bool
+    public function delete(User $user, InventarisKategori $inventarisKategori): bool
     {
-        return $user->can('delete_standard');
+        return $user->can('delete_inventaris::kategori');
     }
 
     /**
@@ -55,15 +55,15 @@ class StandardPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_standard');
+        return $user->can('delete_any_inventaris::kategori');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Standard $standard): bool
+    public function forceDelete(User $user, InventarisKategori $inventarisKategori): bool
     {
-        return $user->can('force_delete_standard');
+        return $user->can('force_delete_inventaris::kategori');
     }
 
     /**
@@ -71,15 +71,15 @@ class StandardPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_standard');
+        return $user->can('force_delete_any_inventaris::kategori');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Standard $standard): bool
+    public function restore(User $user, InventarisKategori $inventarisKategori): bool
     {
-        return $user->can('restore_standard');
+        return $user->can('restore_inventaris::kategori');
     }
 
     /**
@@ -87,15 +87,15 @@ class StandardPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_standard');
+        return $user->can('restore_any_inventaris::kategori');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Standard $standard): bool
+    public function replicate(User $user, InventarisKategori $inventarisKategori): bool
     {
-        return $user->can('replicate_standard');
+        return $user->can('replicate_inventaris::kategori');
     }
 
     /**
@@ -103,6 +103,6 @@ class StandardPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_standard');
+        return $user->can('reorder_inventaris::kategori');
     }
 }

@@ -61,10 +61,9 @@ class UserResource extends Resource
                     })
                     ->dehydrated(fn ($state) => filled($state)) // Dehydrate only if the state is filled
                     ->label('Password'),
-                Forms\Components\Select::make('role')->options([
-                    'Admin' => 'Admin',
-                    'Web' => 'Web',
-                ])->required(),
+                Forms\Components\Select::make('roles_id')->label('Roles')
+                    ->relationship('roles', 'name')
+                    ->required(),
             ]);
     }
 
@@ -77,7 +76,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Nama'),
                 Tables\Columns\TextColumn::make('email')->label('Email'),
                 Tables\Columns\TextColumn::make('phone')->label('No. HP'),
-                Tables\Columns\TextColumn::make('role')->label('Role'),
+                Tables\Columns\TextColumn::make('roles.name')->label('Roles'),
             ])
             ->filters([
                 //   

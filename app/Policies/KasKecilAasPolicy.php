@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\Standard;
+use App\Models\KasKecilAas;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class StandardPolicy
+class KasKecilAasPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class StandardPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_standard');
+        return $user->can('view_any_kas::kecil::aas');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Standard $standard): bool
+    public function view(User $user, KasKecilAas $kasKecilAas): bool
     {
-        return $user->can('view_standard');
+        return $user->can('view_kas::kecil::aas');
     }
 
     /**
@@ -31,23 +31,23 @@ class StandardPolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('create_standard');
+        return $user->can('create_kas::kecil::aas');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Standard $standard): bool
+    public function update(User $user, KasKecilAas $kasKecilAas): bool
     {
-        return $user->can('update_standard');
+        return $user->can('update_kas::kecil::aas');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Standard $standard): bool
+    public function delete(User $user, KasKecilAas $kasKecilAas): bool
     {
-        return $user->can('delete_standard');
+        return $user->can('delete_kas::kecil::aas');
     }
 
     /**
@@ -55,15 +55,15 @@ class StandardPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_standard');
+        return $user->can('delete_any_kas::kecil::aas');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Standard $standard): bool
+    public function forceDelete(User $user, KasKecilAas $kasKecilAas): bool
     {
-        return $user->can('force_delete_standard');
+        return $user->can('force_delete_kas::kecil::aas');
     }
 
     /**
@@ -71,15 +71,15 @@ class StandardPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_standard');
+        return $user->can('force_delete_any_kas::kecil::aas');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Standard $standard): bool
+    public function restore(User $user, KasKecilAas $kasKecilAas): bool
     {
-        return $user->can('restore_standard');
+        return $user->can('restore_kas::kecil::aas');
     }
 
     /**
@@ -87,15 +87,15 @@ class StandardPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_standard');
+        return $user->can('restore_any_kas::kecil::aas');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Standard $standard): bool
+    public function replicate(User $user, KasKecilAas $kasKecilAas): bool
     {
-        return $user->can('replicate_standard');
+        return $user->can('replicate_kas::kecil::aas');
     }
 
     /**
@@ -103,6 +103,6 @@ class StandardPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_standard');
+        return $user->can('reorder_kas::kecil::aas');
     }
 }
