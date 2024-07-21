@@ -38,20 +38,12 @@ class AdminPanelProvider extends PanelProvider
             ->emailVerification()
             ->profile(AuthEditProfile::class)
             ->colors([
-                'danger' => Color::Rose,
-                'gray' => Color::Gray,
+                'danger' => Color::Red,
+                'gray' => Color::Zinc,
+                'info' => Color::Amber,
                 'primary' => Color::Blue,
-                'info' => Color::Indigo,
-                'success' => Color::Emerald,
-                'warning' => Color::Orange,
-            ])
-            ->font('Poppins')
-            // ->brandName('E-MAA')
-            ->favicon(asset('storage/file-web/maa-icon-152x152.png'))
-            ->brandLogo(asset('storage/file-web/logo.png'))
-            ->brandLogoHeight('3rem')
-            ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                'success' => Color::Green,
+                'warning' => Color::Amber,
             ])
             ->topNavigation() // Bilah Top Navigasi
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
