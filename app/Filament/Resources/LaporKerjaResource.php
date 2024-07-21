@@ -48,7 +48,7 @@ class LaporKerjaResource extends Resource
                 Forms\Components\TextInput::make('judul')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('isi')
+                Forms\Components\Textarea::make('isi')
                     ->required()
                     ->maxLength(255),
 

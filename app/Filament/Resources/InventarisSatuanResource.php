@@ -37,7 +37,7 @@ class InventarisSatuanResource extends Resource
                 Forms\Components\TextInput::make('nama_satuan')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('keterangan_satuan')
+                Forms\Components\Textarea::make('keterangan_satuan')
                     ->required()
                     ->maxLength(255),
             ]);

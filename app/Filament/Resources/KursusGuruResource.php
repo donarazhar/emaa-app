@@ -37,7 +37,7 @@ class KursusGuruResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('alamat')
+                Forms\Components\Textarea::make('alamat')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
@@ -47,7 +47,7 @@ class KursusGuruResource extends Resource
                 Forms\Components\TextInput::make('nomor_telepon')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('bidang_keahlian')
+                Forms\Components\Textarea::make('bidang_keahlian')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('sejak')

@@ -48,7 +48,7 @@ class InventarisTransaksiResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->numeric(),
-                Forms\Components\TextArea::make('keterangan_data_inventaris')->label('Keterangan')
+                Forms\Components\Textarea::make('keterangan_data_inventaris')->label('Keterangan')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('tgl_data_inventaris')->label('Tgl Input')

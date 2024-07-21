@@ -36,7 +36,7 @@ class InventarisBagianResource extends Resource
                 Forms\Components\TextInput::make('nama_bagian')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('keterangan_bagian')
+                Forms\Components\Textarea::make('keterangan_bagian')
                     ->required()
                     ->maxLength(255)
             ]);

@@ -36,7 +36,7 @@ class LayananJenisKonsultasiResource extends Resource
                 Forms\Components\TextInput::make('nama_jenis_konsultasi')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('deskripsi')
+                Forms\Components\Textarea::make('deskripsi')
                     ->required()
                     ->maxLength(255),
             ]);

@@ -47,7 +47,7 @@ class KursusMuridResource extends Resource
                     ->numeric()
                     ->required()
                     ->maxLength(13),
-                Forms\Components\TextArea::make('alamat')
+                Forms\Components\Textarea::make('alamat')
                     ->required()
                     ->maxLength(255),
             ])

@@ -77,7 +77,7 @@ class LayananTransaksiPengislamanResource extends Resource
                 Forms\Components\TextInput::make('saksi1')->label('Saksi #1')->required()->maxLength(255),
                 Forms\Components\TextInput::make('saksi2')->label('Saksi #2')->required()->maxLength(255),
                 Forms\Components\TextInput::make('saksi3')->label('Saksi #3')->required()->maxLength(255),
-                Forms\Components\TextArea::make('alasan')->label('Alasan')->required()->maxLength(255),
+                Forms\Components\Textarea::make('alasan')->label('Alasan')->required()->maxLength(255),
                 Forms\Components\Select::make('imam_id')->label('Imam Pengislaman')
                     ->relationship('imam', 'nama_imam')
                     ->required(),

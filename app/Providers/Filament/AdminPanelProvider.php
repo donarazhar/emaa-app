@@ -45,7 +45,8 @@ class AdminPanelProvider extends PanelProvider
                 'success' => Color::Green,
                 'warning' => Color::Amber,
             ])
-            ->topNavigation() // Bilah Top Navigasi
+            ->sidebarCollapsibleOnDesktop()
+            // ->topNavigation() // Bilah Top Navigasi
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -74,7 +75,8 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
-                FilamentApexChartsPlugin::make()
+                FilamentApexChartsPlugin::make(),
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
             ]);
     }
 }

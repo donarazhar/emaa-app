@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'donar@email.com',
             'password' => bcrypt('1234'),
             'foto' => 'file-user/avatar.png',
-            'role' => 'admin',
+            'roles_id' => null,
             'phone' => '088214740182',
         ]);
 

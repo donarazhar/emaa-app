@@ -39,7 +39,7 @@ class LayananImamResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->numeric(),
-                Forms\Components\TextArea::make('keterangan')
+                Forms\Components\Textarea::make('keterangan')
                     ->required()
                     ->maxLength(255),
             ]);

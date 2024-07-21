@@ -53,7 +53,7 @@ class LayananTransaksiKonsultasiResource extends Resource
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('tgl_lahir_jamaah')->label('Tgl Lahir')
                     ->required(),
-                Forms\Components\TextArea::make('alamat')->label('Alamat Lengkap')
+                Forms\Components\Textarea::make('alamat')->label('Alamat Lengkap')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('no_hp')

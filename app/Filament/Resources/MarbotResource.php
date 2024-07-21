@@ -130,7 +130,7 @@ class MarbotResource extends Resource
                                 Forms\Components\Select::make('sertifikat_id')->label('Jenis Sertifikat')
                                     ->options(Sertifikat::all()->pluck('nama', 'id'))
                                     ->searchable(),
-                                Forms\Components\TextArea::make('deskripsi'),
+                                Forms\Components\Textarea::make('deskripsi'),
                                 Forms\Components\FileUpload::make('foto_sertifikat')
                                     ->image()->openable()->downloadable()->directory('file-sertifikat'),
                             ])

@@ -43,7 +43,7 @@ class SuratTransaksiResource extends Resource
                 Forms\Components\TextInput::make('surat_dari_transaksi_surat')->label('Surat dari')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('disposisi_transaksi_surat')->label('Isi Disposisi')
+                Forms\Components\Textarea::make('disposisi_transaksi_surat')->label('Isi Disposisi')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('status_transaksi_surat')
