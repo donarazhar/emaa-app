@@ -17,7 +17,7 @@ class InventarisMerkResource extends Resource
 {
     protected static ?string $model = InventarisMerk::class;
 
-    protected static ?string $navigationGroup = 'Inventaris';
+    protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Inventaris Merk';
     protected static ?string $navigationLabel = 'Data Merk Inv';
     protected static ?string $navigationIcon = 'heroicon-o-tag';

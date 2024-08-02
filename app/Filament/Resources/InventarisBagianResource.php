@@ -17,7 +17,7 @@ class InventarisBagianResource extends Resource
 {
     protected static ?string $model = InventarisBagian::class;
 
-    protected static ?string $navigationGroup = 'Inventaris';
+    protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Inventaris Bagian';
     protected static ?string $navigationLabel = 'Data Bagian Inv';
     protected static ?string $navigationIcon = 'heroicon-o-tag';

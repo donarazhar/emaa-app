@@ -18,7 +18,7 @@ class KasKecilAasResource extends Resource
 {
     protected static ?string $model = KasKecilAas::class;
 
-    protected static ?string $navigationGroup = 'Kas Kecil';
+    protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Akun AAs';
     protected static ?string $navigationLabel = 'Akun AAS';
     protected static ?string $navigationIcon = 'heroicon-o-tag';

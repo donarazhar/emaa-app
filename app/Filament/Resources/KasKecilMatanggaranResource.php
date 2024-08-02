@@ -17,7 +17,7 @@ class KasKecilMatanggaranResource extends Resource
 {
     protected static ?string $model = KasKecilMatanggaran::class;
 
-    protected static ?string $navigationGroup = 'Kas Kecil';
+    protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Akun Matanggarans';
     protected static ?string $navigationLabel = 'Akun Matanggaran';
     protected static ?string $navigationIcon = 'heroicon-o-tag';

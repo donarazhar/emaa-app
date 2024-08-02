@@ -19,10 +19,11 @@ class LaporKerjaResource extends Resource
 {
     protected static ?string $model = LaporKerja::class;
 
-    protected static ?string $navigationGroup = 'Marbot';
+    protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $navigationIcon = 'heroicon-o-camera';
     protected static ?string $modelLabel = 'Lapor Kerja';
     protected static ?string $navigationLabel = 'Lapor Kerja';
+    protected static ?int $navigationSort = 2;
 
     public static function getNavigationBadge(): ?string
     {

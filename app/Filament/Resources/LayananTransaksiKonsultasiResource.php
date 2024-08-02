@@ -17,9 +17,10 @@ class LayananTransaksiKonsultasiResource extends Resource
 {
     protected static ?string $model = LayananTransaksiKonsultasi::class;
 
-    protected static ?string $navigationGroup = 'Layanan';
-    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
+    protected static ?string $navigationGroup = 'Office Management';
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
     protected static ?string $modelLabel = 'Transaksi Konsultasi';
+    protected static ?int $navigationSort = 5;
 
     public static function getNavigationBadge(): ?string
     {

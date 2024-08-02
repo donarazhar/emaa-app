@@ -8,13 +8,13 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RiwayatkepegawaianRelationManager extends RelationManager
 {
     protected static string $relationship = 'riwayatkepegawaians';
 
+    protected static ?string $modelLabel = 'Riwayat Kepegawaian';
+    
     public function form(Form $form): Form
     {
         return $form
@@ -24,7 +24,7 @@ class RiwayatkepegawaianRelationManager extends RelationManager
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('keterangan')
+                Forms\Components\Textarea::make('keterangan')
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('foto_riwayatkepegawaian')
                     ->image()
@@ -42,20 +42,29 @@ class RiwayatkepegawaianRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('row_number')
                     ->label('No.')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('jenis_riwayat')->label('Jenis Riwayat')->sortable(),
+                Tables\Columns\TextColumn::make('jenis_riwayat')->label('Jenis Riwayat')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('nama')->label('Nama Riwayat'),
                 Tables\Columns\TextColumn::make('keterangan'),
-                Tables\Columns\ImageColumn::make('foto_riwayatkepegawaian')->width(100)->height(100)->label('File'),
+                Tables\Columns\ImageColumn::make('foto_riwayatkepegawaian')->label('File')
+                ->square()
+                ->size(50)
+                ->getStateUsing(function ($record) {
+                    return $record->foto_riwayatkepegawaian ? url('storage/' . $record->foto_riwayatkepegawaian) : url('storage/file-user/no-image.jpg');
+                }), 
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('jenis_riwayat')
+                ->multiple()
+                ->options(RiwayatKepegawaian::getKeyValues())
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make()->color('primary'),
+                    Tables\Actions\DeleteAction::make()->color('danger'),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

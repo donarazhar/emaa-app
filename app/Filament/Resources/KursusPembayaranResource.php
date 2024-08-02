@@ -21,7 +21,7 @@ class KursusPembayaranResource extends Resource
 {
     protected static ?string $model = KursusPembayaran::class;
 
-    protected static ?string $navigationGroup = 'Kursus';
+    protected static ?string $navigationGroup = 'Kursus Management';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
     protected static ?string $modelLabel = 'Transaksi Bayar';
     protected static ?string $navigationLabel = 'Transaksi Bayar';

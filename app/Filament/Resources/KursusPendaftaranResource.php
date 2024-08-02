@@ -19,7 +19,7 @@ class KursusPendaftaranResource extends Resource
 {
     protected static ?string $model = KursusPendaftaran::class;
 
-    protected static ?string $navigationGroup = 'Kursus';
+    protected static ?string $navigationGroup = 'Kursus Management';
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     protected static ?string $modelLabel = 'Transaksi Kursus';
     protected static ?string $navigationLabel = 'Transaksi Kursus';

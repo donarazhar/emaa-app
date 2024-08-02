@@ -10,11 +10,7 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\UserResource\RelationManagers;
-use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class UserResource extends Resource
@@ -25,6 +21,7 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $modelLabel = 'User';
     protected static ?string $navigationLabel = 'User';
+    protected static ?string $navigationGroup = 'Setting Management';
 
     public static function getNavigationBadge(): ?string
     {
@@ -35,11 +32,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\FileUpload::make('foto')
-                    ->image()
-                    ->maxSize(1024)
-                    ->directory('file-user')
-                    ->label('Gambar'),
+                
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -47,11 +40,7 @@ class UserResource extends Resource
                     ->label('Email address')
                     ->email()
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->label('Phone number')
-                    ->tel()
-                    ->required(),
+                    ->maxLength(255),               
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->maxLength(255)
@@ -72,10 +61,8 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\ImageColumn::make('foto')->width(100)->height(100)->label('Gambar'),
                 Tables\Columns\TextColumn::make('name')->label('Nama'),
                 Tables\Columns\TextColumn::make('email')->label('Email'),
-                Tables\Columns\TextColumn::make('phone')->label('No. HP'),
                 Tables\Columns\TextColumn::make('roles.name')->label('Roles'),
             ])
             ->filters([

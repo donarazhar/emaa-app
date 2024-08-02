@@ -17,7 +17,7 @@ class InventarisKategoriResource extends Resource
 {
     protected static ?string $model = InventarisKategori::class;
 
-    protected static ?string $navigationGroup = 'Inventaris';
+    protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Inventaris Kategori';
     protected static ?string $navigationLabel = 'Data Kategori Inv';
     protected static ?string $navigationIcon = 'heroicon-o-tag';

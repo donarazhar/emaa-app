@@ -17,7 +17,7 @@ class LayananImamResource extends Resource
 {
     protected static ?string $model = LayananImam::class;
 
-    protected static ?string $navigationGroup = 'Layanan';
+    protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Imams';
     protected static ?string $navigationLabel = 'Data Imam';
     protected static ?string $navigationIcon = 'heroicon-o-tag';

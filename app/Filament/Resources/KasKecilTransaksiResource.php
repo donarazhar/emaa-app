@@ -20,9 +20,10 @@ class KasKecilTransaksiResource extends Resource
 {
     protected static ?string $model = KasKecilTransaksi::class;
 
-    protected static ?string $navigationGroup = 'Kas Kecil';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Office Management';
+    protected static ?string $navigationIcon = 'heroicon-o-table-cells';
     protected static ?string $modelLabel = 'Transaksi Kas Kecils';
+    protected static ?int $navigationSort = 6;
 
     public static function getNavigationBadge(): ?string
     {

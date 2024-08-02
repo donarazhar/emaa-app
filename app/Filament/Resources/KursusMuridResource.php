@@ -19,10 +19,11 @@ class KursusMuridResource extends Resource
 {
     protected static ?string $model = KursusMurid::class;
 
-    protected static ?string $navigationGroup = 'Kursus';
+    protected static ?string $navigationGroup = 'Kursus Management';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $modelLabel = 'Murids';
     protected static ?string $navigationLabel = 'Murid';
+    protected static ?string $navigationParentItem = 'Transaksi Kursus';
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationBadge(): ?string

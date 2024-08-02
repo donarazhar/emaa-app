@@ -6,6 +6,7 @@ use App\Filament\Resources\MarbotResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Resources\Components\Tab;
 
 class ListMarbots extends ListRecords
 {
@@ -23,4 +24,17 @@ class ListMarbots extends ListRecords
         // Menampilkan datatabel OrderyByDesc
         return parent::getTableQuery()->orderByDesc('id');
     }
+
+    public function getTabs(): array
+{
+    return [
+        'All' => Tab::make(),
+        'KTD' => Tab::make()
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('status_pegawai', 'KTD')),
+        'Kontrak' => Tab::make()
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('status_pegawai', 'Kontrak')),
+        'Capeg' => Tab::make()
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('status_pegawai', 'Capeg')),
+    ];
+}
 }

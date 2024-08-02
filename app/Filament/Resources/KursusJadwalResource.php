@@ -20,10 +20,11 @@ class KursusJadwalResource extends Resource
 {
     protected static ?string $model = KursusJadwal::class;
 
-    protected static ?string $navigationGroup = 'Kursus';
+    protected static ?string $navigationGroup = 'Kursus Management';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $modelLabel = 'Jadwal Kursus';
     protected static ?string $navigationLabel = 'Jadwal Kursus';
+    protected static ?string $navigationParentItem = 'Transaksi Kursus';
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationBadge(): ?string

@@ -19,10 +19,11 @@ class KursusGuruResource extends Resource
 {
     protected static ?string $model = KursusGuru::class;
 
-    protected static ?string $navigationGroup = 'Kursus';
+    protected static ?string $navigationGroup = 'Kursus Management';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $modelLabel = 'Guru';
     protected static ?string $navigationLabel = 'Guru';
+    protected static ?string $navigationParentItem = 'Transaksi Kursus';
     protected static ?int $navigationSort = 3;
 
     public static function getNavigationBadge(): ?string

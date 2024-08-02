@@ -16,17 +16,18 @@ return new class extends Migration
         Schema::create('marbots', function (Blueprint $table) {
             $table->id();
             $table->string('nip')->unique();
-            $table->string('nama');
             $table->string('tlahir');
             $table->date('tgl_lahir');
             $table->string('jenkel');
             $table->string('goldar');
             $table->string('status_nikah');
             $table->string('status_pegawai');
+            $table->string('phone')->nullable();
             $table->string('alamat');
             $table->json('kesehatan')->nullable();
-            $table->foreignIdFor(Standard::class);
-            $table->foreignIdFor(User::class)->nullable();
+            $table->text('foto')->nullable();
+            $table->string('email_user')->nullable();
+            $table->foreign('email_user')->references('email')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

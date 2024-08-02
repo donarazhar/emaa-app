@@ -19,10 +19,11 @@ class KursusKategoriResource extends Resource
 {
     protected static ?string $model = KursusKategori::class;
 
-    protected static ?string $navigationGroup = 'Kursus';
+    protected static ?string $navigationGroup = 'Kursus Management';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
     protected static ?string $modelLabel = 'Jenis Kursus';
     protected static ?string $navigationLabel = 'Jenis Kursus';
+    protected static ?string $navigationParentItem = 'Transaksi Kursus';
     protected static ?int $navigationSort = 4;
 
     public static function getNavigationBadge(): ?string

@@ -19,8 +19,8 @@ class InventarisTransaksiResource extends Resource
 {
     protected static ?string $model = InventarisTransaksi::class;
 
-    protected static ?string $navigationGroup = 'Inventaris';
-    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
+    protected static ?string $navigationGroup = 'Office Management';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
     protected static ?string $modelLabel = 'Transaksi Data Inventaris';
     protected static ?int $navigationSort = 9;
 

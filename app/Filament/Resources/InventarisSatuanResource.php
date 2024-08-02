@@ -17,7 +17,7 @@ class InventarisSatuanResource extends Resource
 {
     protected static ?string $model = InventarisSatuan::class;
 
-    protected static ?string $navigationGroup = 'Inventaris';
+    protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Inventaris Satuan';
     protected static ?string $navigationLabel = 'Data Satuan Inv';
     protected static ?string $navigationIcon = 'heroicon-o-tag';

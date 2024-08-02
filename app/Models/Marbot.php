@@ -4,37 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Marbot extends Model
 {
     use HasFactory;
-
-    protected $casts = [
-        'kesehatan' => 'json'
-    ];
-
-    public function user()
+   
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function standard()
-    {
-        return $this->belongsTo(Standard::class);
+        return $this->belongsTo(User::class, 'email_user', 'email');
     }
 
     public function keluargas()
     {
-        return $this->belongsToMany(Keluarga::class);
+        return $this->belongsToMany(MarbotKeluarga::class, 'marbot_has_keluargas', 'marbot_id', 'marbot_keluarga_id');
     }
 
     public function riwayatkepegawaians()
     {
-        return $this->belongsToMany(RiwayatKepegawaian::class, 'riwayat_kepegawaian_marbot');
+        return $this->belongsToMany(MarbotRiwayatKepegawaian::class, 'marbot_has_riwayat_kepegawaians', 'marbot_id', 'marbot_riwayat_kepegawaian_id');
     }
 
-    public function sertifikats()
+    public function kesehatans()
     {
-        return $this->hasMany(SertifikatMarbot::class);
+        return $this->belongsToMany(MarbotKesehatan::class, 'marbot_has_kesehatans', 'marbot_id', 'marbot_kesehatan_id');
     }
+
 }
