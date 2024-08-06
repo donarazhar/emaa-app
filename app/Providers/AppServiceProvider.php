@@ -29,13 +29,13 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
     }
 
-    protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class
-        ],
-        PromoteMarbot::class => [
-            UpdateMarbotStandard::class,
-            SendPromotedEmail::class,
-        ],
-    ];
+    // protected $listen = [
+    //     Registered::class => [
+    //         SendEmailVerificationNotification::class
+    //     ],
+    //     PromoteMarbot::class => [
+    //         UpdateMarbotStandard::class,
+    //         SendPromotedEmail::class,
+    //     ],
+    // ];
 }

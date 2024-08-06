@@ -19,9 +19,9 @@ class InventarisMerkResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Inventaris Merk';
-    protected static ?string $navigationLabel = 'Data Merk Inv';
+    protected static ?string $navigationLabel = 'Master Merk';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
+    protected static ?string $navigationParentItem = 'Inventaris';
     protected static ?int $navigationSort = 7;
 
     public static function getNavigationBadge(): ?string

@@ -19,9 +19,9 @@ class KasKecilMatanggaranResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Akun Matanggarans';
-    protected static ?string $navigationLabel = 'Akun Matanggaran';
+    protected static ?string $navigationLabel = 'Master Matanggaran';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Kas Kecils';
+    protected static ?string $navigationParentItem = 'Kas Kecils';
 
     public static function getNavigationBadge(): ?string
     {

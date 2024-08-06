@@ -18,10 +18,10 @@ class LayananJenisKonsultasiResource extends Resource
     protected static ?string $model = LayananJenisKonsultasi::class;
 
     protected static ?string $navigationGroup = 'Office Management';
-    protected static ?string $modelLabel = 'Jenis Konsultasi';
-    protected static ?string $navigationLabel = 'Data Jenis Konsultasi';
+    protected static ?string $modelLabel = 'Jenis Konsultasis';
+    protected static ?string $navigationLabel = 'Master Jenis Konsultasi';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Konsultasis';
+    protected static ?string $navigationParentItem = 'Layanan Konsultasis';
 
     public static function getNavigationBadge(): ?string
     {

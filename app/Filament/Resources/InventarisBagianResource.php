@@ -19,9 +19,9 @@ class InventarisBagianResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Inventaris Bagian';
-    protected static ?string $navigationLabel = 'Data Bagian Inv';
+    protected static ?string $navigationLabel = 'Master Bagian';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
+    protected static ?string $navigationParentItem = 'Inventaris';
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationBadge(): ?string

@@ -16,7 +16,11 @@ return new class extends Migration
         Schema::create('marbot_keluargas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('tlahir');
+            $table->date('tgl_lahir');
+            $table->string('jenkel');
             $table->string('no_kontak');
+            $table->string('foto_keluarga')->nullable();
             $table->string('tipe_hubungan')->index();
             $table->string('keterangan');
             $table->timestamps();

@@ -14,7 +14,7 @@ class RiwayatkepegawaianRelationManager extends RelationManager
     protected static string $relationship = 'riwayatkepegawaians';
 
     protected static ?string $modelLabel = 'Riwayat Kepegawaian';
-    
+
     public function form(Form $form): Form
     {
         return $form
@@ -22,15 +22,11 @@ class RiwayatkepegawaianRelationManager extends RelationManager
                 Forms\Components\Select::make('jenis_riwayat')
                     ->options(RiwayatKepegawaian::getKeyValues())->label('Jenis Riwayat')->required(),
                 Forms\Components\TextInput::make('nama')
-                    ->required()
-                    ->maxLength(255),
+                    ->required()->maxLength(255),
                 Forms\Components\Textarea::make('keterangan')
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('foto_riwayatkepegawaian')
-                    ->image()
-                    ->maxSize(1024)
-                    ->directory('file-riwayatkepegawaian')
-                    ->label('Lampiran'),
+                    ->image()->maxSize(1024)->directory('file-riwayatkepegawaian')->label('Lampiran'),
             ]);
     }
 
@@ -39,23 +35,20 @@ class RiwayatkepegawaianRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('id')
             ->columns([
-                Tables\Columns\TextColumn::make('row_number')
+                Tables\Columns\TextColumn::make('index')
                     ->label('No.')
                     ->rowIndex(),
                 Tables\Columns\TextColumn::make('jenis_riwayat')->label('Jenis Riwayat')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('nama')->label('Nama Riwayat'),
                 Tables\Columns\TextColumn::make('keterangan'),
                 Tables\Columns\ImageColumn::make('foto_riwayatkepegawaian')->label('File')
-                ->square()
-                ->size(50)
-                ->getStateUsing(function ($record) {
-                    return $record->foto_riwayatkepegawaian ? url('storage/' . $record->foto_riwayatkepegawaian) : url('storage/file-user/no-image.jpg');
-                }), 
+                    ->square()->size(50)->getStateUsing(function ($record) {
+                        return $record->foto_riwayatkepegawaian ? url('storage/' . $record->foto_riwayatkepegawaian) : url('storage/file-user/no-image.jpg');
+                    }),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('jenis_riwayat')
-                ->multiple()
-                ->options(RiwayatKepegawaian::getKeyValues())
+                    ->multiple()->options(RiwayatKepegawaian::getKeyValues())
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),

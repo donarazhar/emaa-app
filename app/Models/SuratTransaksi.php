@@ -24,15 +24,18 @@ class SuratTransaksi extends Model
 
     public static function generateNoUrutSurat()
     {
+        $month = date('m');
         $year = date('Y');
+
         $lastEntry = DB::table('surat_transaksis')
             ->whereYear('created_at', $year)
-            ->orderBy('no_transaksi_surat', 'desc')
+            ->whereMonth('created_at', $month)
+            ->orderBy('id', 'desc')
             ->first();
 
-        $lastNumber = $lastEntry ? intval(explode('_', $lastEntry->no_transaksi_surat)[0]) : 0;
-        $newNumber = $lastNumber + 1;
+        $lastNumber = $lastEntry ? intval(explode('/', $lastEntry->id)[0]) : 0;
+        $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT); // Pad the number to 4 digits
 
-        return $newNumber . '_' . $year;
+        return $newNumber . '/' . $month . '/' . $year;
     }
 }

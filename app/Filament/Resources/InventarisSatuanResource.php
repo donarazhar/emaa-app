@@ -19,9 +19,9 @@ class InventarisSatuanResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Inventaris Satuan';
-    protected static ?string $navigationLabel = 'Data Satuan Inv';
+    protected static ?string $navigationLabel = 'Master Satuan';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
+    protected static ?string $navigationParentItem = 'Inventaris';
     protected static ?int $navigationSort = 8;
 
     public static function getNavigationBadge(): ?string

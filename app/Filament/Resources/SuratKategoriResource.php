@@ -20,10 +20,10 @@ class SuratKategoriResource extends Resource
     protected static ?int $navigationSort = 20;
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Kategori Surat';
-    protected static ?string $navigationLabel = 'Data Kategori Surat';
-    protected static ?string $navigationParentItem = 'Transaksi Surats';
+    protected static ?string $navigationLabel = 'Master Kategori Surat';
+    protected static ?string $navigationParentItem = 'Persuratans';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-     
+
 
     public static function getNavigationBadge(): ?string
     {

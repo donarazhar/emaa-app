@@ -20,7 +20,7 @@ class LayananTransaksiPengislamanResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $navigationIcon = 'heroicon-o-document-magnifying-glass';
-    protected static ?string $modelLabel = 'Transaksi Pengislaman';
+    protected static ?string $modelLabel = 'Layanan Pengislaman';
     protected static ?int $navigationSort = 4;
 
     public static function getNavigationBadge(): ?string

@@ -19,7 +19,7 @@ class LayananTransaksiKonsultasiResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
-    protected static ?string $modelLabel = 'Transaksi Konsultasi';
+    protected static ?string $modelLabel = 'Layanan Konsultasi';
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationBadge(): ?string

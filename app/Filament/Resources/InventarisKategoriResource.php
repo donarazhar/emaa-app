@@ -19,9 +19,9 @@ class InventarisKategoriResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Inventaris Kategori';
-    protected static ?string $navigationLabel = 'Data Kategori Inv';
+    protected static ?string $navigationLabel = 'Master Kategori';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Data Inventaris';
+    protected static ?string $navigationParentItem = 'Inventaris';
     protected static ?int $navigationSort = 6;
 
     public static function getNavigationBadge(): ?string

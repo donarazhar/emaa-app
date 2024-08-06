@@ -21,7 +21,7 @@ class InventarisTransaksiResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
-    protected static ?string $modelLabel = 'Transaksi Data Inventaris';
+    protected static ?string $modelLabel = 'Inventaris';
     protected static ?int $navigationSort = 9;
 
     public static function getNavigationBadge(): ?string

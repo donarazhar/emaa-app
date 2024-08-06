@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('status_pegawai');
             $table->string('phone')->nullable();
             $table->string('alamat');
-            $table->json('kesehatan')->nullable();
             $table->text('foto')->nullable();
             $table->string('email_user')->nullable();
             $table->foreign('email_user')->references('email')->on('users')->onDelete('cascade');

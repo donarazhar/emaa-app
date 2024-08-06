@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class Marbot extends Model
 {
-    use HasFactory;
-   
+    use HasFactory, HasRoles;
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'email_user', 'email');
@@ -29,5 +31,4 @@ class Marbot extends Model
     {
         return $this->belongsToMany(MarbotKesehatan::class, 'marbot_has_kesehatans', 'marbot_id', 'marbot_kesehatan_id');
     }
-
 }

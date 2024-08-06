@@ -22,7 +22,7 @@ class KasKecilTransaksiResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $navigationIcon = 'heroicon-o-table-cells';
-    protected static ?string $modelLabel = 'Transaksi Kas Kecils';
+    protected static ?string $modelLabel = 'Kas Kecil';
     protected static ?int $navigationSort = 6;
 
     public static function getNavigationBadge(): ?string
@@ -47,9 +47,9 @@ class KasKecilTransaksiResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('jumlah')->required()
                     ->label('Jumlah'),
-                Forms\Components\Datepicker::make('tgl_transaksi')->required()
+                Forms\Components\DatePicker::make('tgl_transaksi')->required()
                     ->label('Tanggal Transaksi'),
-                Forms\Components\TextArea::make('perincian')->required()
+                Forms\Components\Textarea::make('perincian')->required()
                     ->label('Perincian'),
                 Forms\Components\FileUpload::make('foto_kaskecil')
                     ->image()

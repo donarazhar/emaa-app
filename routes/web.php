@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MarbotController;
+
 
 
 Route::get('/', function () {
@@ -13,3 +15,4 @@ Route::get('/web', function () {
 Route::get('/blog', function () {
     return view('blog');
 });
+Route::get('/pdf-preview/{id}', [MarbotController::class, 'preview'])->name('pdf.preview');

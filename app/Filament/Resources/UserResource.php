@@ -32,7 +32,7 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                
+
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -40,7 +40,7 @@ class UserResource extends Resource
                     ->label('Email address')
                     ->email()
                     ->required()
-                    ->maxLength(255),               
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->maxLength(255)
@@ -50,9 +50,12 @@ class UserResource extends Resource
                     })
                     ->dehydrated(fn ($state) => filled($state)) // Dehydrate only if the state is filled
                     ->label('Password'),
-                Forms\Components\Select::make('roles_id')->label('Roles')
+                // Using Select Component
+                Forms\Components\Select::make('roles')
                     ->relationship('roles', 'name')
-                    ->required(),
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
             ]);
     }
 

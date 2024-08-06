@@ -20,9 +20,9 @@ class KasKecilAasResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Akun AAs';
-    protected static ?string $navigationLabel = 'Akun AAS';
+    protected static ?string $navigationLabel = 'Master AAS';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Kas Kecils';
+    protected static ?string $navigationParentItem = 'Kas Kecils';
 
     public static function getNavigationBadge(): ?string
     {

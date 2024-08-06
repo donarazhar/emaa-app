@@ -19,9 +19,9 @@ class LayananImamResource extends Resource
 
     protected static ?string $navigationGroup = 'Office Management';
     protected static ?string $modelLabel = 'Imams';
-    protected static ?string $navigationLabel = 'Data Imam';
+    protected static ?string $navigationLabel = 'Master Imam';
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-    protected static ?string $navigationParentItem = 'Transaksi Konsultasis';
+    protected static ?string $navigationParentItem = 'Layanan Konsultasis';
 
     public static function getNavigationBadge(): ?string
     {

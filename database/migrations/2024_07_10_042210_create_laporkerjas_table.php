@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('judul');
             $table->text('isi');
             $table->text('foto_laporkerja')->nullable();
-            $table->foreignId('user_id')->constrained('users');
+            $table->string('email_user')->nullable();
+            $table->foreign('email_user')->references('email')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
