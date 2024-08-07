@@ -11,11 +11,12 @@ use Filament\Resources\Components\Tab;
 class ListMarbots extends ListRecords
 {
     protected static string $resource = MarbotResource::class;
+    protected static ?string $title = 'Data Tabel Marbot';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Data Baru Marbot'),
         ];
     }
 
@@ -26,15 +27,19 @@ class ListMarbots extends ListRecords
     }
 
     public function getTabs(): array
-{
-    return [
-        'All' => Tab::make(),
-        'KTD' => Tab::make()
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('status_pegawai', 'KTD')),
-        'Kontrak' => Tab::make()
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('status_pegawai', 'Kontrak')),
-        'Capeg' => Tab::make()
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('status_pegawai', 'Capeg')),
-    ];
-}
+    {
+        return [
+            'All' => Tab::make(),
+            'Staf TU' => Tab::make()
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Staf')),
+            'Kebersihan' => Tab::make()
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Kebersihan')),
+            'Teknisi' => Tab::make()
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Teknisi')),
+            'Imam Muazin' => Tab::make()
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Imammuazin')),
+            'Lepas' => Tab::make()
+                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Lepas')),
+        ];
+    }
 }

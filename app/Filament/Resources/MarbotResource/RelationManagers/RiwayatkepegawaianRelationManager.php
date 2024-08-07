@@ -42,7 +42,7 @@ class RiwayatkepegawaianRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('nama')->label('Nama Riwayat'),
                 Tables\Columns\TextColumn::make('keterangan'),
                 Tables\Columns\ImageColumn::make('foto_riwayatkepegawaian')->label('File')
-                    ->square()->size(50)->getStateUsing(function ($record) {
+                    ->circular()->size(50)->getStateUsing(function ($record) {
                         return $record->foto_riwayatkepegawaian ? url('storage/' . $record->foto_riwayatkepegawaian) : url('storage/file-user/no-image.jpg');
                     }),
             ])
@@ -51,12 +51,12 @@ class RiwayatkepegawaianRelationManager extends RelationManager
                     ->multiple()->options(RiwayatKepegawaian::getKeyValues())
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->label('Buat Data Kepegawaian'),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
                 ]),
             ])
             ->bulkActions([

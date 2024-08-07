@@ -9,6 +9,7 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateMarbot extends CreateRecord
 {
     protected static string $resource = MarbotResource::class;
+    protected static ?string $title = 'Data Baru Marbot';
 
     protected function getRedirectUrl(): string
     {

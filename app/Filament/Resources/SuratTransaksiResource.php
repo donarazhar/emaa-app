@@ -77,10 +77,12 @@ class SuratTransaksiResource extends Resource
                         $year = date('Y');
                         return str_pad($adjustedNumber, 4, '0', STR_PAD_LEFT) . '/' . $month . '/' . $year;
                     }),
-                Tables\Columns\TextColumn::make('tgl_transaksi_surat')->dateTime('d/m/Y')->label('Tgl.')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('no_transaksi_surat')->label('No. Surat'),
-                Tables\Columns\TextColumn::make('surat_dari_transaksi_surat')->label('Dari')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('perihal_transaksi_surat')->label('Perihal')->limit(20)->searchable(),
+                Tables\Columns\TextColumn::make('tgl_transaksi_surat')->dateTime('d/m/Y')->label('Tgl & No. Surat')
+                    ->description(fn (SuratTransaksi $record): string => $record->no_transaksi_surat)
+                    ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('surat_dari_transaksi_surat')->label('Dari & Perihal')
+                    ->description(fn (SuratTransaksi $record): string => $record->perihal_transaksi_surat)
+                    ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('kategori.nama_kategori')->label('Kategori')->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('asal.nama_asal_surat')->label('Asal')->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status_transaksi_surat')->label('Status')->sortable()->toggleable(isToggledHiddenByDefault: true),
@@ -100,9 +102,9 @@ class SuratTransaksiResource extends Resource
             ], layout: FiltersLayout::AboveContentCollapsible)->filtersFormColumns(3)
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make()->color('info'),
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
                 ])
             ])
             ->bulkActions([
@@ -123,8 +125,8 @@ class SuratTransaksiResource extends Resource
     {
         return [
             'index' => Pages\ListSuratTransaksis::route('/'),
-            'create' => Pages\CreateSuratTransaksi::route('/create'),
-            'edit' => Pages\EditSuratTransaksi::route('/{record}/edit'),
+            // 'create' => Pages\CreateSuratTransaksi::route('/create'),
+            // 'edit' => Pages\EditSuratTransaksi::route('/{record}/edit'),
         ];
     }
 }

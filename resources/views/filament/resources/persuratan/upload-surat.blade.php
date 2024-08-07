@@ -3,7 +3,7 @@
     '' => 'List',
 ]" />
 <div class="flex justify-between mt-1">
-    <div class="font-bold text-3xl">Persuratans
+    <div class="font-bold text-3xl">Data Tabel Persuratan
     </div>
     <div>
         {{ $data }}

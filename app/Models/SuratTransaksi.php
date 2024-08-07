@@ -10,8 +10,6 @@ class SuratTransaksi extends Model
 {
     use HasFactory;
 
-
-
     public function kategori()
     {
         return $this->belongsTo(SuratKategori::class, 'kategori_surat_id');

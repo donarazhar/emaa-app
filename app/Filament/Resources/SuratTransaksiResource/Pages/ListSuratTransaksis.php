@@ -19,13 +19,18 @@ class ListSuratTransaksis extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->slideOver()->label('Buat Surat Baru'),
         ];
+    }
+
+    protected function getTableQuery(): Builder
+    {
+        return parent::getTableQuery()->orderBy('id', 'desc');
     }
 
     public function getHeader(): ?View
     {
-        $data = Actions\CreateAction::make()->label('New Data Persuratan');
+        $data = Actions\CreateAction::make()->label('Buat Surat Baru');
         return view('filament.resources.persuratan.upload-surat', compact('data'));
     }
 
@@ -52,10 +57,5 @@ class ListSuratTransaksis extends ListRecords
                 ->badge(SuratTransaksi::query()->where('tgl_transaksi_surat', '>=', now()->subYear())->count()),
 
         ];
-    }
-
-    protected function getTableQuery(): Builder
-    {
-        return parent::getTableQuery()->orderBy('id', 'desc');
     }
 }

@@ -45,8 +45,9 @@ class AdminPanelProvider extends PanelProvider
                 'success' => Color::Green,
                 'warning' => Color::Amber,
             ])
+            ->darkMode(isForced: true)
             ->font('Poppins')
-            ->brandName('eMAA - Masjidku')
+            ->brandName('EMAA - Masjidku')
             ->favicon(asset('storage/logo-maa.png'))
             ->navigationGroups([
                 'Office Management',

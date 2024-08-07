@@ -9,6 +9,7 @@ use App\Models\LaporKerja;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Auth;
+use Filament\Tables\Enums\FiltersLayout;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\LaporKerjaResource\Pages;
@@ -37,7 +38,7 @@ class LaporKerjaResource extends Resource
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('foto_laporkerja')
-                    ->image()->openable()->multiple()->directory('file-laporkerja')->label('Gambar'),
+                    ->image()->imageEditor()->openable()->multiple()->directory('file-laporkerja')->label('Gambar'),
                 Forms\Components\TextInput::make('email_user')
                     ->label('Pelapor')->default($user->email)->readOnly(),
                 Forms\Components\DatePicker::make('tgl')->label('Tgl. Lapor (Default, wajib lapor setiap hari)')
@@ -55,16 +56,18 @@ class LaporKerjaResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('index')->label('No')->rowIndex(),
-                Tables\Columns\TextColumn::make('tgl')->dateTime('d/m/Y')->label('Tgl'),
+                Tables\Columns\TextColumn::make('tgl')->dateTime('d/m/Y')->label('Tgl')->sortable()->searchable(),
                 Tables\Columns\ImageColumn::make('foto_laporkerja')->label('Foto')
-                    ->stacked()->size(80)->circular()->limit(3)->limitedRemainingText(),
-                Tables\Columns\TextColumn::make('user.name')->label('Pelapor'),
-                Tables\Columns\TextColumn::make('judul')->label('Judul'),
-                Tables\Columns\TextColumn::make('isi')->label('Deskripsi'),
+                    ->stacked()->size(40)->circular()->limit(3)->limitedRemainingText(),
+                Tables\Columns\TextColumn::make('user.name')->label('Pelapor')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('judul')->label('Laporan')->sortable()->searchable()
+                    ->description(fn (LaporKerja $record): string => $record->isi),
             ])
             ->filters([
-                DateRangeFilter::make('tgl'),
-            ])
+                DateRangeFilter::make('tgl')->label('Filter by Range Tanggal'),
+                Tables\Filters\SelectFilter::make('user.name')->label('Filter by Nama Marbot')
+                    ->relationship('user', 'name'),
+            ], layout: FiltersLayout::AboveContentCollapsible)->filtersFormColumns(2)
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make()->color('info')->slideOver(),

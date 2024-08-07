@@ -44,7 +44,7 @@ class KeluargasRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('index')->label('No.')->rowIndex(),
                 Tables\Columns\ImageColumn::make('foto_keluarga')->label('Photo')
-                    ->circular()->size(80)->getStateUsing(function ($record) {
+                    ->circular()->size(50)->getStateUsing(function ($record) {
                         return $record->foto_keluarga ? url('storage/' . $record->foto_keluarga) : url('storage/file-user/no-image.jpg');
                     }),
                 Tables\Columns\TextColumn::make('nama')->label('Nama'),
@@ -60,12 +60,12 @@ class KeluargasRelationManager extends RelationManager
                     ->options(TipeHubungan::getKeyValues())
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->label('Buat Data Keluarga'),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
                 ]),
             ])
             ->bulkActions([

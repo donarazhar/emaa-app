@@ -42,7 +42,7 @@ class KesehatansRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('nama')->label('Nama Riwayat'),
                 Tables\Columns\TextColumn::make('keterangan'),
                 Tables\Columns\ImageColumn::make('foto_kesehatan')->label('File')
-                    ->square()->size(50)->getStateUsing(function ($record) {
+                    ->circular()->size(50)->getStateUsing(function ($record) {
                         return $record->foto_kesehatan ? url('storage/' . $record->foto_kesehatan) : url('storage/file-user/no-image.jpg');
                     }),
             ])
@@ -51,12 +51,12 @@ class KesehatansRelationManager extends RelationManager
                     ->multiple()->options(Kesehatan::getKeyValues())
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()->label('Buat Data Kesehatan'),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
                 ]),
             ])
             ->bulkActions([

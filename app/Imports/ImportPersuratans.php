@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\SuratTransaksi;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Filament\Actions\Imports\ImportColumn;
 
 class ImportPersuratans implements ToModel
 {

@@ -62,24 +62,23 @@ class MarbotResource extends Resource
                                     Forms\Components\Select::make('email_user')->label('Users Akun')
                                         ->relationship('user', 'name')->required(),
                                     Forms\Components\TextInput::make('nip')->label('NIP')
-                                        ->numeric()->maxLength(15)->required(),
+                                        ->numeric()->maxLength(15)->unique(ignoreRecord: true)->required(),
                                     Forms\Components\TextInput::make('phone')->label('No. HP')
-                                        ->numeric()->maxLength(15)->required(),
+                                        ->numeric()->maxLength(15)->unique(ignoreRecord: true)->required(),
                                     Forms\Components\Select::make('jenkel')->label('Jenkel')->options([
                                         'Laki-Laki' => 'Laki-Laki',
                                         'Perempuan' => 'Perempuan',
                                     ])->required(),
                                     Forms\Components\TextInput::make('tlahir')
-                                        ->label('Tmp. Lahir')->required(),
+                                        ->label('Tmp. Lahir'),
                                     Forms\Components\DatePicker::make('tgl_lahir')->label('Tgl. Lahir')
-                                        ->maxDate(now()->subYears(20))
-                                        ->required(),
+                                        ->maxDate(now()->subYears(20)),
                                     Forms\Components\Select::make('goldar')->label('Goldar')->options([
                                         'O' => 'O',
                                         'A' => 'A',
                                         'AB' => 'AB',
                                         'B' => 'B',
-                                    ])->required(),
+                                    ]),
                                 ])
                                 ->columns(2)
                                 ->description('Enter your details')
@@ -89,7 +88,7 @@ class MarbotResource extends Resource
                             Forms\Components\Wizard\Step::make('Twice Information')
                                 ->schema([
                                     Forms\Components\Textarea::make('alamat')->label('Alamat Lengkap')
-                                        ->maxLength(255)->rows(4)->required()->columnSpanFull(),
+                                        ->maxLength(255)->rows(4)->columnSpanFull(),
                                     Forms\Components\Grid::make()
                                         ->schema([
                                             Forms\Components\Select::make('status_nikah')
@@ -98,18 +97,27 @@ class MarbotResource extends Resource
                                                     'Menikah' => '1. Menikah',
                                                     'Belum Menikah' => '2. Belum Menikah',
                                                     'Cerai' => '3. Cerai',
-                                                ])
-                                                ->required(),
+                                                ]),
                                             Forms\Components\Select::make('status_pegawai')
                                                 ->label('Status Pegawai')
                                                 ->options([
                                                     'KTD' => '1. KTD',
                                                     'Capeg' => '2. Capeg',
                                                     'Kontrak' => '3. Kontrak',
-                                                ])
-                                                ->required(),
+                                                    'Lepas' => '4. Pegawai Lepas',
+                                                ]),
+                                            Forms\Components\Select::make('Posisi')
+                                                ->label('Posisi')
+                                                ->options([
+                                                    'Staf' => '1. Staf TU',
+                                                    'Kebersihan' => '2. Kebersihan',
+                                                    'Teknisi' => '3. Teknisi',
+                                                    'Lepas' => '4. Pegawai Lepas',
+                                                    'Imam' => '5. Imam Muazin',
+
+                                                ]),
                                         ])
-                                        ->columns(2),
+                                        ->columns(3),
                                 ])
                                 ->description('Enter your add details')
                                 ->icon('heroicon-o-server-stack'),
@@ -136,11 +144,11 @@ class MarbotResource extends Resource
                         return 'NIP : ' . $record->nip;
                     }),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('Nama Marbot')->icon('heroicon-m-user')->iconColor('primary'),
+                    ->label('Nama Marbot')->icon('heroicon-m-user')->iconColor('primary')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->label('No. HP')->icon('heroicon-m-device-phone-mobile')->iconColor('primary'),
                 Tables\Columns\TextColumn::make('email_user')->label('Email')
-                    ->icon('heroicon-m-envelope')->iconColor('primary'),
+                    ->icon('heroicon-m-envelope')->iconColor('primary')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('jenkel')->label('Jenkel')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('tlahir')->label('Tlahir')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('tgl_lahir')->dateTime('d/m/Y')->label('Tgl. Lahir')->toggleable(isToggledHiddenByDefault: true),
