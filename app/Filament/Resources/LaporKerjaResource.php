@@ -39,7 +39,7 @@ class LaporKerjaResource extends Resource
                 Forms\Components\FileUpload::make('foto_laporkerja')
                     ->image()->openable()->multiple()->directory('file-laporkerja')->label('Gambar'),
                 Forms\Components\TextInput::make('email_user')
-                    ->label('Nama Pelapor')->default($user->email)->readOnly(),
+                    ->label('Pelapor')->default($user->email)->readOnly(),
                 Forms\Components\DatePicker::make('tgl')->label('Tgl. Lapor (Default, wajib lapor setiap hari)')
                     ->default(now())->readOnly()->required(),
                 Forms\Components\TextInput::make('judul')
@@ -67,9 +67,9 @@ class LaporKerjaResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make()->color('info'),
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
                 ])
             ])
             ->bulkActions([
@@ -101,7 +101,7 @@ class LaporKerjaResource extends Resource
         return [
             'index' => Pages\ListLaporKerjas::route('/'),
             'create' => Pages\CreateLaporKerja::route('/create'),
-            'edit' => Pages\EditLaporKerja::route('/{record}/edit'),
+            // 'edit' => Pages\EditLaporKerja::route('/{record}/edit'),
         ];
     }
 }

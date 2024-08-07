@@ -21,6 +21,7 @@ use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use App\Filament\Resources\MarbotResource\Widgets\MarbotTable;
 use App\Filament\Resources\MarbotResource\Widgets\StatsOverview;
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use App\Filament\Resources\KursusPendaftaranResource\Widgets\KursusChart;
 
 class AdminPanelProvider extends PanelProvider
@@ -35,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->passwordReset()
             ->emailVerification()
-            ->profile(AuthEditProfile::class)
+            // ->profile(AuthEditProfile::class)
             ->colors([
                 'danger' => Color::Red,
                 'gray' => Color::Zinc,
@@ -84,7 +85,19 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentApexChartsPlugin::make(),
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
+                FilamentEditProfilePlugin::make()
+                    ->slug('my-profile')
+                    ->setTitle('My Profile')
+                    ->setNavigationLabel('My Profile')
+                    ->setNavigationGroup('Setting Management')
+                    ->setIcon('heroicon-m-user-circle')
+                    ->shouldShowDeleteAccountForm(false)
+                    ->shouldShowAvatarForm(
+                        value: true,
+                        directory: 'file-avatars', // image will be stored in 'storage/app/public/avatars
+                        rules: 'mimes:jpeg,png|max:1024' //only accept jpeg and png files with a maximum size of 1MB
+                    ),
             ]);
     }
 }

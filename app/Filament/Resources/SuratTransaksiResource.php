@@ -80,7 +80,7 @@ class SuratTransaksiResource extends Resource
                 Tables\Columns\TextColumn::make('tgl_transaksi_surat')->dateTime('d/m/Y')->label('Tgl.')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('no_transaksi_surat')->label('No. Surat'),
                 Tables\Columns\TextColumn::make('surat_dari_transaksi_surat')->label('Dari')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('perihal_transaksi_surat')->label('Perihal')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('perihal_transaksi_surat')->label('Perihal')->limit(20)->searchable(),
                 Tables\Columns\TextColumn::make('kategori.nama_kategori')->label('Kategori')->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('asal.nama_asal_surat')->label('Asal')->sortable()->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('status_transaksi_surat')->label('Status')->sortable()->toggleable(isToggledHiddenByDefault: true),
