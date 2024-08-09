@@ -59,9 +59,9 @@ class KasKecilAasResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\TextColumn::make('kode_aas')->label('Kode AAS'),
-                Tables\Columns\TextColumn::make('nama_aas')->label('Nama AAS'),
+                Tables\Columns\TextColumn::make('id')->label('No')->rowIndex()->sortable(),
+                Tables\Columns\TextColumn::make('kode_aas')->label('Kode AAS')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('nama_aas')->label('Nama AAS')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('status')->label('Status'),
                 Tables\Columns\TextColumn::make('kategori')->label('Kategori'),
             ])
@@ -69,7 +69,7 @@ class KasKecilAasResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

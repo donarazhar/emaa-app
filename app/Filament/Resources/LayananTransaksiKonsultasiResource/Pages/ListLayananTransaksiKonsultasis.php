@@ -21,6 +21,12 @@ class ListLayananTransaksiKonsultasis extends ListRecords
         ];
     }
 
+    protected function getTableQuery(): Builder
+    {
+        // Menampilkan datatabel OrderyByDesc
+        return parent::getTableQuery()->orderByDesc('id');
+    }
+
     public function getTabs(): array
     {
         return [

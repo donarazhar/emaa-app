@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('kas_kecil_matanggarans', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_matanggaran');
-            $table->foreignId('aas_id')->constrained('kas_kecil_aas');
+            $table->string('kode_matanggaran')->unique();
+            $table->string('kode_aas');
+            $table->foreign('kode_aas')->references('kode_aas')->on('kas_kecil_aas')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('saldo');
             $table->timestamps();
         });

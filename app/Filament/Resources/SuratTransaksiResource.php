@@ -68,7 +68,7 @@ class SuratTransaksiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('index')->label('No')->rowIndex(),
+                Tables\Columns\TextColumn::make('id')->label('No')->rowIndex(),
                 Tables\Columns\TextColumn::make('no_disposisi')->label('No. Disposisi')
                     ->getStateUsing(function ($record) {
                         $currentNumber = intval(explode('/', \App\Models\SuratTransaksi::generateNoUrutSurat())[0]);

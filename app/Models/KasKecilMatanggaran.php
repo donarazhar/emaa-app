@@ -11,11 +11,16 @@ class KasKecilMatanggaran extends Model
 
     public function aas()
     {
-        return $this->belongsTo(KasKecilAas::class, 'aas_id');
+        return $this->belongsTo(KasKecilAas::class, 'kode_aas', 'kode_aas');
+    }
+
+    public function getKodesMatanggaranAttribute()
+    {
+        return $this->kode_matanggaran . ' - ' . $this->aas->nama_aas;
     }
 
     public function transaksis()
     {
-        return $this->hasMany(KasKecilTransaksi::class, 'matanggaran_id');
+        return $this->hasMany(KasKecilTransaksi::class, 'kode_matanggaran', 'kode_matanggaran');
     }
 }

@@ -46,7 +46,7 @@ class SuratAsalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('id')->label('No')->rowIndex(),
                 Tables\Columns\TextColumn::make('nama_asal_surat')->label('Asal Surat')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('keterangan_asal_surat')->label('Keterangan'),
             ])

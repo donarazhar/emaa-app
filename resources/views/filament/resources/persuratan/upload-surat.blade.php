@@ -20,7 +20,7 @@
         </div>
         <div class="flex items-center justify-between mt-3">
             <button type="submit"
-                class="bg-blue-500 hover:bg-blue-700 text-bkack font-bold py-2 px-4 rounded-full shadow focus:outline-none focus:shadow-outline">
+                class="bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded-full shadow focus:outline-none focus:shadow-outline">
                 Unggah
             </button>
         </div>

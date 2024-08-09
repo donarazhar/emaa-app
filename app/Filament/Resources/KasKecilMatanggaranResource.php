@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\KasKecilMatanggaranResource\Pages;
-use App\Filament\Resources\KasKecilMatanggaranResource\RelationManagers;
-use App\Models\KasKecilMatanggaran;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\KasKecilAas;
+use Filament\Resources\Resource;
+use App\Models\KasKecilMatanggaran;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\KasKecilMatanggaranResource\Pages;
+use App\Filament\Resources\KasKecilMatanggaranResource\RelationManagers;
 
 class KasKecilMatanggaranResource extends Resource
 {
@@ -33,8 +34,10 @@ class KasKecilMatanggaranResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('kode_matanggaran')->label('Kode Matanggaran'),
-                Forms\Components\Select::make('aas_id')->label('Akun AAS')
-                    ->relationship('aas', 'nama_aas')
+                Forms\Components\Select::make('kode_aas')->label('Akun AAS')
+                    ->options(function () {
+                        return KasKecilAas::all()->pluck('KodesAas', 'kode_aas');
+                    })
                     ->required(),
                 Forms\Components\TextInput::make('saldo')->label('Saldo'),
             ]);
@@ -45,15 +48,16 @@ class KasKecilMatanggaranResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\TextColumn::make('kode_matanggaran')->label('Kode matanggaran'),
-                Tables\Columns\TextColumn::make('aas.nama_aas')->label('Nama AAS'),
+                Tables\Columns\TextColumn::make('kode_matanggaran')->label('Kode Matanggaran')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('aas.kode_aas')->label('Kode AAS')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('aas.nama_aas')->label('Nama AAS')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('saldo')->label('Saldo'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

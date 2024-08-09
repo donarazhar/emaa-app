@@ -14,6 +14,6 @@ class KasKecilTransaksi extends Model
 
     public function matanggaran()
     {
-        return $this->belongsTo(KasKecilMatanggaran::class, 'matanggaran_id');
+        return $this->belongsTo(KasKecilMatanggaran::class, 'kode_matanggaran', 'kode_matanggaran');
     }
 }

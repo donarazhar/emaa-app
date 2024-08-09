@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('kas_kecil_aas', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_aas');
+            $table->string('kode_aas')->unique();
             $table->string('nama_aas');
-            $table->enum('kategori', ['pembentukan', 'pengisian', 'pengeluaran']);
             $table->enum('status', ['debit', 'kredit']);
+            $table->enum('kategori', ['pembentukan', 'pengisian', 'pengeluaran']);
             $table->timestamps();
         });
     }

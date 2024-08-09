@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('kas_kecil_transaksis', function (Blueprint $table) {
             $table->id();
             $table->string('perincian');
+            $table->string('pengisian_id')->nullable();
             $table->integer('jumlah');
             $table->enum('kategori', ['pembentukan', 'pengisian', 'pengeluaran']);
             $table->date('tgl_transaksi');
-            $table->foreignId('matanggaran_id')->constrained('kas_kecil_matanggarans');
+            $table->string('kode_matanggaran');
+            $table->foreign('kode_matanggaran')->references('kode_matanggaran')->on('kas_kecil_matanggarans')->onDelete('cascade')->onUpdate('cascade');
             $table->text('foto_kaskecil')->nullable();
             $table->timestamps();
         });

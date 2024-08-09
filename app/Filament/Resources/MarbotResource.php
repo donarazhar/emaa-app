@@ -136,7 +136,7 @@ class MarbotResource extends Resource
 
             ->striped()
             ->columns([
-                Tables\Columns\TextColumn::make('index')->label('No')->rowIndex(),
+                Tables\Columns\TextColumn::make('id')->label('No')->rowIndex(),
                 Tables\Columns\ImageColumn::make('foto')->label('Photo')
                     ->circular()->size(80)->getStateUsing(function ($record) {
                         return $record->foto ? url('storage/' . $record->foto) : url('storage/file-user/no-image.jpg');
@@ -273,7 +273,6 @@ class MarbotResource extends Resource
                         Grid::make(1)
                             ->schema([
                                 Group::make([
-
                                     TextEntry::make('tlahir')
                                         ->label('Tempat Lahir')
                                         ->weight(FontWeight::Bold)

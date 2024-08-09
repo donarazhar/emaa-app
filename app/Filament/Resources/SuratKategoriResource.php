@@ -47,7 +47,7 @@ class SuratKategoriResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('id')->label('No')->rowIndex(),
                 Tables\Columns\TextColumn::make('nama_kategori')->label('Kategori Surat')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('keterangan_kategori')->label('Keterangan'),
             ])
