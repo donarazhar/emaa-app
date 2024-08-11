@@ -16,13 +16,18 @@ class SuratTransaksiResource extends Resource
     protected static ?string $model = SuratTransaksi::class;
 
     protected static ?string $navigationGroup = 'Office Management';
-    protected static ?string $navigationIcon = 'heroicon-o-envelope-open';
+    protected static ?string $navigationIcon = 'heroicon-m-envelope-open';
     protected static ?string $modelLabel = 'Persuratans';
     protected static ?int $navigationSort = 3;
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
     }
 
     public static function form(Form $form): Form
@@ -82,11 +87,12 @@ class SuratTransaksiResource extends Resource
                     ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('surat_dari_transaksi_surat')->label('Dari & Perihal')
                     ->description(fn (SuratTransaksi $record): string => $record->perihal_transaksi_surat)
+                    ->description(fn (SuratTransaksi $record): string => $record->kategori->nama_kategori, position:'above')
                     ->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('kategori.nama_kategori')->label('Kategori')->sortable()->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('asal.nama_asal_surat')->label('Asal')->sortable()->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('status_transaksi_surat')->label('Status')->sortable()->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('disposisi_transaksi_surat')->label('Isi Disposisi')->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('status_transaksi_surat')->label('Status & Isi Disposisi')
+                ->description(fn (SuratTransaksi $record): string => $record->asal->nama_asal_surat, position:'above')
+                ->description(fn (SuratTransaksi $record): string => $record->disposisi_transaksi_surat)
+                ->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('nama_asal_surat')->label('Filter by Asal Surat')

@@ -22,7 +22,7 @@ class KursusPembayaranResource extends Resource
     protected static ?string $model = KursusPembayaran::class;
 
     protected static ?string $navigationGroup = 'Kursus Management';
-    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
+    protected static ?string $navigationIcon = 'heroicon-m-credit-card';
     protected static ?string $modelLabel = 'Transaksi Bayar';
     protected static ?string $navigationLabel = 'Transaksi Bayar';
     protected static ?int $navigationSort = 1;
@@ -30,6 +30,11 @@ class KursusPembayaranResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
     }
 
     public static function form(Form $form): Form

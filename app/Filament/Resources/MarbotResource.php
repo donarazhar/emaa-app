@@ -32,7 +32,7 @@ class MarbotResource extends Resource
     protected static ?string $model = Marbot::class;
 
     protected static ?string $navigationGroup = 'Office Management';
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-m-users';
     protected static ?string $modelLabel = 'Marbot';
     protected static ?string $navigationLabel = 'Marbot';
     protected static ?int $navigationSort = 1;
@@ -41,7 +41,11 @@ class MarbotResource extends Resource
     {
         return static::getModel()::count();
     }
-
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
+    }
+    
     public static function form(Form $form): Form
     {
         return $form

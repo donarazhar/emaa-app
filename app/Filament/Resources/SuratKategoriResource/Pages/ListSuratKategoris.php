@@ -9,11 +9,13 @@ use Filament\Resources\Pages\ListRecords;
 class ListSuratKategoris extends ListRecords
 {
     protected static string $resource = SuratKategoriResource::class;
+    protected static ?string $title = 'Data Tabel Kategori Surat';
+
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Data Baru')->slideOver(),
         ];
     }
 }

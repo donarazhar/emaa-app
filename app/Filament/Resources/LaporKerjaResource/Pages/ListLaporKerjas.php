@@ -22,7 +22,7 @@ class ListLaporKerjas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Buat Lapor Kerja'),
+            Actions\CreateAction::make()->label('Buat Lapor Kerja')->slideOver(),
         ];
     }
 

@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" type="image/png" sizes="192x192"
+        href="https://masjidagungalazhar.com/assets/images/favicon/android-icon-192x192.png">
     <title>Detail {{ $marbot->user->name }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>

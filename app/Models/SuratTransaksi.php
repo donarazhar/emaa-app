@@ -36,4 +36,25 @@ class SuratTransaksi extends Model
 
         return $newNumber . '/' . $month . '/' . $year;
     }
+
+    public function setAttributesToProperCase($value)
+    {
+        return ucwords(strtolower($value));
+    }
+    
+    public function setPerihalTransaksiSuratAttribute($value)
+    {
+        $this->attributes['perihal_transaksi_surat'] = $this->setAttributesToProperCase($value);
+    }
+    
+    public function setSuratDariTransaksiSuratAttribute($value)
+    {
+        $this->attributes['surat_dari_transaksi_surat'] = $this->setAttributesToProperCase($value);
+    }
+    
+    public function setDisposisiTransaksiSuratAttribute($value)
+    {
+        $this->attributes['disposisi_transaksi_surat'] = $this->setAttributesToProperCase($value);
+    }
+
 }

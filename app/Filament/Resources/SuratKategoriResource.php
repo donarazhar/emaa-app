@@ -22,12 +22,17 @@ class SuratKategoriResource extends Resource
     protected static ?string $modelLabel = 'Kategori Surat';
     protected static ?string $navigationLabel = 'Master Kategori Surat';
     protected static ?string $navigationParentItem = 'Persuratans';
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationIcon = 'heroicon-m-tag';
 
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
     }
 
     public static function form(Form $form): Form
@@ -55,7 +60,11 @@ class SuratKategoriResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -75,8 +84,8 @@ class SuratKategoriResource extends Resource
     {
         return [
             'index' => Pages\ListSuratKategoris::route('/'),
-            'create' => Pages\CreateSuratKategori::route('/create'),
-            'edit' => Pages\EditSuratKategori::route('/{record}/edit'),
+            // 'create' => Pages\CreateSuratKategori::route('/create'),
+            // 'edit' => Pages\EditSuratKategori::route('/{record}/edit'),
         ];
     }
 }

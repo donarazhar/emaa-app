@@ -22,7 +22,7 @@ class LaporKerjaResource extends Resource
     protected static ?string $model = LaporKerja::class;
 
     protected static ?string $navigationGroup = 'Office Management';
-    protected static ?string $navigationIcon = 'heroicon-o-camera';
+    protected static ?string $navigationIcon = 'heroicon-m-camera';
     protected static ?string $modelLabel = 'Lapor Kerja';
     protected static ?string $navigationLabel = 'Lapor Kerja';
     protected static ?int $navigationSort = 2;
@@ -30,6 +30,11 @@ class LaporKerjaResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'success';
     }
 
     public static function form(Form $form): Form
@@ -55,12 +60,14 @@ class LaporKerjaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('index')->label('No')->rowIndex(),
-                Tables\Columns\TextColumn::make('tgl')->dateTime('d/m/Y')->label('Tgl')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('id')->label('No'),
                 Tables\Columns\ImageColumn::make('foto_laporkerja')->label('Foto')
-                    ->stacked()->size(40)->circular()->limit(3)->limitedRemainingText(),
-                Tables\Columns\TextColumn::make('user.name')->label('Pelapor')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('judul')->label('Laporan')->sortable()->searchable()
+                    ->stacked()->size(60)->circular()->limit(3)->limitedRemainingText(),
+                Tables\Columns\TextColumn::make('user.name')->label('Detail Pelapor')
+                ->description(fn (LaporKerja $record): string => (new \DateTime($record->tgl))->format('d/m/Y'), position: 'above')
+                ->description(fn (LaporKerja $record): string => $record->email_user)
+                ->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('judul')->label('Detail Laporan')->sortable()->searchable()
                     ->description(fn (LaporKerja $record): string => $record->isi),
             ])
             ->filters([
@@ -103,7 +110,7 @@ class LaporKerjaResource extends Resource
     {
         return [
             'index' => Pages\ListLaporKerjas::route('/'),
-            'create' => Pages\CreateLaporKerja::route('/create'),
+            // 'create' => Pages\CreateLaporKerja::route('/create'),
             // 'edit' => Pages\EditLaporKerja::route('/{record}/edit'),
         ];
     }

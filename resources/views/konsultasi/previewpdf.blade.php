@@ -20,7 +20,8 @@
             </div>
             <div class="text-gray-700">
                 <div class="font-bold text-md mb-2 uppercase">Data Lengkap Konsultasi</div>
-                <div class="text-sm">Pertanggal: {{ now()->format('d/m/Y') }}</div>
+                <div class="text-sm">Per: {{ now()->locale('id')->isoFormat('D/MMMM/YYYY') }}
+                </div>
             </div>
         </div>
 
@@ -37,7 +38,9 @@
                         <tr class="odd:bg-white even:bg-gray-100">
                             <th class="text-gray-700 font-bold py-1">Tempat / Tanggal Lahir</th>
                             <td class="py-1 text-gray-700">{{ $konsultasi->tempat_lahir_jamaah }},
-                                {{ \Carbon\Carbon::parse($konsultasi->tgl_lahir_jamaah)->format('d/m/Y') }}</td>
+                                {{ \Carbon\Carbon::parse($konsultasi->tgl_lahir_jamaah)->locale('id')->isoFormat('D/MMMM/YYYY') }}
+
+                            </td>
                         </tr>
                         <tr class="odd:bg-white even:bg-gray-100">
                             <th class="text-gray-700 font-bold py-1">Alamat</th>

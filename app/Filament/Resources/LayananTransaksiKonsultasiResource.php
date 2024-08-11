@@ -31,13 +31,18 @@ class LayananTransaksiKonsultasiResource extends Resource
     protected static ?string $model = LayananTransaksiKonsultasi::class;
 
     protected static ?string $navigationGroup = 'Office Management';
-    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
+    protected static ?string $navigationIcon = 'heroicon-m-chat-bubble-left-ellipsis';
     protected static ?string $modelLabel = 'Layanan Konsultasi';
     protected static ?int $navigationSort = 4;
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
     }
 
     public static function form(Form $form): Form

@@ -29,13 +29,18 @@ class LayananTransaksiPengislamanResource extends Resource
     protected static ?string $model = LayananTransaksiPengislaman::class;
 
     protected static ?string $navigationGroup = 'Office Management';
-    protected static ?string $navigationIcon = 'heroicon-o-document-magnifying-glass';
+    protected static ?string $navigationIcon = 'heroicon-m-document-magnifying-glass';
     protected static ?string $modelLabel = 'Layanan Pengislaman';
     protected static ?int $navigationSort = 5;
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'success';
     }
 
     public static function form(Form $form): Form

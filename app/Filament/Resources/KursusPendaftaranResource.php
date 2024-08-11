@@ -20,7 +20,7 @@ class KursusPendaftaranResource extends Resource
     protected static ?string $model = KursusPendaftaran::class;
 
     protected static ?string $navigationGroup = 'Kursus Management';
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static ?string $navigationIcon = 'heroicon-m-academic-cap';
     protected static ?string $modelLabel = 'Transaksi Kursus';
     protected static ?string $navigationLabel = 'Transaksi Kursus';
     protected static ?int $navigationSort = 0;
@@ -28,6 +28,11 @@ class KursusPendaftaranResource extends Resource
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'success';
     }
 
     public static function form(Form $form): Form

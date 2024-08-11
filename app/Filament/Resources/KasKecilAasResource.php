@@ -29,6 +29,11 @@ class KasKecilAasResource extends Resource
         return static::getModel()::count();
     }
 
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -52,14 +57,14 @@ class KasKecilAasResource extends Resource
                         'debit' => 'Debit',
                         'kredit' => 'Kredit',
                     ]),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('No')->rowIndex()->sortable(),
+                Tables\Columns\TextColumn::make('id')->label('No')->sortable(),
                 Tables\Columns\TextColumn::make('kode_aas')->label('Kode AAS')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('nama_aas')->label('Nama AAS')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('status')->label('Status'),
@@ -69,7 +74,11 @@ class KasKecilAasResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

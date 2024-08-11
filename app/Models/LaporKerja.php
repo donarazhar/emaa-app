@@ -20,4 +20,20 @@ class LaporKerja extends Model
     {
         return $this->belongsTo(User::class, 'email_user', 'email');
     }
+
+    public function setAttributesToProperCase($value)
+    {
+        return ucwords(strtolower($value));
+    }
+    
+    public function setJudulAttribute($value)
+    {
+        $this->attributes['judul'] = $this->setAttributesToProperCase($value);
+    }
+    
+    public function setIsiAttribute($value)
+    {
+        $this->attributes['isi'] = $this->setAttributesToProperCase($value);
+    }
+
 }

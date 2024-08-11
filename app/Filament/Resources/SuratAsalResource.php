@@ -22,11 +22,16 @@ class SuratAsalResource extends Resource
     protected static ?string $modelLabel = 'Asal Surat';
     protected static ?string $navigationLabel = 'Master Asal Surat';
     protected static ?string $navigationParentItem = 'Persuratans';
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationIcon = 'heroicon-m-tag';
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
     }
 
     public static function form(Form $form): Form
@@ -39,7 +44,7 @@ class SuratAsalResource extends Resource
                 Forms\Components\TextInput::make('keterangan_asal_surat')->label('Keterangan')
                     ->required()
                     ->maxLength(255),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -54,7 +59,11 @@ class SuratAsalResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -74,8 +83,8 @@ class SuratAsalResource extends Resource
     {
         return [
             'index' => Pages\ListSuratAsals::route('/'),
-            'create' => Pages\CreateSuratAsal::route('/create'),
-            'edit' => Pages\EditSuratAsal::route('/{record}/edit'),
+            // 'create' => Pages\CreateSuratAsal::route('/create'),
+            // 'edit' => Pages\EditSuratAsal::route('/{record}/edit'),
         ];
     }
 }

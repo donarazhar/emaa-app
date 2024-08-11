@@ -18,4 +18,14 @@ class KasKecilAas extends Model
     {
         return $this->kode_aas . ' - ' . $this->nama_aas;
     }
+
+    public function setAttributesToProperCase($value)
+    {
+        return ucwords(strtolower($value));
+    }
+    
+    public function setNamaAasAttribute($value)
+    {
+        $this->attributes['nama_aas'] = $this->setAttributesToProperCase($value);
+    }
 }

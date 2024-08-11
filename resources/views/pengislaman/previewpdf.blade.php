@@ -128,25 +128,28 @@
     <div class="container">
         <div class="absolute number">{{ $pengislaman->no_urut }}</div>
         <div class="absolute date1">{{ $pengislaman->hari }}</div>
-        <div class="absolute date2">{{ \Carbon\Carbon::parse($pengislaman->tgl)->isoFormat('DD MMMM YYYY') }}</div>
+        <div class="absolute date2">
+            {{ \Carbon\Carbon::parse($pengislaman->tgl)->locale('id')->isoFormat('DD MMMM YYYY') }}</div>
 
         <div class="absolute info">
             <p>{{ $pengislaman->nama }}</p>
             <p>{{ $pengislaman->jenkel }}</p>
             <p>{{ $pengislaman->tlahir }},
-                {{ \Carbon\Carbon::parse($pengislaman->tgllahir)->isoFormat('DD MMMM YYYY') }}</p>
+                {{ \Carbon\Carbon::parse($pengislaman->tgllahir)->locale('id')->isoFormat('DD MMMM YYYY') }}</p>
             <p>{{ $pengislaman->agama_semula }}</p>
             <p>{{ $pengislaman->pekerjaan }}</p>
             <p>{{ $pengislaman->alamat1 }}</p>
             <p>{{ $pengislaman->alamat2 }}</p>
         </div>
         <div class="absolute left-day">{{ $pengislaman->hari }}</div>
-        <div class="absolute right-date"> {{ \Carbon\Carbon::parse($pengislaman->tgl)->isoFormat('DD MMMM YYYY') }}
+        <div class="absolute right-date">
+            {{ \Carbon\Carbon::parse($pengislaman->tgl)->locale('id')->isoFormat('DD MMMM YYYY') }}
         </div>
         <div class="absolute right-clock"> {{ substr($pengislaman->jam, 0, 5) }} </div>
         <div class="absolute center-name">{{ $pengislaman->nama_baru }}</div>
         <div class="absolute hijri">{{ $pengislaman->tgl_hijriah }} {{ $pengislaman->tahun_hijriah }}</div>
-        <div class="absolute gregorian">{{ \Carbon\Carbon::parse($pengislaman->tgl)->isoFormat('DD MMMM YYYY') }}</div>
+        <div class="absolute gregorian">
+            {{ \Carbon\Carbon::parse($pengislaman->tgl)->locale('id')->isoFormat('DD MMMM YYYY') }}</div>
         <div class="absolute imam-name">{{ $pengislaman->imam->nama_imam }}</div>
 
         <div class="absolute witnesses">

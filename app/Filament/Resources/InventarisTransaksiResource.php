@@ -20,13 +20,18 @@ class InventarisTransaksiResource extends Resource
     protected static ?string $model = InventarisTransaksi::class;
 
     protected static ?string $navigationGroup = 'Office Management';
-    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
+    protected static ?string $navigationIcon = 'heroicon-m-inbox-stack';
     protected static ?string $modelLabel = 'Inventaris';
     protected static ?int $navigationSort = 9;
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'warning';
     }
 
     public static function form(Form $form): Form

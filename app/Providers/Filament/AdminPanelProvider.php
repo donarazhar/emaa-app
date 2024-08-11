@@ -43,7 +43,7 @@ class AdminPanelProvider extends PanelProvider
                 'info' => Color::Amber,
                 'primary' => Color::Blue,
                 'success' => Color::Green,
-                'warning' => Color::Amber,
+                'warning' => Color::Yellow,
             ])
             ->darkMode(isForced: true)
             ->font('Poppins')

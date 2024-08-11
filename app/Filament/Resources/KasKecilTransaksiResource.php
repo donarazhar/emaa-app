@@ -7,39 +7,37 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Models\KasKecilAas;
 use Filament\Support\RawJs;
 use Filament\Resources\Resource;
 use App\Models\KasKecilTransaksi;
 use App\Models\KasKecilMatanggaran;
-use Filament\Actions\ReplicateAction;
 use Illuminate\Database\Query\Builder;
-use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Actions\CreateAction;
-use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Columns\Summarizers\Sum;
-use Filament\Tables\Columns\Summarizers\Summarizer;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\KasKecilTransaksiResource\Pages;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
-use App\Filament\Resources\KasKecilTransaksiResource\RelationManagers;
 
 class KasKecilTransaksiResource extends Resource
 {
     protected static ?string $model = KasKecilTransaksi::class;
 
     protected static ?string $navigationGroup = 'Office Management';
-    protected static ?string $navigationIcon = 'heroicon-o-table-cells';
+    protected static ?string $navigationIcon = 'heroicon-m-table-cells';
     protected static ?string $modelLabel = 'Kas Kecil';
     protected static ?int $navigationSort = 6;
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
     }
 
     public static function form(Form $form): Form
@@ -61,6 +59,7 @@ class KasKecilTransaksiResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('jumlah')->required()
                     ->label('Jumlah')->numeric()
+                    ->prefix('Rp')
                     ->maxLength(10)
                     ->mask(RawJs::make('$money($input)'))
                     ->stripCharacters(','),
@@ -80,69 +79,42 @@ class KasKecilTransaksiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->rowIndex()->label('No.'),
-                Tables\Columns\TextColumn::make('tgl_transaksi')->dateTime('d/m/Y')->label('Tgl')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('id')->label('No.'),
+                Tables\Columns\TextColumn::make('tgl_transaksi')->dateTime('d/m/Y')->label('Tgl'),
                 Tables\Columns\TextColumn::make('matanggaran.kode_matanggaran')->label('Detail Akun')
                     ->description(fn(KasKecilTransaksi $record): string => $record->matanggaran->aas->kode_aas, position: 'above')
                     ->description(fn(KasKecilTransaksi $record): string => $record->matanggaran->aas->nama_aas)
                     ->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('perincian')
+                Tables\Columns\TextColumn::make('jumlah')->numeric()
                     ->label('Detail Perincian')
-                    // ->summarize([
-                    //     // Pengeluaran untuk bulan berjalan
-                    //     Summarizer::make()
-                    //         ->label(fn() => '#Pengeluaran ' . Carbon::now()->locale('id')->translatedFormat('F'))
-                    //         ->numeric()
-                    //         ->using(function (Builder $query): string {
-                    //             $startOfMonth = Carbon::now()->startOfMonth()->toDateString();
-                    //             $endOfMonth = Carbon::now()->endOfMonth()->toDateString();
-                    //             return (string) $query
-                    //                 ->whereBetween('tgl_transaksi', [$startOfMonth, $endOfMonth])
-                    //                 ->where('kategori', 'pengeluaran')
-                    //                 ->sum('jumlah');
-                    //         }),
-
-                    //     // Total pengeluaran sesuai filter (tidak spesifik per bulan)
-                    //     Summarizer::make()
-                    //         ->label('#Pengeluaran by Filter')
-                    //         ->numeric()
-                    //         ->using(function (Builder $query): string {
-                    //             return (string) $query
-                    //                 ->where('kategori', 'pengeluaran')
-                    //                 ->sum('jumlah');  // Total sesuai dengan filter yang diterapkan
-                    //         }),
-
-                    //     // Total pengisian sesuai filter (tidak spesifik per bulan)
-                    //     Summarizer::make()
-                    //         ->label(fn() => '#Pengisian by Filter')
-                    //         ->numeric()
-                    //         ->using(function (Builder $query): string {
-                    //             return (string) $query
-                    //                 ->where('kategori', 'pengisian')
-                    //                 ->sum('jumlah');
-                    //         }),
-                    // ])
                     ->description(fn(KasKecilTransaksi $record): string => $record->matanggaran->aas->status, position: 'above')
-                    ->description(fn(KasKecilTransaksi $record): string => number_format($record->jumlah, 0, ',', ','))
+                    ->description(fn(KasKecilTransaksi $record): string => $record->perincian)
                     ->color(
                         fn(KasKecilTransaksi $record): string =>
                         $record->kategori === 'pengisian' ? 'primary' : ($record->kategori === 'pembentukan' ? 'danger' : 'default')
                     )
-                    ->searchable(),
+                    ->searchable()
+                    ->summarize(
+                        Sum::make()
+                            ->label('Total Pengeluaran')
+                            ->query(fn(Builder $query) => $query->where('kategori', 'pengeluaran'))
+                    ),
                 Tables\Columns\ToggleColumn::make('pengisian_id')
                     ->label('Pencairan')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->disabled(fn($record) => $record->kategori !== 'pengisian'),
-
             ])
             ->filters([
-                DateRangeFilter::make('tgl_transaksi'),
+                DateRangeFilter::make('tgl_transaksi')
+                    ->label('Filter by Tanggal'),
                 SelectFilter::make('kategori')
                     ->options([
                         'pengisian' => 'Pengisian Kas',
                         'pengeluaran' => 'Pengeluaran Kas',
-                    ])->label('Filter by Kategori'),
-            ], layout: FiltersLayout::AboveContentCollapsible)->filtersFormColumns(2)
+                    ])
+                    ->label('Filter by Kategori'),
+            ], layout: FiltersLayout::AboveContent)->filtersFormColumns(2)
+
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make()->color('info')->slideOver()
@@ -151,7 +123,15 @@ class KasKecilTransaksiResource extends Resource
                         ->slideOver()->visible(fn($record) => $record->kategori !== 'pembentukan'),
                     Tables\Actions\DeleteAction::make()->color('danger')
                         ->slideOver()->visible(fn($record) => $record->kategori !== 'pembentukan'),
-                ])
+                    Tables\Actions\Action::make('print')
+                        ->label('Cetak')
+                        ->icon('heroicon-m-printer')
+                        ->color('success')
+                        ->visible(fn($record) => $record->kategori === 'pengisian')
+                        ->url(fn($record) => route('cetak-pengisiankas', $record->id))
+                        ->openUrlInNewTab(),
+                ]),
+
             ])
             ->headerActions([
                 CreateAction::make()
@@ -165,7 +145,7 @@ class KasKecilTransaksiResource extends Resource
                     ->form([
                         Forms\Components\TextInput::make('kategori')
                             ->default('pengisian')->readOnly(),
-                        Forms\Components\Select::make('kode_matanggaran')->label('Mata Anggaran')
+                        Forms\Components\Select::make('kode_matanggaran')
                             ->label('Mata Anggaran')
                             ->options(function () {
                                 return KasKecilMatanggaran::with('aas')
@@ -176,16 +156,40 @@ class KasKecilTransaksiResource extends Resource
                             ->searchable()
                             ->preload()
                             ->required(),
-                        Forms\Components\TextInput::make('jumlah')->required()
-                            ->label('Jumlah')->numeric()
-                            ->maxLength(10)
+                        Forms\Components\Group::make([
+                            Forms\Components\DatePicker::make('start_date')
+                                ->label('Mulai Tanggal')
+                                ->dehydrated(false)  // Mencegah penyimpanan ke database
+                                ->required(),
+                            Forms\Components\DatePicker::make('tgl_transaksi')
+                                ->label('Sampai Tanggal')
+                                ->required()
+                                ->reactive()  // Membuatnya bereaksi terhadap perubahan
+                                ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                    $startDate = $get('start_date');
+                                    $endDate = $state;
+                                    // Query untuk menghitung total pengeluaran
+                                    $totalPengeluaran = \App\Models\KasKecilTransaksi::where('kategori', 'pengeluaran')
+                                        ->whereBetween('tgl_transaksi', [$startDate, $endDate])
+                                        ->sum('jumlah');
+                                    // Mengatur nilai 'jumlah'
+                                    $set('jumlah', $totalPengeluaran);
+                                }),
+
+                        ])->columns(2),
+                        Forms\Components\TextInput::make('jumlah')
+                            ->label('Jumlah')
+                            ->prefix('Rp')
+                            ->numeric()
+                            ->readOnly()
+                            ->required()
                             ->mask(RawJs::make('$money($input)'))
                             ->stripCharacters(','),
-                        Forms\Components\DatePicker::make('tgl_transaksi')->required()
-                            ->label('Tanggal Transaksi'),
-                        Forms\Components\Textarea::make('perincian')->required()
+
+                        Forms\Components\Textarea::make('perincian')
+                            ->required()
                             ->label('Perincian'),
-                    ]),
+                    ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

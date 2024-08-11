@@ -23,4 +23,9 @@ class KasKecilMatanggaran extends Model
     {
         return $this->hasMany(KasKecilTransaksi::class, 'kode_matanggaran', 'kode_matanggaran');
     }
+
+    public function setAttributesToProperCase($value)
+    {
+        return ucwords(strtolower($value));
+    }
 }

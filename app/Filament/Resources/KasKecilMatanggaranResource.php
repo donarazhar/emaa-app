@@ -29,6 +29,11 @@ class KasKecilMatanggaranResource extends Resource
         return static::getModel()::count();
     }
 
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return 'danger';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -39,25 +44,29 @@ class KasKecilMatanggaranResource extends Resource
                         return KasKecilAas::all()->pluck('KodesAas', 'kode_aas');
                     })
                     ->required(),
-                Forms\Components\TextInput::make('saldo')->label('Saldo'),
-            ]);
+                Forms\Components\TextInput::make('saldo')->label('Saldo')->prefix('Rp'),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('id')->label('No.')->sortable(),
                 Tables\Columns\TextColumn::make('kode_matanggaran')->label('Kode Matanggaran')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('aas.kode_aas')->label('Kode AAS')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('aas.nama_aas')->label('Nama AAS')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('saldo')->label('Saldo'),
+                Tables\Columns\TextColumn::make('saldo')->label('Saldo')->numeric(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->slideOver(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

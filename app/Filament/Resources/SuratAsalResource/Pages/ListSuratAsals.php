@@ -9,11 +9,12 @@ use Filament\Resources\Pages\ListRecords;
 class ListSuratAsals extends ListRecords
 {
     protected static string $resource = SuratAsalResource::class;
+    protected static ?string $title = 'Data Tabel Asal Surat';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Data Baru')->slideOver(),
         ];
     }
 }

@@ -38,22 +38,4 @@ class ListKasKecilTransaksis extends ListRecords
             Excel::import(new ImportTransaksiKasKecil, $this->file);
         }
     }
-
-    protected function getTableQuery(): Builder
-    {
-        // Menampilkan datatabel OrderyByDesc
-        return parent::getTableQuery()->orderBy('tgl_transaksi');
-    }
-
-    public function getTabs(): array
-    {
-        return [
-            'All' => Tab::make(),
-            'This Month' => Tab::make()
-                ->modifyQueryUsing(fn(Builder $query) => $query->whereBetween('tgl_transaksi', [now()->startOfMonth(), now()->endOfMonth()]))
-                ->badge(KasKecilTransaksi::query()->whereBetween('tgl_transaksi', [now()->startOfMonth(), now()->endOfMonth()])->count()),
-
-
-        ];
-    }
 }
