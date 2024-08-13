@@ -9,11 +9,12 @@ use Filament\Resources\Pages\ListRecords;
 class ListInventarisMerks extends ListRecords
 {
     protected static string $resource = InventarisMerkResource::class;
+    protected static ?string $title = 'Data Merk Barang';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Merk Barang')->slideOver(),
         ];
     }
 }

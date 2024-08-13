@@ -9,11 +9,12 @@ use Filament\Resources\Pages\ListRecords;
 class ListInventarisBagians extends ListRecords
 {
     protected static string $resource = InventarisBagianResource::class;
+    protected static ?string $title = 'Data Bagian Inventaris';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Bagian Inventaris')->slideOver(),
         ];
     }
 }

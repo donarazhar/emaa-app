@@ -39,37 +39,85 @@ class InventarisTransaksiResource extends Resource
         return $form
             ->schema([
                 Forms\Components\FileUpload::make('foto_data_inventaris')
+                    ->label('Gambar')
                     ->image()
-                    ->maxSize(1024)
-                    ->directory('file-inventaris')
-                    ->label('Gambar'),
-                Forms\Components\TextInput::make('nama_data_inventaris')->label('Nama Barang')
+                    ->imageEditor()
+                    ->multiple()
+                    ->directory('file-inventaris'),
+
+                Forms\Components\TextInput::make('kode_barang')
+                    ->label('Kode Barang')
+                    ->readOnly() // Kode barang diisi otomatis, tidak perlu diinput manual
+                    ->default(fn($record) => $record ? $record->kode_barang : null)
+                    ->afterStateHydrated(fn($state, callable $set, $record) => $record ? $set('kode_barang', $record->kode_barang) : null),
+
+                Forms\Components\TextInput::make('nama_data_inventaris')
+                    ->label('Nama Barang')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('jenis_data_inventaris')->label('Jenis Barang')
+
+                Forms\Components\TextInput::make('jenis_data_inventaris')
+                    ->label('Jenis Barang')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('stok_data_inventaris')->label('Banyak')
+
+                Forms\Components\Select::make('jenis_transaksi')
+                    ->options([
+                        'masuk' => 'Masuk',
+                        'keluar' => 'Keluar',
+                        'pindah' => 'Pindah',
+                    ])
+                    ->label('Jenis Transaksi')
+                    ->required(),
+
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'baik' => 'Baik',
+                        'rusak' => 'Rusak',
+                        'repair' => 'Repair',
+                    ])
+                    ->label('Status Barang')
+                    ->required(),
+
+                Forms\Components\TextInput::make('stok_data_inventaris')
+                    ->label('Banyak')
                     ->required()
                     ->maxLength(255)
                     ->numeric(),
-                Forms\Components\Textarea::make('keterangan_data_inventaris')->label('Keterangan')
+
+                Forms\Components\Textarea::make('keterangan_data_inventaris')
+                    ->label('Keterangan')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\DatePicker::make('tgl_data_inventaris')->label('Tgl Input')
+
+                Forms\Components\DatePicker::make('tgl_data_inventaris')
+                    ->label('Tgl Input')
                     ->required()
                     ->maxDate(now()),
+
                 Forms\Components\Select::make('kategori_id')
                     ->relationship('kategori', 'nama_kategori')
+                    ->label('Kategori')
                     ->required(),
+
                 Forms\Components\Select::make('satuan_id')
                     ->relationship('satuan', 'nama_satuan')
+                    ->label('Satuan')
                     ->required(),
+
                 Forms\Components\Select::make('merk_id')
                     ->relationship('merk', 'nama_merk')
+                    ->label('Merk')
                     ->required(),
+
                 Forms\Components\Select::make('bagian_id')
                     ->relationship('bagian', 'nama_bagian')
+                    ->label('Bagian')
+                    ->required(),
+
+                Forms\Components\Select::make('suplier_id')
+                    ->relationship('suplier', 'nama_suplier')
+                    ->label('Suplier')
                     ->required(),
             ]);
     }
@@ -78,25 +126,70 @@ class InventarisTransaksiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->label('ID'),
-                Tables\Columns\ImageColumn::make('foto_data_inventaris')->label('Gambar')->circular(),
-                Tables\Columns\TextColumn::make('tgl_data_inventaris')->dateTime('d/m/Y')->label('Tgl. Input'),
-                Tables\Columns\TextColumn::make('nama_data_inventaris')->label('Nama Barang'),
-                Tables\Columns\TextColumn::make('merk.nama_merk')->label('Merk'),
-                Tables\Columns\TextColumn::make('stok_data_inventaris')->label('Byk'),
-                Tables\Columns\TextColumn::make('satuan.nama_satuan')->label('Satuan'),
-                Tables\Columns\TextColumn::make('bagian.nama_bagian')->label('Lokasi'),
-                Tables\Columns\TextColumn::make('kategori.nama_kategori')->label('Kategori'),
-                Tables\Columns\TextColumn::make('jenis_data_inventaris')->label('Jenis'),
-                Tables\Columns\TextColumn::make('keterangan_data_inventaris')->label('Keterangan'),
+                Tables\Columns\TextColumn::make('id')->label('No.'),
+
+                Tables\Columns\ImageColumn::make('foto_data_inventaris')
+                    ->label('Gambar')
+                    ->circular()
+                    ->size(60)
+                    ->stacked()
+                    ->limit(3)
+                    ->limitedRemainingText(),
+
+                Tables\Columns\TextColumn::make('kode_barang')
+                    ->label('Detail Kode Barang')
+                    ->searchable()
+                    ->description(fn(InventarisTransaksi $record): string => 'Tgl. Input :' . ' ' . (new \DateTime($record->tgl_data_inventaris))->format('d/m/Y'), position: 'above')
+                    ->description(fn(InventarisTransaksi $record): string => 'Inv :' . ' ' . $record->jenis_transaksi),
+
+                Tables\Columns\TextColumn::make('nama_data_inventaris')
+                    ->label('Detail Barang')
+                    ->description(fn(InventarisTransaksi $record): string => $record->merk->nama_merk, position: 'above')
+                    ->description(fn(InventarisTransaksi $record): string => 'Banyak: ' . $record->stok_data_inventaris . ' ' . $record->satuan->nama_satuan),
+
+                Tables\Columns\TextColumn::make('bagian.nama_bagian')
+                    ->label('Detail Kategori')
+                    ->description(fn(InventarisTransaksi $record): string => $record->kategori->nama_kategori, position: 'above')
+                    ->description(fn(InventarisTransaksi $record): string => $record->jenis_data_inventaris),
+
+                Tables\Columns\TextColumn::make('keterangan_data_inventaris')
+                    ->label('Detail Penyusutan')
+                    ->description(fn(InventarisTransaksi $record): string => 'Status :' . ' ' . $record->status)
+                    ->description(
+                        fn(InventarisTransaksi $record): string =>
+                        $record->penyusutan
+                            ? 'Tgl. Penyusutan : ' . (new \DateTime($record->penyusutan->tgl_penyusutan))->format('d/m/Y')
+                            : 'Tgl. Penyusutan : Belum Ada',
+                        position: 'above'
+                    ),
+
+                Tables\Columns\TextColumn::make('penyusutan.nilai_awal')
+                    ->label('Detail Nilai Penyusutan')
+                    ->prefix('Rp')
+                    ->numeric()
+                    ->description(
+                        fn(InventarisTransaksi $record): string =>
+                        $record->penyusutan
+                            ? 'Susut/Tahun : Rp. ' . number_format($record->penyusutan->nilai_penyusutan, 0, ',', '.')
+                            : 'Susut/Tahun : Belum Ada',
+                        position: 'above'
+                    )
+                    ->description(
+                        fn(InventarisTransaksi $record): string =>
+                        $record->penyusutan
+                            ? 'Nilai Akhir : Rp. ' . number_format($record->penyusutan->nilai_akhir, 0, ',', '.')
+                            : 'Nilai Akhir : Belum Ada'
+                    ),
             ])
             ->filters([
                 DateRangeFilter::make('tgl_data_inventaris'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()->color('info'),
-                Tables\Actions\EditAction::make()->color('primary'),
-                Tables\Actions\DeleteAction::make()->color('danger'),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

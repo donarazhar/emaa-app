@@ -38,10 +38,13 @@ class InventarisKategoriResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_kategori')
+                Forms\Components\TextInput::make('nama_kategori')->label('Nama Kategori')
                     ->required()
                     ->maxLength(255),
-            ]);
+                Forms\Components\Textarea::make('keterangan_kategori')->label('Keterangan')
+                    ->required()
+                    ->maxLength(255),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -50,12 +53,17 @@ class InventarisKategoriResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
                 Tables\Columns\TextColumn::make('nama_kategori')->label('Nama Kategori')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('keterangan_kategori')->label('Keterangan'),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

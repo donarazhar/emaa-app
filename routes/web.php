@@ -20,4 +20,4 @@ Route::get('/pdf-preview/{id}', [MarbotController::class, 'preview'])->name('pdf
 Route::get('/pdf-previewkonsultasi/{id}', [KonsultasiController::class, 'preview'])->name('pdf.previewkonsultasi');
 Route::get('/pdf-previewpengislmaman/{id}', [PengislamanController::class, 'preview'])->name('pdf.previewpengislaman');
 Route::get('/cetak-pengisian/{id}', [KasKecilController::class, 'cetakPengisianKas'])->name('cetak-pengisiankas');
-
+Route::get('/cetak-laporankas/{selected}/{periodeawal}/{periodeakhir}', [KasKecilController::class, 'cetakLaporanKas'])->name('cetak-laporankas');

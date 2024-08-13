@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
@@ -10,12 +9,14 @@ use Filament\Tables\Table;
 use Filament\Support\RawJs;
 use Filament\Resources\Resource;
 use App\Models\KasKecilTransaksi;
+use Illuminate\Support\Collection;
 use App\Models\KasKecilMatanggaran;
 use Illuminate\Database\Query\Builder;
 use Filament\Notifications\Notification;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Columns\Summarizers\Sum;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use App\Filament\Resources\KasKecilTransaksiResource\Pages;
@@ -109,9 +110,11 @@ class KasKecilTransaksiResource extends Resource
                     ->label('Filter by Tanggal'),
                 SelectFilter::make('kategori')
                     ->options([
+                        'pembentukan' => 'Pembentukan Kas',
                         'pengisian' => 'Pengisian Kas',
                         'pengeluaran' => 'Pengeluaran Kas',
                     ])
+                    ->default('pembentukan')
                     ->label('Filter by Kategori'),
             ], layout: FiltersLayout::AboveContent)->filtersFormColumns(2)
 
@@ -192,10 +195,27 @@ class KasKecilTransaksiResource extends Resource
                     ])
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    ExportBulkAction::make()->color('info'),
-                    // Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                BulkActionGroup::make([
+                    Tables\Actions\BulkAction::make('print')
+                        ->label('Export PDF')
+                        ->color('success')
+                        ->icon('heroicon-m-printer')
+                        ->action(function (Collection $records) {
+                            // Ambil ID dari record yang dipilih
+                            $selectedIds = $records->pluck('id')->toArray();
+
+                            // Ambil periode awal dan akhir berdasarkan tanggal terendah dan tertinggi
+                            $periodeawal = $records->min('tgl_transaksi');
+                            $periodeakhir = $records->max('tgl_transaksi');
+
+                            // Redirect ke route dengan parameter ID yang dipilih dan periode
+                            return redirect()->route('cetak-laporankas', [
+                                'selected' => implode(',', $selectedIds),
+                                'periodeawal' => $periodeawal,
+                                'periodeakhir' => $periodeakhir,
+                            ]);
+                        })
+                ])
             ]);
     }
 

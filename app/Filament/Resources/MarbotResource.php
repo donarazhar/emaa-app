@@ -45,7 +45,7 @@ class MarbotResource extends Resource
     {
         return 'warning';
     }
-    
+
     public static function form(Form $form): Form
     {
         return $form
@@ -436,7 +436,7 @@ class MarbotResource extends Resource
     {
         return [
             'index' => Pages\ListMarbots::route('/'),
-            'create' => Pages\CreateMarbot::route('/create'),
+            // 'create' => Pages\CreateMarbot::route('/create'),
             'edit' => Pages\EditMarbot::route('/{record}/edit'),
         ];
     }

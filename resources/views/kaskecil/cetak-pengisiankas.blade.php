@@ -11,236 +11,163 @@
     <!-- Normalize or reset CSS with your favorite library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
 
-    <!-- Load paper.css for happy printing -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css">
-
-    <!-- Set page size here: A5, A4 or A3 -->
-    <!-- Set also "landscape" if you need -->
     <style>
-        @page {
-            size: A4
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: white;
+            margin: 0;
+            padding: 20px;
+            color: hsl(0, 0%, 0%);
+            font-size: 14px;
+        }
+
+        #header {
+            display: flex;
+            align-items: center;
+        }
+
+        #logo {
+            width: 100px;
+            margin-right: 20px;
+        }
+
+        #kop-surat {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        #kop-surat div {
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
         }
 
         #alamat {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 12px;
+            font-size: 14px;
             color: hsl(125, 100%, 36%);
         }
 
         #title {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: bold;
             color: hsl(125, 100%, 36%);
         }
 
         h2#subjudul {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 30px;
+            font-size: 28px;
             font-weight: bold;
             color: hsl(125, 100%, 36%);
-
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th,
-        td {
-            /* border: 1px solid black; */
-            padding: 8px;
-            text-align: left;
-        }
-
-        td img {
-            display: block;
-            /* Menghilangkan whitespace di sekitar gambar */
-        }
-
-        td#title {
-            text-align: center;
-            line-height: 10%;
+            margin: 0;
+            padding: 0;
         }
 
         hr {
-            margin: 2px 0;
-            border: none;
-            height: 0.5px;
+            margin: 5px 0;
+            height: 1px;
             background-color: hsl(125, 100%, 36%);
             border: 1px solid hsl(125, 100%, 36%);
+            /* Tambahkan border untuk memastikan garis dicetak */
         }
 
         hr#tebal {
             margin: 5px 0;
-            border: none;
             height: 2px;
             background-color: hsl(125, 100%, 36%);
-            border: 1.2px solid hsl(125, 100%, 36%);
+            border: 1px solid hsl(125, 100%, 36%);
         }
 
         p {
-            font-family: 'Times New Roman', Times, serif;
             margin: 2px 0;
             line-height: 130%;
-            font-size: 14px;
-            color: hsl(0, 0%, 0%);
+            font-size: inherit;
         }
 
         p#jumlah {
-            font-family: 'Times New Roman', Times, serif;
             font-size: 18px;
-            color: hsl(0, 0%, 0%);
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .justify {
+            text-align: justify;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        /* Gaya khusus untuk pencetakan */
+        @media print {
+            hr {
+                border: 1px solid hsl(125, 100%, 36%);
+            }
         }
     </style>
 </head>
 
-<body class="A4 potrait">
-    <section class="sheet padding-10mm">
-        <table>
-            <tr>
-                <td style="width: 10px; text-align:center;">
-                    <img src="{{ asset('storage/logo-maa.png') }}" width="130%">
-                </td>
-                <td id="title" style="width: 60px;">
-                    <span id="title">
-                        Yayasan Pesantren Islam Al Azhar<br>
-                        <h2 id="subjudul">Masjid Agung Al Azhar</h2>
-                    </span><br>
-                    <span>
-                        <small id="alamat">Jl. Sisingamangaraja Kebayoran Baru Jakarta Selatan 12110 Telp.
-                            021-72783683</small>
-                    </span>
-                    <br> <br> <br> <br> <br><br><br><br><span><small id="alamat">Website :
-                            www.masjidagungalazhar.com | Email : masjidagungalazhar@gmail.com</small></span>
-                </td>
-            </tr>
-        </table>
-        <hr>
-        <hr id="tebal">
-        <br>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 10%; text-align:left;">
-                    <p><b>Nomor<br>Lamp<br>Perihal</b></p>
-                </td>
-                <td style="width: 65%; text-align:left;">
-                    <p><b>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/YPIA-MAA/&nbsp;&nbsp;&nbsp;&nbsp;/2024<br>:
-                            &nbsp;&nbsp;&nbsp;&nbsp; Lembar <br>: {{ $transaksi->perincian }}</b></p>
-                </td>
+<body>
+    <div id="header">
+        <img id="logo" src="{{ asset('storage/logo-maa.png') }}" alt="Logo MAA">
+        <div id="kop-surat">
+            <div id="title">Yayasan Pesantren Islam Al Azhar</div>
+            <h2 id="subjudul">Masjid Agung Al Azhar</h2>
+            <div id="alamat">Jl. Sisingamangaraja Kebayoran Baru Jakarta Selatan 12110 Telp. 021-72783683</div>
+            <div id="alamat">Website: www.masjidagungalazhar.com | Email: masjidagungalazhar@gmail.com</div>
+        </div>
+    </div>
 
-                <td style="width: 25%; text-align:right">
-                    <p><b>Jakarta,
-                            {{ \Carbon\Carbon::parse($transaksi->tanggal)->locale('id')->isoFormat('DD/MMMM/YYYY') }}
-                        </b><br><br><br>
-                    </p>
+    <hr>
+    <hr id="tebal">
+    <br>
+    <div>
+        <p class="right"><strong>Jakarta,
+                {{ \Carbon\Carbon::parse($transaksi->tanggal)->locale('id')->isoFormat('DD/MMMM/YYYY') }}</strong>
+        </p>
+        <table>
+            <tr>
+                <td style="width: 20%;"><strong>Nomor</strong></td>
+                <td style="width: 80%;">
+                    <strong>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/YPIA-MAA/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2024</strong>
                 </td>
-                <td style="width: 2%;"></td>
+            </tr>
+            <tr>
+                <td><strong>Lamp</strong></td>
+                <td><strong>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lembar</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Perihal</strong></td>
+                <td><strong>: {{ $transaksi->perincian }}</strong></td>
             </tr>
         </table>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 96%; text-align:left;">
-                    <p>Yang terhormat, <br><b>Pengurus YPI Al Azhar</b><br>di Tempat</p>
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 96%; text-align:left;">
-                    <p><i>Assalamualaikum Warrahmatullahi Wabarakatuh,</p>
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 96%; text-align:justify;">
-                    <p>Salam ta'zim kami sampaikan semoga Allah SWT senantiasa melimpahkan rahmat, taufiq dan
-                        hidayahNya serta memberikan kesehatan kepada kita semua sehingga dapat menjalankan tugas
-                        dan aktifitas sehari-hari.
-                    </p>
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 96%; text-align:justify;">
-                    <p>Bersama ini kami sampaikan laporan penggantian Kas Kecil Masjid Agung Al Azhar
-                        <b>{{ \Carbon\Carbon::parse($transaksi->tanggal)->locale('id')->isoFormat('MMMM YYYY') }}</b>
-                        sebagai
-                        berikut:
-                    </p>
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td style="width: 8%;"></td>
-                <td style="width: 90%; text-align:left;">
-                    <p id="jumlah"><b>Sebesar Rp. {{ number_format($transaksi->jumlah, 0, ',', '.') }},-</b>
-                    </p>
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 96%; text-align:justify;">
-                    <p><i>Terlampir kwitansi</i>
-                    </p>
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 96%; text-align:justify;">
-                    <p>Demikian ini kami sampaikan, Atas perhatiannya kami ucapkan terima kasih.
-                    </p>
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 96%; text-align:justify;">
-                    <p><i>Billahit Taufiq wal Hidayah</i>
-                    <p><i>Wassalamualaikum Warrahmatullahi Wabarakatuh</i>
-                    </p>
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table><br>
-        <table>
-            <tr>
-                <td style="width: 2%;"></td>
-                <td style="width: 96%; text-align:justify;">
+        <br><br>
+        <p>Yang terhormat,<br><strong>Pengurus YPI Al Azhar</strong><br>di Tempat<br><br></p>
 
-                    <p>Haji Tatang Komara
-                    <p>Kepala Kantor <br><br><br><br>
-                    <p><b>Kepala Kantor MAA</b>
-                    </p>
+        <p><i>Assalamualaikum Warrahmatullahi Wabarakatuh,<br><br></i></p>
 
-                </td>
-                <td style="width: 2%;"></td>
-            </tr>
-        </table>
+        <p class="justify">Salam ta'zim kami sampaikan semoga Allah SWT senantiasa melimpahkan rahmat, taufiq dan
+            hidayahNya serta memberikan kesehatan kepada kita semua sehingga dapat menjalankan tugas dan aktifitas
+            sehari-hari.<br><br></p>
 
-    </section>
+        <p class="justify">Bersama ini kami sampaikan laporan penggantian Kas Kecil Masjid Agung Al Azhar
+            <strong>{{ \Carbon\Carbon::parse($transaksi->tanggal)->locale('id')->isoFormat('MMMM YYYY') }}</strong>
+            sebagai berikut:<br><br>
+        </p>
 
+        <p id="jumlah" class="center"><strong>sebesar Rp.
+                {{ number_format($transaksi->jumlah, 0, ',', '.') }},-<br><br></strong></p>
+
+        <p class="justify"><i>Terlampir kwitansi</i></p>
+
+        <p class="justify">Demikian ini kami sampaikan, atas perhatiannya kami ucapkan terima kasih.<br><br><br></p>
+
+        <p class="justify"><i>Billahit Taufiq wal Hidayah</i></p>
+        <p class="justify"><i>Wassalamualaikum Warrahmatullahi Wabarakatuh</i></p>
+        <br><br><br>
+        <p class="right">Masjid Agung Al Azhar<br>Kepala Kantor<br><br><br><br><br><strong>Haji Tatang Komara</strong>
+        </p>
+    </div>
 </body>
 
 </html>

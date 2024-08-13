@@ -16,7 +16,7 @@ class ListMarbots extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Data Baru Marbot'),
+            Actions\CreateAction::make()->label('Data Baru Marbot')->slideOver(),
         ];
     }
 
@@ -31,15 +31,15 @@ class ListMarbots extends ListRecords
         return [
             'All' => Tab::make(),
             'Staf TU' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Staf')),
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('posisi', 'Staf')),
             'Kebersihan' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Kebersihan')),
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('posisi', 'Kebersihan')),
             'Teknisi' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Teknisi')),
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('posisi', 'Teknisi')),
             'Imam Muazin' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Imammuazin')),
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('posisi', 'Imammuazin')),
             'Lepas' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('posisi', 'Lepas')),
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('posisi', 'Lepas')),
         ];
     }
 }
