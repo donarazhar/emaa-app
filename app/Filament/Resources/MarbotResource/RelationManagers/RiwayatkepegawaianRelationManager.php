@@ -13,8 +13,6 @@ class RiwayatkepegawaianRelationManager extends RelationManager
 {
     protected static string $relationship = 'riwayatkepegawaians';
 
-    protected static ?string $modelLabel = 'Riwayat Kepegawaian';
-
     public function form(Form $form): Form
     {
         return $form

@@ -91,7 +91,7 @@ class InventarisTransaksiResource extends Resource
                     ->maxLength(255),
 
                 Forms\Components\DatePicker::make('tgl_data_inventaris')
-                    ->label('Tgl Input')
+                    ->label('Tgl. Pembelian')
                     ->required()
                     ->maxDate(now()),
 
@@ -127,7 +127,6 @@ class InventarisTransaksiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('No.'),
-
                 Tables\Columns\ImageColumn::make('foto_data_inventaris')
                     ->label('Gambar')
                     ->circular()
@@ -139,7 +138,7 @@ class InventarisTransaksiResource extends Resource
                 Tables\Columns\TextColumn::make('kode_barang')
                     ->label('Detail Kode Barang')
                     ->searchable()
-                    ->description(fn(InventarisTransaksi $record): string => 'Tgl. Input :' . ' ' . (new \DateTime($record->tgl_data_inventaris))->format('d/m/Y'), position: 'above')
+                    ->description(fn(InventarisTransaksi $record): string => 'Tgl. Pembelian :' . ' ' . (new \DateTime($record->tgl_data_inventaris))->format('d/m/Y'), position: 'above')
                     ->description(fn(InventarisTransaksi $record): string => 'Inv :' . ' ' . $record->jenis_transaksi),
 
                 Tables\Columns\TextColumn::make('nama_data_inventaris')
@@ -152,34 +151,70 @@ class InventarisTransaksiResource extends Resource
                     ->description(fn(InventarisTransaksi $record): string => $record->kategori->nama_kategori, position: 'above')
                     ->description(fn(InventarisTransaksi $record): string => $record->jenis_data_inventaris),
 
-                Tables\Columns\TextColumn::make('keterangan_data_inventaris')
-                    ->label('Detail Penyusutan')
-                    ->description(fn(InventarisTransaksi $record): string => 'Status :' . ' ' . $record->status)
-                    ->description(
-                        fn(InventarisTransaksi $record): string =>
-                        $record->penyusutan
-                            ? 'Tgl. Penyusutan : ' . (new \DateTime($record->penyusutan->tgl_penyusutan))->format('d/m/Y')
-                            : 'Tgl. Penyusutan : Belum Ada',
-                        position: 'above'
-                    ),
-
                 Tables\Columns\TextColumn::make('penyusutan.nilai_awal')
-                    ->label('Detail Nilai Penyusutan')
+                    ->label('Detail Harga Barang')
                     ->prefix('Rp')
                     ->numeric()
                     ->description(
+                        fn(InventarisTransaksi $record): string => $record->keterangan_data_inventaris
+                    ),
+
+                Tables\Columns\TextColumn::make('penyusutan.keterangan_penyusutan')
+                    ->label('Detail Penyusutan')
+                    ->description(fn(InventarisTransaksi $record): string => 'Kondisi :' . ' ' . $record->status)
+                    ->description(
                         fn(InventarisTransaksi $record): string =>
                         $record->penyusutan
-                            ? 'Susut/Tahun : Rp. ' . number_format($record->penyusutan->nilai_penyusutan, 0, ',', '.')
-                            : 'Susut/Tahun : Belum Ada',
+                            ? 'Susut s.d : ' . (new \DateTime($record->penyusutan->tgl_penyusutan))->format('d/m/Y')
+                            : 'Susut s.d : -',
+                        position: 'above'
+                    ),
+
+                Tables\Columns\TextColumn::make('nilai_tahunberjalan')
+                    ->label('Detail Nilai Penyusutan')
+                    ->numeric()
+                    ->getStateUsing(function (InventarisTransaksi $record) {
+                        // Periksa apakah penyusutan tersedia
+                        if ($record->penyusutan) {
+                            // Ambil nilai awal dan nilai penyusutan
+                            $nilaiAwal = $record->penyusutan->nilai_awal;
+                            $nilaiPenyusutan = $record->penyusutan->nilai_penyusutan;
+
+                            // Ambil tanggal data inventaris dan tanggal sekarang
+                            $tglDataInventaris = new \DateTime($record->tgl_data_inventaris);
+                            $tahunSekarang = new \DateTime(); // Tanggal hari ini
+
+                            // Hitung selisih tahun (genap)
+                            $lamaTahun = $tglDataInventaris->diff($tahunSekarang)->y;
+
+                            // Periksa apakah belum genap satu tahun
+                            $tahunBerjalan = $lamaTahun < 1 ? 0 : $lamaTahun;
+
+                            // Hitung nilai tahun berjalan
+                            $nilaiTahunBerjalan = $nilaiAwal - ($tahunBerjalan * $nilaiPenyusutan);
+
+                            // Format nilai tahun berjalan dengan pemisah ribuan
+                            return 'Rp ' . number_format($nilaiTahunBerjalan, 0, ',', ',');
+                        }
+
+                        // Jika tidak ada penyusutan, kembalikan nilai default atau 0
+                        return 'Rp 0';
+                    })
+
+                    ->description(
+                        fn(InventarisTransaksi $record): string =>
+                        $record->penyusutan
+                            ? 'Susut/Tahun : Rp ' . number_format($record->penyusutan->nilai_penyusutan, 0, ',', ',')
+                            : 'Susut/Tahun : 0',
                         position: 'above'
                     )
                     ->description(
                         fn(InventarisTransaksi $record): string =>
                         $record->penyusutan
-                            ? 'Nilai Akhir : Rp. ' . number_format($record->penyusutan->nilai_akhir, 0, ',', '.')
-                            : 'Nilai Akhir : Belum Ada'
+                            ? 'Nilai Akhir : Rp ' . number_format($record->penyusutan->nilai_akhir, 0, ',', ',')
+                            : 'Nilai Akhir : 0'
                     ),
+
             ])
             ->filters([
                 DateRangeFilter::make('tgl_data_inventaris'),

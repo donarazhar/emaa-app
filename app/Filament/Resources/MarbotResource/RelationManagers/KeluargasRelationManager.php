@@ -13,8 +13,6 @@ class KeluargasRelationManager extends RelationManager
 {
     protected static string $relationship = 'keluargas';
 
-    protected static ?string $modelLabel = 'Hubungan Keluarga';
-
     public function form(Form $form): Form
     {
         return $form
@@ -22,8 +20,8 @@ class KeluargasRelationManager extends RelationManager
                 Forms\Components\Select::make('tipe_hubungan')->label('Tipe Hubungan')->columnSpanFull()->options(TipeHubungan::getKeyValues()),
                 Forms\Components\TextInput::make('nama'),
                 Forms\Components\Select::make('jenkel')->label('Jenkel')->options([
-                    'Laki-Laki' => 'Laki-Laki',
-                    'Perempuan' => 'Perempuan',
+                    'Laki-Laki' => '1. Laki-Laki',
+                    'Perempuan' => '2. Perempuan',
                 ])->required(),
                 Forms\Components\TextInput::make('no_kontak'),
                 Forms\Components\TextInput::make('tlahir')
@@ -61,6 +59,7 @@ class KeluargasRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()->label('Buat Data Keluarga'),
+
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([

@@ -3,15 +3,14 @@
 namespace App\Filament\Resources\KasKecilTransaksiResource\Pages;
 
 use Filament\Actions;
-use App\Models\KasKecilTransaksi;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Facades\Excel;
-use Filament\Resources\Components\Tab;
 use App\Imports\ImportTransaksiKasKecil;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Widgets\KasKecilPembentukan;
 use App\Filament\Resources\KasKecilTransaksiResource;
-
+use App\Filament\Resources\MarbotResource\Widgets\StatsOverview;
+use App\Filament\Widgets\KasKecilStats;
 
 class ListKasKecilTransaksis extends ListRecords
 {
@@ -22,6 +21,13 @@ class ListKasKecilTransaksis extends ListRecords
     {
         return [
             Actions\CreateAction::make()->slideOver()->label('Tambah Data Pengeluaran'),
+        ];
+    }
+
+    protected function getFooterWidgets(): array
+    {
+        return [
+            KasKecilStats::class,
         ];
     }
 

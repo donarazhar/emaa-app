@@ -7,13 +7,14 @@ use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use App\Filament\Widgets\LaporKerjaBlog;
 use Filament\Http\Middleware\Authenticate;
+use App\Filament\Widgets\GrafikMarbotChart;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Pages\Auth\EditProfile as AuthEditProfile;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -64,11 +65,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                StatsOverview::class,
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-                // MarbotTable::class,
-                // KursusChart::class,
+                // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
+                GrafikMarbotChart::class,
+                LaporKerjaBlog::class,
+
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -38,50 +38,46 @@ class InventarisSuplierResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_suplier')
+                Forms\Components\TextInput::make('nama_suplier')->label('Nama Suplier')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('alamat_suplier')
+                Forms\Components\Textarea::make('alamat_suplier')->label('Alamat Lengkap')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('kontak_suplier')
+                Forms\Components\TextInput::make('kontak_suplier')->label('No. Kontak')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('email_suplier')
+                Forms\Components\TextInput::make('email_suplier')->label('Email Address')
                     ->email()
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\Textarea::make('keterangan_suplier')
-                    ->columnSpanFull(),
-            ]);
+                Forms\Components\Textarea::make('keterangan_suplier')->label('Keterangan')
+                    ->maxLength(255)
+                    ->default(null),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama_suplier')
+                Tables\Columns\TextColumn::make('id')->label('ID'),
+                Tables\Columns\TextColumn::make('nama_suplier')->label('Detail Suplier')
+                    ->searchable()
+                    ->description(fn(InventarisSuplier $record): string => $record->email_suplier, position: 'above')
+                    ->description(fn(InventarisSuplier $record): string => $record->alamat_suplier),
+                Tables\Columns\TextColumn::make('kontak_suplier')->label('No. HP')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('alamat_suplier')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kontak_suplier')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email_suplier')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -101,8 +97,8 @@ class InventarisSuplierResource extends Resource
     {
         return [
             'index' => Pages\ListInventarisSupliers::route('/'),
-            'create' => Pages\CreateInventarisSuplier::route('/create'),
-            'edit' => Pages\EditInventarisSuplier::route('/{record}/edit'),
+            // 'create' => Pages\CreateInventarisSuplier::route('/create'),
+            // 'edit' => Pages\EditInventarisSuplier::route('/{record}/edit'),
         ];
     }
 }

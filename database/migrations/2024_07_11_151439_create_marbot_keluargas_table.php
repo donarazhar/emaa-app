@@ -29,6 +29,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Marbot::class);
             $table->foreignIdFor(MarbotKeluarga::class);
+            $table->timestamps();
         });
     }
 

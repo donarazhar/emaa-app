@@ -1,5 +1,5 @@
 <x-filament::breadcrumbs :breadcrumbs="[
-    '/admin/kas-kecil-aas' => 'Pengeluaran Kas Kecil',
+    '/admin/kas-kecil-transaksis' => 'Pengeluaran Kas Kecil',
     '' => 'List',
 ]" />
 

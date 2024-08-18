@@ -1,32 +1,37 @@
 <?php
-
+// Deklarasi namespace untuk model ini
 namespace App\Models;
 
+// Import trait dan kelas yang akan digunakan dalam model ini
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+// Deklarasi kelas InventarisTransaksi yang merupakan turunan dari Model Eloquent Laravel
 class InventarisTransaksi extends Model
 {
+    // Menggunakan trait HasFactory dan SoftDeletes
     use HasFactory, SoftDeletes;
 
+    // Mendefinisikan bahwa kolom 'foto_data_inventaris' akan diperlakukan sebagai array
     protected $casts = [
         'foto_data_inventaris' => 'array',
     ];
 
+    // Method boot() digunakan untuk mengatur perilaku default saat model dibuat
     protected static function boot()
     {
         parent::boot();
 
+        // Saat model sedang dibuat, method ini memastikan relasi kategori, merk, dan bagian telah di-load
+        // Kemudian, kode barang akan digenerate sebelum model disimpan ke database
         static::creating(function ($model) {
-            // Pastikan relasi telah di-load sebelum generate kode
             $model->load('kategori', 'merk', 'bagian');
-
-            // Generate kode barang
             $model->kode_barang = $model->generateKodeBarang();
         });
     }
 
+    // Method generateKodeBarang() digunakan untuk membuat kode barang unik berdasarkan kategori, merk, dan bagian
     public function generateKodeBarang()
     {
         // Mengambil inisial dari kategori, merk, dan bagian
@@ -49,31 +54,37 @@ class InventarisTransaksi extends Model
         return strtoupper($kategoriInisial . $merkInisial . $bagianInisial . $newNumber);
     }
 
+    // Relasi belongsTo dengan InventarisKategori
     public function kategori()
     {
         return $this->belongsTo(InventarisKategori::class);
     }
 
+    // Relasi belongsTo dengan InventarisMerk
     public function merk()
     {
         return $this->belongsTo(InventarisMerk::class);
     }
 
+    // Relasi belongsTo dengan InventarisSatuan
     public function satuan()
     {
         return $this->belongsTo(InventarisSatuan::class);
     }
 
+    // Relasi belongsTo dengan InventarisBagian
     public function bagian()
     {
         return $this->belongsTo(InventarisBagian::class);
     }
 
+    // Relasi belongsTo dengan InventarisSuplier
     public function suplier()
     {
         return $this->belongsTo(InventarisSuplier::class);
     }
 
+    // Relasi hasOne dengan InventarisPenyusutan
     public function penyusutan()
     {
         return $this->hasOne(InventarisPenyusutan::class);

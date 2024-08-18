@@ -13,9 +13,6 @@ class KesehatansRelationManager extends RelationManager
 {
     protected static string $relationship = 'kesehatans';
 
-    protected static ?string $modelLabel = 'Riwayat Kesehatan';
-
-
     public function form(Form $form): Form
     {
         return $form

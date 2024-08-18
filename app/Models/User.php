@@ -1,9 +1,8 @@
 <?php
-
+// Deklarasi namespace untuk model ini
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
+// Import trait dan kelas yang akan digunakan dalam model ini
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Filament\Models\Contracts\HasAvatar;
@@ -14,16 +13,19 @@ use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-implements FilamentUser, HasAvatar
+// Deklarasi kelas User yang merupakan turunan dari Authenticatable Laravel
+// Kelas ini mengimplementasikan interface FilamentUser dan HasAvatar untuk mendukung fitur Filament
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
-    use HasFactory,
-        Notifiable,
-        HasRoles,
-        HasPanelShield;
+    // Menggunakan trait HasFactory, Notifiable, HasRoles, dan HasPanelShield
+    // HasFactory: Untuk memungkinkan pembuatan instance model menggunakan factory
+    // Notifiable: Untuk memungkinkan pengiriman notifikasi kepada pengguna
+    // HasRoles: Untuk mengelola peran dan izin pengguna menggunakan Spatie Permissions
+    // HasPanelShield: Untuk mengelola izin panel Filament
+    use HasFactory, Notifiable, HasRoles, HasPanelShield;
 
     /**
-     * The attributes that are mass assignable.
+     * Atribut yang dapat diisi secara massal (mass assignable).
      *
      * @var array<int, string>
      */
@@ -33,11 +35,10 @@ implements FilamentUser, HasAvatar
         'password',
         'roles_id',
         'avatar_url',
-
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Atribut yang harus disembunyikan untuk serialisasi.
      *
      * @var array<int, string>
      */
@@ -47,7 +48,7 @@ implements FilamentUser, HasAvatar
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Mendapatkan atribut yang harus di-cast.
      *
      * @return array<string, string>
      */
@@ -59,11 +60,16 @@ implements FilamentUser, HasAvatar
         ];
     }
 
+    // Relasi one-to-many dengan model Marbot
+    // Setiap user dapat memiliki banyak Marbot terkait, dihubungkan melalui kolom email_user
     public function marbots(): HasMany
     {
         return $this->hasMany(Marbot::class, 'email_user', 'email');
     }
 
+    // Mengimplementasikan metode getFilamentAvatarUrl untuk mendapatkan URL avatar pengguna
+    // Jika avatar_url ada, metode ini mengembalikan URL yang dibangun menggunakan Storage facade
+    // Jika tidak, mengembalikan null
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url ? Storage::url("$this->avatar_url") : null;

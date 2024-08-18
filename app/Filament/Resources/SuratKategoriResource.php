@@ -45,7 +45,7 @@ class SuratKategoriResource extends Resource
                 Forms\Components\TextInput::make('keterangan_kategori')->label('Keterangan')
                     ->required()
                     ->maxLength(255),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table

@@ -63,25 +63,44 @@ class MarbotResource extends Resource
                                 ->schema([
                                     Forms\Components\FileUpload::make('foto')->label('Foto Profile')
                                         ->image()->openable()->downloadable()->directory('file-marbot'),
-                                    Forms\Components\Select::make('email_user')->label('Users Akun')
-                                        ->relationship('user', 'name')->required(),
+                                    Forms\Components\Select::make('email_user')
+                                        ->label('Users Akun')
+                                        ->options(function ($get) {
+                                            // Ambil semua email user yang sudah terdaftar di tabel marbots
+                                            $registeredEmails = \App\Models\Marbot::pluck('email_user');
+
+                                            // Ambil email saat ini dari field yang sedang diedit
+                                            $currentEmail = $get('email_user');
+
+                                            // Jika email saat ini sudah terdaftar di tabel marbots, tetap tampilkan di dalam opsi
+                                            return \App\Models\User::where(function ($query) use ($registeredEmails, $currentEmail) {
+                                                $query->whereNotIn('email', $registeredEmails);
+
+                                                if ($currentEmail) {
+                                                    $query->orWhere('email', $currentEmail);
+                                                }
+                                            })
+                                                ->pluck('name', 'email');
+                                        })
+                                        ->required()
+                                        ->disabled(fn($record) => $record != null),
                                     Forms\Components\TextInput::make('nip')->label('NIP')
                                         ->numeric()->maxLength(15)->unique(ignoreRecord: true)->required(),
                                     Forms\Components\TextInput::make('phone')->label('No. HP')
                                         ->numeric()->maxLength(15)->unique(ignoreRecord: true)->required(),
                                     Forms\Components\Select::make('jenkel')->label('Jenkel')->options([
-                                        'Laki-Laki' => 'Laki-Laki',
-                                        'Perempuan' => 'Perempuan',
+                                        'Laki-Laki' => '1. Laki-Laki',
+                                        'Perempuan' => '2. Perempuan',
                                     ])->required(),
                                     Forms\Components\TextInput::make('tlahir')
                                         ->label('Tmp. Lahir'),
                                     Forms\Components\DatePicker::make('tgl_lahir')->label('Tgl. Lahir')
                                         ->maxDate(now()->subYears(20)),
                                     Forms\Components\Select::make('goldar')->label('Goldar')->options([
-                                        'O' => 'O',
-                                        'A' => 'A',
-                                        'AB' => 'AB',
-                                        'B' => 'B',
+                                        'O' => '1. O',
+                                        'A' => '2. A',
+                                        'AB' => '3. AB',
+                                        'B' => '4. B',
                                     ]),
                                 ])
                                 ->columns(2)
@@ -110,7 +129,7 @@ class MarbotResource extends Resource
                                                     'Kontrak' => '3. Kontrak',
                                                     'Lepas' => '4. Pegawai Lepas',
                                                 ]),
-                                            Forms\Components\Select::make('Posisi')
+                                            Forms\Components\Select::make('posisi')
                                                 ->label('Posisi')
                                                 ->options([
                                                     'Staf' => '1. Staf TU',
@@ -118,6 +137,7 @@ class MarbotResource extends Resource
                                                     'Teknisi' => '3. Teknisi',
                                                     'Lepas' => '4. Pegawai Lepas',
                                                     'Imam' => '5. Imam Muazin',
+                                                    'Mutasi' => '6. Imam Muazin',
 
                                                 ]),
                                         ])
