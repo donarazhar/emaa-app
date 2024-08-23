@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\DB;
 class KasKecilStats extends BaseWidget
 {
 
-    protected static bool $shouldPollOnVisible = false;
-    protected int | string | array $columnSpan = 'full';
-
     public static function canView(): bool
     {
         return request()->routeIs('filament.admin.resources.kas-kecil-transaksis.index');
@@ -69,6 +66,8 @@ class KasKecilStats extends BaseWidget
                 ->description('Saldo saat ini')
                 ->icon('heroicon-m-calculator')
                 ->color('warning'),
+
+
         ];
     }
 }

@@ -9,11 +9,13 @@ use Filament\Resources\Pages\ListRecords;
 class ListKursusGurus extends ListRecords
 {
     protected static string $resource = KursusGuruResource::class;
+    protected static ?string $title = 'Data Tabel Guru';
+
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Data Guru')->slideOver(),
         ];
     }
 }

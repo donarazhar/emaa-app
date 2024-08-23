@@ -89,4 +89,25 @@ class InventarisTransaksi extends Model
     {
         return $this->hasOne(InventarisPenyusutan::class);
     }
+
+    // Metode untuk mengubah string menjadi format Proper Case (huruf pertama setiap kata kapital)
+    public function setAttributesToProperCase($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function setNamaDataInventarisAttribute($value)
+    {
+        $this->attributes['nama_data_inventaris'] = $this->setAttributesToProperCase($value);
+    }
+
+    public function setJenisDataInventarisAttribute($value)
+    {
+        $this->attributes['jenis_data_inventaris'] = $this->setAttributesToProperCase($value);
+    }
+
+    public function setKeteranganDataInventarisAttribute($value)
+    {
+        $this->attributes['keterangan_data_inventaris'] = $this->setAttributesToProperCase($value);
+    }
 }

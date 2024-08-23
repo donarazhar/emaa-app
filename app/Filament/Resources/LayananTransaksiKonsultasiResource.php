@@ -6,23 +6,20 @@ use Filament\Forms;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\ActionSize;
 use Filament\Support\Enums\FontWeight;
-use Filament\Infolists\Components\Grid;
-use Filament\Infolists\Components\Group;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Facades\Validator;
 use App\Models\LayananTransaksiKonsultasi;
-use Filament\Infolists\Components\Section;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Actions\Action;
-use Filament\Infolists\Components\RepeatableEntry;
 use App\Filament\Resources\LayananTransaksiKonsultasiResource\Pages;
 use Joaopaulolndev\FilamentPdfViewer\Infolists\Components\PdfViewerEntry;
 
@@ -124,19 +121,19 @@ class LayananTransaksiKonsultasiResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('No')->rowIndex(),
                 Tables\Columns\TextColumn::make('nama_jamaah')->label('Nama Jamaah')->sortable()->searchable()
-                    ->description(fn (LayananTransaksiKonsultasi $record): string => $record->jenkel_jamaah),
+                    ->description(fn(LayananTransaksiKonsultasi $record): string => $record->jenkel_jamaah),
                 Tables\Columns\TextColumn::make('tgl_booking')->dateTime('d/m/Y')
                     ->label('Detail Booking')
-                    ->description(fn (LayananTransaksiKonsultasi $record): string => $record->jam_booking, position: 'above')
-                    ->description(fn (LayananTransaksiKonsultasi $record): string => $record->imam->nama_imam)
+                    ->description(fn(LayananTransaksiKonsultasi $record): string => $record->jam_booking, position: 'above')
+                    ->description(fn(LayananTransaksiKonsultasi $record): string => $record->imam->nama_imam)
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('jeniskonsultasi.nama_jenis_konsultasi')->label('Detail Masalah')
-                    ->description(fn (LayananTransaksiKonsultasi $record): string => $record->deskripsi_masalah),
-                Tables\Columns\TextColumn::make('email')->label('Detail Kontak')->toggleable(isToggledHiddenByDefault: true)->description(fn (LayananTransaksiKonsultasi $record): string => $record->no_hp),
+                    ->description(fn(LayananTransaksiKonsultasi $record): string => $record->deskripsi_masalah),
+                Tables\Columns\TextColumn::make('email')->label('Detail Kontak')->toggleable(isToggledHiddenByDefault: true)->description(fn(LayananTransaksiKonsultasi $record): string => $record->no_hp),
                 Tables\Columns\TextColumn::make('pekerjaan')->label('Detail Personal')->toggleable(isToggledHiddenByDefault: true)
-                    ->description(fn (LayananTransaksiKonsultasi $record): string => $record->pendidikan, position: 'above')
-                    ->description(fn (LayananTransaksiKonsultasi $record): string => $record->alamat),
+                    ->description(fn(LayananTransaksiKonsultasi $record): string => $record->pendidikan, position: 'above')
+                    ->description(fn(LayananTransaksiKonsultasi $record): string => $record->alamat),
             ])
             ->filters([
                 SelectFilter::make('jenkel_jamaah')
@@ -175,7 +172,7 @@ class LayananTransaksiKonsultasiResource extends Resource
                     ->headerActions([
                         Action::make('Export File')
                             ->icon('heroicon-m-printer')
-                            ->url(fn ($record) => route('pdf.previewkonsultasi', ['id' => $record->id]))
+                            ->url(fn($record) => route('pdf.previewkonsultasi', ['id' => $record->id]))
                             ->openUrlInNewTab(true)
                             ->iconButton()
                             ->size(ActionSize::Large)

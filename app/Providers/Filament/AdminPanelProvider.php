@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Widgets\GrafikInventarisChart;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
@@ -10,20 +11,25 @@ use Filament\Support\Colors\Color;
 use App\Filament\Widgets\LaporKerjaBlog;
 use Filament\Http\Middleware\Authenticate;
 use App\Filament\Widgets\GrafikMarbotChart;
+use App\Filament\Widgets\GrafikKonsultasiChart;
 use Illuminate\Session\Middleware\StartSession;
+use App\Filament\Widgets\GrafikPengislamanChart;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use App\Filament\Widgets\GrafikPengisianKasChart;
+use App\Filament\Widgets\GrafikPengeluaranKasChart;
+use App\Filament\Widgets\GrafikMarbotPerPosisiChart;
+use App\Filament\Widgets\GrafikPersuratanByAsalChart;
+use App\Filament\Widgets\GrafikPersuratanByTimeChart;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
+use App\Filament\Widgets\GrafikPersuratanByCategoryChart;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use App\Filament\Resources\MarbotResource\Widgets\MarbotTable;
-use App\Filament\Resources\MarbotResource\Widgets\StatsOverview;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
-use App\Filament\Resources\KursusPendaftaranResource\Widgets\KursusChart;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -65,10 +71,19 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                // Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
+                Widgets\AccountWidget::class,
+                Widgets\FilamentInfoWidget::class,
                 GrafikMarbotChart::class,
+                GrafikMarbotPerPosisiChart::class,
                 LaporKerjaBlog::class,
+                GrafikPersuratanByTimeChart::class,
+                GrafikPersuratanByCategoryChart::class,
+                GrafikPersuratanByAsalChart::class,
+                GrafikKonsultasiChart::class,
+                GrafikPengislamanChart::class,
+                GrafikPengisianKasChart::class,
+                GrafikPengeluaranKasChart::class,
+                GrafikInventarisChart::class,
 
             ])
             ->middleware([

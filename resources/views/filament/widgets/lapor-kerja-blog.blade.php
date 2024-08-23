@@ -58,17 +58,13 @@
                 style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); background: gray; color: white; padding: 5px; font-size: 5px; z-index: 1000; border-radius: 50%;">
                 <x-heroicon-m-chevron-double-right class="w-6 h-6 text-white" />
             </button>
-
-
-
-
         </div>
 
         <!-- Button Section -->
         <div class="text-center mt-4">
             <x-filament::button>
                 <a href="{{ route('filament.admin.resources.lapor-kerjas.index') }}" class="text-white">
-                    Lihat semua data
+                    Lihat Semua Laporan
                 </a>
             </x-filament::button>
         </div>

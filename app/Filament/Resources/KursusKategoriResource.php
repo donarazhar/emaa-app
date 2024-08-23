@@ -2,17 +2,14 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\KursusKategoriResource\Pages;
-use App\Filament\Resources\KursusKategoriResource\RelationManagers;
-use App\Models\KursusKategori;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use Filament\Support\RawJs;
+use App\Models\KursusKategori;
+use Filament\Resources\Resource;
+use App\Filament\Resources\KursusKategoriResource\Pages;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 
 class KursusKategoriResource extends Resource
@@ -40,43 +37,51 @@ class KursusKategoriResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_kursus')
+                Forms\Components\TextInput::make('nama_kursus')->label('Nama Kursus')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('durasi')
-                    ->required(),
-                Forms\Components\TextInput::make('biaya')
+                Forms\Components\TextInput::make('durasi')->label('Durasi Ajar *menit')
                     ->numeric()
                     ->required(),
-                Forms\Components\Select::make('kursus_guru_id')
+                Forms\Components\TextInput::make('biaya')->label('Biaya perbulan')
+                    ->mask(RawJs::make('$money($input)'))
+                    ->stripCharacters(',')
+                    ->numeric()
+                    ->prefix('Rp')
+                    ->required(),
+                Forms\Components\Select::make('jenis_kursus')->label('Jenis Kursus')->options([
+                    'reguler' => '1. Reguler',
+                    'private' => '2. Private',
+                ])->required(),
+                Forms\Components\Select::make('kursus_guru_id')->label('Nama Guru')
                     ->relationship('guru', 'nama')
                     ->required(),
-                Forms\Components\Textarea::make('deskripsi')
+                Forms\Components\Textarea::make('deskripsi')->label('Keterangan')
                     ->required(),
-            ]);
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('nama_kursus'),
-                Tables\Columns\TextColumn::make('deskripsi'),
-                Tables\Columns\TextColumn::make('durasi'),
-                Tables\Columns\TextColumn::make('biaya'),
-                Tables\Columns\TextColumn::make('guru.nama')
-                    ->label('Nama Guru'),
+                Tables\Columns\TextColumn::make('id')->label('No.')->sortable(),
+                Tables\Columns\TextColumn::make('nama_kursus')->label('Detail Kursus')->sortable()->searchable()
+                    ->description(fn(KursusKategori $record): string => $record->guru->nama, position: 'above')
+                    ->description(fn(KursusKategori $record): string => $record->deskripsi),
+                Tables\Columns\TextColumn::make('biaya')->label('Detail Biaya')->numeric()->prefix('Rp ')
+                    ->description(fn(KursusKategori $record): string => 'Durasi : ' . $record->durasi . 'menit', position: 'above')
+                    ->description(fn(KursusKategori $record): string => 'Jenis: ' . strtoupper($record->jenis_kursus)),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make()->color('info'),
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
-                ]),
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

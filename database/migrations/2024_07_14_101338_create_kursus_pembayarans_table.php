@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kursus_pendaftaran_id')->constrained('kursus_pendaftarans')->onDelete('cascade');
             $table->date('tanggal');
-            $table->decimal('jumlah', 10, 2);
+            $table->integer('jumlah');
             $table->string('metode_pembayaran');
             $table->string('status');
             $table->text('foto')->nullable();

@@ -5,6 +5,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\MarbotController;
 use App\Http\Controllers\KasKecilController;
 use App\Http\Controllers\KonsultasiController;
+use App\Http\Controllers\KursusController;
 use App\Http\Controllers\PengislamanController;
 
 Route::get('/', function () {
@@ -21,3 +22,5 @@ Route::get('/pdf-previewkonsultasi/{id}', [KonsultasiController::class, 'preview
 Route::get('/pdf-previewpengislmaman/{id}', [PengislamanController::class, 'preview'])->name('pdf.previewpengislaman');
 Route::get('/cetak-pengisian/{id}', [KasKecilController::class, 'cetakPengisianKas'])->name('cetak-pengisiankas');
 Route::get('/cetak-laporankas/{selected}/{periodeawal}/{periodeakhir}', [KasKecilController::class, 'cetakLaporanKas'])->name('cetak-laporankas');
+Route::get('/pdf-previewpendaftaran/{id}', [KursusController::class, 'preview'])->name('pdf.previewpendaftaran');
+Route::get('/pdf-previewkwitansi/{id}', [KursusController::class, 'kwitansi'])->name('pdf.previewkwitansi');

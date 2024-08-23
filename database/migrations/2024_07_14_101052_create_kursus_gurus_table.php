@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat');
+            $table->string('jenkel');
             $table->string('email')->unique();
             $table->string('nomor_telepon');
             $table->string('bidang_keahlian');
-            $table->integer('sejak');
+            $table->date('sejak');
+            $table->text('foto')->nullable();
             $table->timestamps();
         });
     }

@@ -37,14 +37,14 @@ class LayananImamResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_imam')
+                Forms\Components\TextInput::make('nama_imam')->label('Nama Imam')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('nohp_imam')
+                Forms\Components\TextInput::make('nohp_imam')->label('No. HP')
                     ->required()
                     ->maxLength(255)
                     ->numeric(),
-                Forms\Components\Textarea::make('keterangan')
+                Forms\Components\Textarea::make('keterangan')->label('Keterangan')
                     ->required()
                     ->maxLength(255),
             ])->columns(1);
@@ -56,7 +56,7 @@ class LayananImamResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
                 Tables\Columns\TextColumn::make('nama_imam')->label('Nama Imam'),
-                Tables\Columns\TextColumn::make('nohp_imam')->label('No. Handphone'),
+                Tables\Columns\TextColumn::make('nohp_imam')->label('No. HP'),
                 Tables\Columns\TextColumn::make('keterangan')->label('Keterangan'),
             ])
             ->filters([

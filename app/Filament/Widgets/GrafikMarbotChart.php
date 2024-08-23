@@ -8,10 +8,10 @@ use Carbon\Carbon;
 
 class GrafikMarbotChart extends ChartWidget
 {
-    protected static ?string $heading = 'Demografis Marbot';
-    protected int | string | array $columnSpan = 'full';
-    protected static string $color = 'info';
-    protected static ?string $maxHeight = '250px';
+    protected static ?string $heading = 'Grafik Marbot';
+    protected int | string | array $columnSpan = 9;
+    protected static ?string $maxHeight = '100%';
+    protected static ?int $sort = 1;
 
     public function getDescription(): ?string
     {
@@ -35,7 +35,7 @@ class GrafikMarbotChart extends ChartWidget
         })->count();
         $menikah = $marbots->where('status_nikah', 'Menikah')->count();
         $belumMenikah = $marbots->where('status_nikah', 'Belum Menikah')->count();
-        $lakiLaki = $marbots->where('jenkel', 'Laki-laki')->count();
+        $lakiLaki = $marbots->where('jenkel', 'Laki-Laki')->count();
         $perempuan = $marbots->where('jenkel', 'Perempuan')->count();
         $ktd = $marbots->where('status_pegawai', 'KTD')->count();
         $capeg = $marbots->where('status_pegawai', 'Capeg')->count();
@@ -77,7 +77,7 @@ class GrafikMarbotChart extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Banyak',
+                    'label' => 'Jumlah Marbot',
                     'data' => $data,
                     'backgroundColor' => '#ffde59',
                     'borderColor' => '#ffffff',

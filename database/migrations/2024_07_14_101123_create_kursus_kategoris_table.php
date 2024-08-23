@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nama_kursus');
             $table->text('deskripsi');
             $table->string('durasi');
-            $table->decimal('biaya', 10, 2);
+            $table->integer('biaya');
+            $table->enum('jenis_kursus', ['reguler', 'private']); // Menambahkan kolom jenis_kursus
             $table->foreignId('kursus_guru_id')->constrained('kursus_gurus')->onDelete('cascade');
             $table->timestamps();
         });

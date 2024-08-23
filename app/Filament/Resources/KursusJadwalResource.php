@@ -2,19 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\KursusJadwalResource\Pages;
-use App\Filament\Resources\KursusJadwalResource\RelationManagers;
+use Carbon\Carbon;
+use Filament\Forms;
+use Filament\Tables;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
 use App\Models\KursusJadwal;
 use App\Models\KursusKategori;
-use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
+use App\Filament\Resources\KursusJadwalResource\Pages;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use App\Filament\Resources\KursusJadwalResource\RelationManagers;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class KursusJadwalResource extends Resource
 {
@@ -42,45 +43,49 @@ class KursusJadwalResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('hari')
-                    ->label('Hari kursus')
+                    ->label('Hari Kursus')
                     ->required()
                     ->columnSpanFull(),
+
                 Forms\Components\TimePicker::make('jam_mulai')
                     ->label('Dari jam')
-                    ->datalist([
-                        '09:00',
-                        '09:30',
-                        '10:00',
-                        '10:30',
-                        '11:00',
-                        '11:30',
-                        '12:00',
-                    ])
+                    ->native(false)
+                    ->hoursStep(1)
+                    ->minutesStep(15)
+                    ->secondsStep(10)
                     ->required(),
                 Forms\Components\TimePicker::make('jam_selesai')
                     ->label('Sampai jam')
-                    ->datalist([
-                        '09:00',
-                        '09:30',
-                        '10:00',
-                        '10:30',
-                        '11:00',
-                        '11:30',
-                        '12:00',
-                    ])
+                    ->native(false)
+                    ->hoursStep(1)
+                    ->minutesStep(15)
+                    ->secondsStep(10)
                     ->required(),
+                Forms\Components\Select::make('ruang_kelas')->label('Ruang Kelas')->options([
+                    '101' => '1. Ruang 101',
+                    '102' => '2. Ruang 102',
+                    '103' => '3. Ruang 103',
+                    '104' => '4. Ruang 104',
+                    '105' => '5. Ruang 105',
+                    '106' => '6. Ruang 106',
+                ])->required()
+                    ->columnSpanFull(),
                 Forms\Components\Select::make('kursus_kategori_id')
-                    ->relationship('kursuskategori', 'nama_kursus')
+                    ->label('Jenis Kursus')
+                    ->options(function () {
+                        return KursusKategori::with('guru')->get()->mapWithKeys(function ($kategori) {
+                            return [
+                                $kategori->id => $kategori->nama_kursus . ' (' . ucfirst($kategori->jenis_kursus) . ') - ' . $kategori->guru->nama
+                            ];
+                        });
+                    })
                     ->required()
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set) {
                         $kategori = KursusKategori::find($state);
                         $set('nama_guru', $kategori ? $kategori->guru->nama : null);
-                    }),
-                Forms\Components\TextInput::make('nama_guru')
-                    ->label('Nama Guru')
-                    ->disabled()
-                    ->required(),
+                    })
+                    ->columnSpanFull(),
 
             ]);
     }
@@ -89,16 +94,23 @@ class KursusJadwalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('hari'),
-                Tables\Columns\TextColumn::make('jam_mulai')->label('Mulai')
-                    ->time(),
-                Tables\Columns\TextColumn::make('jam_selesai')->label('Selesai')
-                    ->time(),
-                Tables\Columns\TextColumn::make('kursuskategori.nama_kursus')
-                    ->label('Jenis Kursus'),
-                Tables\Columns\TextColumn::make('kursuskategori.guru.nama')
-                    ->label('Nama Guru'),
+                Tables\Columns\TextColumn::make('id')->label('No.')->sortable(),
+                Tables\Columns\TextColumn::make('hari')->label('Detail Waktu')
+                    ->description(
+                        fn(KursusJadwal $record): string =>
+                        'Jam : ' . Carbon::parse($record->jam_mulai)->format('H:i') .
+                            ' - ' . Carbon::parse($record->jam_selesai)->format('H:i') .
+                            ' WIB'
+                    ),
+                Tables\Columns\TextColumn::make('kategori.nama_kursus')->label('Detail Kursus')
+                    ->description(fn(KursusJadwal $record): string => 'Guru : ' . $record->kategori->guru->nama, position: 'above')
+                    ->description(
+                        fn(KursusJadwal $record): string =>
+                        'Ruang Kelas: ' . $record->ruang_kelas . ' (' . strtoupper($record->kategori->jenis_kursus) . ')'
+                    ),
+                Tables\Columns\TextColumn::make('kategori.biaya')->label('Biaya/bulan')
+                    ->numeric()
+                    ->prefix('Rp ')
 
             ])
             ->filters([
@@ -106,10 +118,10 @@ class KursusJadwalResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make()->color('info'),
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
-                ]),
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

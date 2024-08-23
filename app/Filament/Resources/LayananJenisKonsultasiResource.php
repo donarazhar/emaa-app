@@ -37,10 +37,10 @@ class LayananJenisKonsultasiResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_jenis_konsultasi')
+                Forms\Components\TextInput::make('nama_jenis_konsultasi')->label('Nama Konsultasi')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('deskripsi')
+                Forms\Components\Textarea::make('deskripsi')->label('Keterangan')
                     ->required()
                     ->maxLength(255),
             ])->columns(1);
@@ -52,7 +52,7 @@ class LayananJenisKonsultasiResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('ID'),
                 Tables\Columns\TextColumn::make('nama_jenis_konsultasi')->label('Jenis Konsultasi'),
-                Tables\Columns\TextColumn::make('deskripsi')->label('deskripsi'),
+                Tables\Columns\TextColumn::make('deskripsi')->label('Deskripsi'),
             ])
             ->filters([
                 //

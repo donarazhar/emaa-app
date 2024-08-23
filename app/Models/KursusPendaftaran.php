@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class KursusPendaftaran extends Model
 {
@@ -19,8 +20,20 @@ class KursusPendaftaran extends Model
         return $this->belongsTo(KursusJadwal::class, 'kursus_jadwal_id');
     }
 
+    public function pembayarans()
+    {
+        return $this->hasMany(KursusPembayaran::class, 'kursus_pendaftaran_id');
+    }
+
+
     public function getCombinedInfoAttribute()
     {
-        return $this->murid->nama . ' - ' . $this->jadwal->kursuskategori->guru->nama . ' - ' . $this->jadwal->kursuskategori->nama_kursus . ' ( ' . $this->jadwal->hari . ' - ' . $this->jadwal->jam_mulai . ' s/d ' . $this->jadwal->jam_selesai . ' )';
+        $jamMulai = Carbon::parse($this->jadwal->jam_mulai)->format('H:i');
+        $jamSelesai = Carbon::parse($this->jadwal->jam_selesai)->format('H:i');
+
+        // Mengubah jenis_kursus menjadi huruf kapital
+        $jenisKursus = strtoupper($this->jadwal->kategori->jenis_kursus);
+
+        return $this->murid->nama . ' | ' . $this->jadwal->kategori->guru->nama . ' - ' . $this->jadwal->kategori->nama_kursus . ' (' . $this->jadwal->hari . ' | ' . $jamMulai . ' s/d ' . $jamSelesai  . ' | ' . $jenisKursus . ') ';
     }
 }

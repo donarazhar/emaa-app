@@ -69,8 +69,8 @@ class LayananTransaksiPengislamanResource extends Resource
                 ])->required(),
                 Forms\Components\TextInput::make('nama')->label('Nama Muallaf')->required()->maxLength(255)->columnSpanFull(),
                 Forms\Components\Select::make('jenkel')->options([
-                    'Laki-Laki' => 'Laki-Laki',
-                    'Perempuan' => 'Perempuan',
+                    'Pria' => '1. Pria',
+                    'Wanita' => '2. Wanita',
                 ])->required(),
                 Forms\Components\TextInput::make('no_hp')->required()->maxLength(255)->numeric(),
                 Forms\Components\TextInput::make('email')->label('Email address')->email()->required()->maxLength(255),
@@ -108,25 +108,25 @@ class LayananTransaksiPengislamanResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')->label('No')->rowIndex(),
                 Tables\Columns\TextColumn::make('nama')->label('Nama Muallaf')->sortable()->searchable()
-                    ->description(fn (LayananTransaksiPengislaman $record): string => $record->agama_semula)
-                    ->description(fn (LayananTransaksiPengislaman $record): string => $record->jenkel, position: 'above'),
-                Tables\Columns\TextColumn::make('email')->label('Detail Kontak')->toggleable(isToggledHiddenByDefault: true)->description(fn (LayananTransaksiPengislaman $record): string => $record->no_hp),
+                    ->description(fn(LayananTransaksiPengislaman $record): string => $record->agama_semula)
+                    ->description(fn(LayananTransaksiPengislaman $record): string => $record->jenkel, position: 'above'),
+                Tables\Columns\TextColumn::make('email')->label('Detail Kontak')->toggleable(isToggledHiddenByDefault: true)->description(fn(LayananTransaksiPengislaman $record): string => $record->no_hp),
                 Tables\Columns\TextColumn::make('tgl')->dateTime('d/m/Y')->label('Detail Booking')->sortable()->searchable()
-                    ->description(fn (LayananTransaksiPengislaman $record): string => $record->hari, position: 'above')
-                    ->description(fn (LayananTransaksiPengislaman $record): string => $record->jam),
+                    ->description(fn(LayananTransaksiPengislaman $record): string => $record->hari, position: 'above')
+                    ->description(fn(LayananTransaksiPengislaman $record): string => $record->jam),
                 Tables\Columns\TextColumn::make('imam.nama_imam')->label('Detail Pelaksanaan')
-                    ->description(fn (LayananTransaksiPengislaman $record): string => $record->alasan)
-                    ->description(fn (LayananTransaksiPengislaman $record): string => $record->kategori, position: 'above'),
+                    ->description(fn(LayananTransaksiPengislaman $record): string => $record->alasan)
+                    ->description(fn(LayananTransaksiPengislaman $record): string => $record->kategori, position: 'above'),
                 Tables\Columns\TextColumn::make('alamat1')->label('Detail Personal')->toggleable(isToggledHiddenByDefault: true)
-                    ->description(fn (LayananTransaksiPengislaman $record): string => $record->pekerjaan, position: 'above')
-                    ->description(fn (LayananTransaksiPengislaman $record): string => $record->alamat2),
+                    ->description(fn(LayananTransaksiPengislaman $record): string => $record->pekerjaan, position: 'above')
+                    ->description(fn(LayananTransaksiPengislaman $record): string => $record->alamat2),
 
             ])
             ->filters([
                 SelectFilter::make('jenkel')
                     ->options([
-                        'Laki-Laki' => 'Laki-Laki',
-                        'Perempuan' => 'Perempuan',
+                        'Pria' => '1. Pria',
+                        'Wanita' => '2. Wanita',
                     ])->label('Filter by Jenis Kelamin'),
                 SelectFilter::make('imam.nama_imam')
                     ->relationship('imam', 'nama_imam')->label('Filter by Konsultan'),
@@ -167,7 +167,7 @@ class LayananTransaksiPengislamanResource extends Resource
                     ->headerActions([
                         Action::make('Export File')
                             ->icon('heroicon-m-printer')
-                            ->url(fn ($record) => route('pdf.previewpengislaman', ['id' => $record->id]))
+                            ->url(fn($record) => route('pdf.previewpengislaman', ['id' => $record->id]))
                             ->openUrlInNewTab(true)
                             ->iconButton()
                             ->size(ActionSize::Large)

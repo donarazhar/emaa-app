@@ -45,7 +45,8 @@ class InventarisSuplierResource extends Resource
                     ->maxLength(255)
                     ->default(null),
                 Forms\Components\TextInput::make('kontak_suplier')->label('No. Kontak')
-                    ->maxLength(255)
+                    ->numeric()
+                    ->maxLength(20)
                     ->default(null),
                 Forms\Components\TextInput::make('email_suplier')->label('Email Address')
                     ->email()

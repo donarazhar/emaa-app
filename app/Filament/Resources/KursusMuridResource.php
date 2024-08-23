@@ -40,49 +40,59 @@ class KursusMuridResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('tanggal')
+                Forms\Components\DatePicker::make('tanggal')->label('Tgl. Daftar')
                     ->required(),
-                Forms\Components\TextInput::make('nama')
+                Forms\Components\TextInput::make('nama')->label('Nama Lengkap')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('email')
+                Forms\Components\Select::make('jenkel')->label('Jenkel')->options([
+                    'Laki-Laki' => '1. Laki-Laki',
+                    'Perempuan' => '2. Perempuan',
+                ])->required(),
+                Forms\Components\TextInput::make('email')->label('Email Address')
                     ->required()
                     ->email()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('nomor_telepon')
+                Forms\Components\TextInput::make('nomor_telepon')->label('No.HP')
                     ->numeric()
                     ->required()
                     ->maxLength(13),
-                Forms\Components\Textarea::make('alamat')
+                Forms\Components\FileUpload::make('foto')->label('Foto Profile')
+                    ->image()->openable()->downloadable()->directory('file-kursus-murid'),
+                Forms\Components\Textarea::make('alamat')->label('Alamat Lengkap')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->columnSpanFull(),
             ])
-            ->columns([
-                'xl' => 2,
-            ]);
+            ->columns(2);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable(),
-                Tables\Columns\TextColumn::make('tanggal')->label('Tgl')->dateTime('d/m/Y')->sortable(),
-                Tables\Columns\TextColumn::make('nama')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('alamat')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('nomor_telepon')->label('No.HP')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('id')->label('No.')->sortable(),
+                Tables\Columns\ImageColumn::make('foto')->label('Photo')
+                    ->circular()->size(80)->getStateUsing(function ($record) {
+                        return $record->foto ? url('storage/' . $record->foto) : url('storage/file-user/no-image.jpg');
+                    }),
+                Tables\Columns\TextColumn::make('tanggal')->label('Tgl. Daftar')->dateTime('d/m/Y')->sortable(),
+                Tables\Columns\TextColumn::make('nama')->label('Detail Murid')->sortable()->searchable()
+                    ->description(fn(KursusMurid $record): string => $record->jenkel, position: 'above')
+                    ->description(fn(KursusMurid $record): string => $record->email),
+                Tables\Columns\TextColumn::make('nomor_telepon')->label('Detail Kontak')
+                    ->description(fn(KursusMurid $record): string => $record->alamat)
+                    ->sortable()->searchable(),
 
             ])
             ->filters([
-                DateRangeFilter::make('tanggal_daftar'),
+                DateRangeFilter::make('tanggal'),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make()->color('info'),
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
-                ]),
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

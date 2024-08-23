@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('hari');
             $table->time('jam_mulai');
             $table->time('jam_selesai');
+            $table->string('ruang_kelas'); // Menambahkan kolom ruang_kelas
             $table->timestamps();
         });
     }

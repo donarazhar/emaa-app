@@ -1,15 +1,12 @@
 <?php
-// Deklarasi namespace untuk model ini
+
 namespace App\Models;
 
-// Import trait dan kelas yang akan digunakan dalam model ini
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-// Deklarasi kelas InventarisSuplier yang merupakan turunan dari Model Eloquent Laravel
 class InventarisSuplier extends Model
 {
-    // Menggunakan trait HasFactory untuk memungkinkan pembuatan instance model menggunakan factory
     use HasFactory;
 
     // Relasi one-to-many dengan model InventarisTransaksi
@@ -17,5 +14,26 @@ class InventarisSuplier extends Model
     public function inventarisTransaksis()
     {
         return $this->hasMany(InventarisTransaksi::class);
+    }
+
+    // Metode untuk mengubah string menjadi format Proper Case (huruf pertama setiap kata kapital)
+    public function setAttributesToProperCase($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function setNamaSuplierAttribute($value)
+    {
+        $this->attributes['nama_suplier'] = $this->setAttributesToProperCase($value);
+    }
+
+    public function setAlamatSuplierAttribute($value)
+    {
+        $this->attributes['alamat_suplier'] = $this->setAttributesToProperCase($value);
+    }
+
+    public function setKeteranganSuplierAttribute($value)
+    {
+        $this->attributes['keterangan_suplier'] = $this->setAttributesToProperCase($value);
     }
 }

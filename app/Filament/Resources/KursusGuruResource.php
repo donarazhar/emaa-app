@@ -40,38 +40,52 @@ class KursusGuruResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')
+                Forms\Components\TextInput::make('nama')->label('Nama Guru')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('alamat')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
+                Forms\Components\FileUpload::make('foto')->label('Foto Profile')
+                    ->image()->openable()->downloadable()->directory('file-kursus-guru'),
+                Forms\Components\Select::make('jenkel')->label('Jenkel')->options([
+                    'Laki-Laki' => '1. Laki-Laki',
+                    'Perempuan' => '2. Perempuan',
+                ])->required(),
+                Forms\Components\DatePicker::make('sejak')->label('Bergabung Sejak')
+                    ->date()
+                    ->required(),
+                Forms\Components\TextInput::make('email')->label('Email Address')
                     ->email()
                     ->required()
                     ->unique(ignoreRecord: true),
-                Forms\Components\TextInput::make('nomor_telepon')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('bidang_keahlian')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('sejak')
+                Forms\Components\TextInput::make('nomor_telepon')->label('No. HP')
                     ->numeric()
-                    ->required(),
-            ]);
+                    ->required()
+                    ->maxLength(20),
+                Forms\Components\Textarea::make('bidang_keahlian')->label('Bidang Keahlian')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Textarea::make('alamat')->label('Alamat Lengkap')
+                    ->required()
+                    ->maxLength(255),
+
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama'),
-                Tables\Columns\TextColumn::make('alamat'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('nomor_telepon'),
-                Tables\Columns\TextColumn::make('bidang_keahlian'),
-                Tables\Columns\TextColumn::make('sejak'),
+                Tables\Columns\TextColumn::make('id')->label('No.')->sortable(),
+                Tables\Columns\ImageColumn::make('foto')->label('Photo')
+                    ->circular()->size(80)->getStateUsing(function ($record) {
+                        return $record->foto ? url('storage/' . $record->foto) : url('storage/file-user/no-image.jpg');
+                    }),
+                Tables\Columns\TextColumn::make('nama')->label('Detail Guru')->sortable()->searchable()
+                    ->description(fn(KursusGuru $record): string => $record->jenkel, position: 'above')
+                    ->description(fn(KursusGuru $record): string => $record->email),
+                Tables\Columns\TextColumn::make('nomor_telepon')->label('Detail Kontak')
+                    ->description(fn(KursusGuru $record): string => 'Sejak :' . ' ' . (new \DateTime($record->sejak))->format('d/m/Y'), position: 'above')
+                    ->description(fn(KursusGuru $record): string => $record->alamat),
+                Tables\Columns\TextColumn::make('bidang_keahlian')->label('Bidang Keahlian'),
 
             ])
             ->filters([
@@ -79,10 +93,10 @@ class KursusGuruResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
-                    Tables\Actions\ViewAction::make()->color('info'),
-                    Tables\Actions\EditAction::make()->color('primary'),
-                    Tables\Actions\DeleteAction::make()->color('danger'),
-                ]),
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

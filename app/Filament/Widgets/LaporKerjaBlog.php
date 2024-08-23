@@ -9,7 +9,8 @@ class LaporKerjaBlog extends Widget
 {
     protected static ?string $heading = 'Blog Lapor Kerja';
     protected int | string | array $columnSpan = 'full';
-    protected static ?string $pollingInterval = null;
+    protected static ?string $maxHeight = '100%';
+    protected static ?int $sort = 2;
     protected static string $view = 'filament.widgets.lapor-kerja-blog';
 
     public function getDescription(): ?string
