@@ -78,4 +78,11 @@ class KursusController extends Controller
         // Mengirim data pembayaran ke view 'kursus.previewkwitansi'
         return view('kursus.previewkwitansi', compact('pembayaran', 'nomor_kwitansi'));
     }
+
+    public function export()
+    {
+        $categoryID = request()->input('jenis_kursus');
+
+        return 'Hello Export';
+    }
 }

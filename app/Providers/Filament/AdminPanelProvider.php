@@ -40,6 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->databaseNotifications()
             ->registration()
             ->passwordReset()
             ->emailVerification()
@@ -57,10 +58,10 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('EMAA - Masjidku')
             ->favicon(asset('storage/logo-maa.png'))
             ->navigationGroups([
+                'Blog Management',
                 'Office Management',
                 'Kursus Management',
                 'Setting Management',
-                'Filament Shield',
 
             ])
             ->sidebarFullyCollapsibleOnDesktop()

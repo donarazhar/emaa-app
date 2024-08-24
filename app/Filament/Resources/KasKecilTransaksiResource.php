@@ -117,7 +117,6 @@ class KasKecilTransaksiResource extends Resource
                     ->default('pembentukan')
                     ->label('Filter by Kategori'),
             ], layout: FiltersLayout::AboveContent)->filtersFormColumns(2)
-
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make()->color('info')->slideOver()

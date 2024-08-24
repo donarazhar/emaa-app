@@ -114,50 +114,49 @@ class KursusPembayaranResource extends Resource
                     ->numeric()->prefix('Rp ')
                     ->description(fn(KursusPembayaran $record): string => 'Via : ' . $record->metode_pembayaran, position: 'above')
                     ->description(fn(KursusPembayaran $record): string => 'Status : ' . $record->status)
-                // ->summarize(
-                //     Sum::make()
-                //         ->label('Total per Bulan')
-                //         ->query(
-                //             fn(Builder $query) => $query
-                //                 ->whereMonth('tanggal', Carbon::now()->month)
-                //                 ->whereYear('tanggal', Carbon::now()->year)
-                //         )
-                // )
-                // ->summarize(
-                //     Sum::make()
-                //         ->label('Total Reguler')
-                //         ->query(
-                //             fn(Builder $query) => $query
-                //                 ->whereRaw("EXISTS (
-                //                             SELECT 1
-                //                             FROM kursus_pendaftarans
-                //                             JOIN kursus_jadwals ON kursus_pendaftarans.kursus_jadwal_id = kursus_jadwals.id
-                //                             JOIN kursus_kategoris ON kursus_jadwals.kursus_kategori_id = kursus_kategoris.id
-                //                             WHERE kursus_pembayarans.kursus_pendaftaran_id = kursus_pendaftarans.id
-                //                             AND kursus_kategoris.jenis_kursus = 'reguler'
-                //                         )")
-                //                 ->whereMonth('tanggal', Carbon::now()->month)
-                //                 ->whereYear('tanggal', Carbon::now()->year)
-                //         )
-                // )
-                // ->summarize(
-                //     Sum::make()
-                //         ->label('Total Private')
-                //         ->query(
-                //             fn(Builder $query) => $query
-                //                 ->whereRaw("EXISTS (
-                //                             SELECT 1
-                //                             FROM kursus_pendaftarans
-                //                             JOIN kursus_jadwals ON kursus_pendaftarans.kursus_jadwal_id = kursus_jadwals.id
-                //                             JOIN kursus_kategoris ON kursus_jadwals.kursus_kategori_id = kursus_kategoris.id
-                //                             WHERE kursus_pembayarans.kursus_pendaftaran_id = kursus_pendaftarans.id
-                //                             AND kursus_kategoris.jenis_kursus = 'private'
-                //                         )")
-                //                 ->whereMonth('tanggal', Carbon::now()->month)
-                //                 ->whereYear('tanggal', Carbon::now()->year)
-                //         )
-                // )
-                ,
+                    ->summarize(
+                        Sum::make()
+                            ->label('Total per Bulan')
+                            ->query(
+                                fn(Builder $query) => $query
+                                    ->whereMonth('tanggal', Carbon::now()->month)
+                                    ->whereYear('tanggal', Carbon::now()->year)
+                            )
+                    )
+                    ->summarize(
+                        Sum::make()
+                            ->label('Total Reguler')
+                            ->query(
+                                fn(Builder $query) => $query
+                                    ->whereRaw("EXISTS (
+                                            SELECT 1
+                                            FROM kursus_pendaftarans
+                                            JOIN kursus_jadwals ON kursus_pendaftarans.kursus_jadwal_id = kursus_jadwals.id
+                                            JOIN kursus_kategoris ON kursus_jadwals.kursus_kategori_id = kursus_kategoris.id
+                                            WHERE kursus_pembayarans.kursus_pendaftaran_id = kursus_pendaftarans.id
+                                            AND kursus_kategoris.jenis_kursus = 'reguler'
+                                        )")
+                                    ->whereMonth('tanggal', Carbon::now()->month)
+                                    ->whereYear('tanggal', Carbon::now()->year)
+                            )
+                    )
+                    ->summarize(
+                        Sum::make()
+                            ->label('Total Private')
+                            ->query(
+                                fn(Builder $query) => $query
+                                    ->whereRaw("EXISTS (
+                                            SELECT 1
+                                            FROM kursus_pendaftarans
+                                            JOIN kursus_jadwals ON kursus_pendaftarans.kursus_jadwal_id = kursus_jadwals.id
+                                            JOIN kursus_kategoris ON kursus_jadwals.kursus_kategori_id = kursus_kategoris.id
+                                            WHERE kursus_pembayarans.kursus_pendaftaran_id = kursus_pendaftarans.id
+                                            AND kursus_kategoris.jenis_kursus = 'private'
+                                        )")
+                                    ->whereMonth('tanggal', Carbon::now()->month)
+                                    ->whereYear('tanggal', Carbon::now()->year)
+                            )
+                    ),
                 Tables\Columns\ImageColumn::make('foto')->label('Lampiran')
                     ->circular()->size(80)->getStateUsing(function ($record) {
                         return $record->foto ? url('storage/' . $record->foto) : url('storage/file-user/no-image.jpg');
