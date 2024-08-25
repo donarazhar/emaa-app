@@ -9,11 +9,12 @@ use Filament\Resources\Pages\ListRecords;
 class ListBlogGiatMasjids extends ListRecords
 {
     protected static string $resource = BlogGiatMasjidResource::class;
+    protected static ?string $title = 'List Giat Masjid';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()->label('Buat Giat Baru')->slideOver(),
         ];
     }
 }

@@ -174,93 +174,91 @@
         <div class="grid grid-cols-2 md:grid-cols-4 w-11/12 md:container mx-auto gap-4 mb-2">
             <!-- Rekening 1 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
-                <a href="#" class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center bank-card" data-bank="BNI Syariah">
                     <img src="https://masjidagungalazhar.com/assets/images/bni_syariah.png" alt=""
                         class="w-1/2 mx-auto py-6 px-6">
                     <div
-                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 transition-opacity duration-300 bank-info">
                         <p class="text-white text-lg font-bold">BNI Syariah</p>
                     </div>
-                </a>
+                </div>
             </div>
             <!-- Rekening 2 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
-                <a href="#" class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center bank-card" data-bank="Mandiri Syariah">
                     <img src="https://masjidagungalazhar.com/assets/images/mandiri_syariah.png" alt=""
                         class="w-1/2 mx-auto py-6 px-6">
                     <div
-                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 transition-opacity duration-300 bank-info">
                         <p class="text-white text-lg font-bold">Mandiri Syariah</p>
                     </div>
-                </a>
+                </div>
             </div>
-            <!-- Rekening 3 -->
+            <!-- Rekening 31 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
-                <a href="#" class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center bank-card" data-bank="BTN Syariah">
                     <img src="https://masjidagungalazhar.com/assets/images/btn_syariah.png" alt=""
                         class="w-1/2 mx-auto py-6 px-6">
                     <div
-                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 transition-opacity duration-300 bank-info">
                         <p class="text-white text-lg font-bold">BTN Syariah</p>
                     </div>
-                </a>
+                </div>
             </div>
             <!-- Rekening 4 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
-                <a href="#" class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center bank-card" data-bank="Bank Muamalat">
                     <img src="https://masjidagungalazhar.com/assets/images/muamalat.png" alt=""
                         class="w-1/2 mx-auto py-6 px-6">
                     <div
-                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <p class="text-white text-lg font-bold">Muamalat</p>
+                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 transition-opacity duration-300 bank-info">
+                        <p class="text-white text-lg font-bold">Bank Muamalat</p>
                     </div>
-                </a>
+                </div>
             </div>
-        </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 w-11/12 md:container mx-auto gap-4 mb-4">
             <!-- Rekening 5 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
-                <a href="#" class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center bank-card" data-bank="Permata Syariah">
                     <img src="https://masjidagungalazhar.com/assets/images/permata_syariah.png" alt=""
                         class="w-1/2 mx-auto py-6 px-6">
                     <div
-                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 transition-opacity duration-300 bank-info">
                         <p class="text-white text-lg font-bold">Permata Syariah</p>
                     </div>
-                </a>
+                </div>
             </div>
             <!-- Rekening 6 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
-                <a href="#" class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center bank-card" data-bank="Bank Mandiri">
                     <img src="https://masjidagungalazhar.com/assets/images/mandiri.png" alt=""
                         class="w-1/2 mx-auto py-6 px-6">
                     <div
-                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <p class="text-white text-lg font-bold">Mandiri</p>
+                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 transition-opacity duration-300 bank-info">
+                        <p class="text-white text-lg font-bold">Bank Mandiri</p>
                     </div>
-                </a>
+                </div>
             </div>
             <!-- Rekening 7 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
-                <a href="#" class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center bank-card" data-bank="BRI Syariah">
                     <img src="https://masjidagungalazhar.com/assets/images/bri_syariah.png" alt=""
                         class="w-1/2 mx-auto py-6 px-6">
                     <div
-                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 transition-opacity duration-300 bank-info">
                         <p class="text-white text-lg font-bold">BRI Syariah</p>
                     </div>
-                </a>
+                </div>
             </div>
             <!-- Rekening 8 -->
             <div class="shadow-xl rounded-xl flex justify-center items-center relative group h-48">
-                <a href="#" class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center bank-card" data-bank="BSI Syariah">
                     <img src="https://masjidagungalazhar.com/assets/images/bank_bsi.png" alt=""
                         class="w-1/2 mx-auto py-6 px-6">
                     <div
-                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <p class="text-white text-lg font-bold">BSI</p>
+                        class="absolute inset-0 bg-red-600 bg-opacity-90 flex justify-center items-center opacity-0 transition-opacity duration-300 bank-info">
+                        <p class="text-white text-lg font-bold">BSI Syariah</p>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </section>
@@ -407,6 +405,31 @@
                 el: '.swiper-pagination',
                 clickable: true,
             },
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator
+                .userAgent);
+            const bankCards = document.querySelectorAll('.bank-card');
+
+            bankCards.forEach(card => {
+                if (isMobile) {
+                    card.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const info = this.querySelector('.bank-info');
+                        info.style.opacity = info.style.opacity === '1' ? '0' : '1';
+                    });
+                } else {
+                    card.addEventListener('mouseenter', function() {
+                        this.querySelector('.bank-info').style.opacity = '1';
+                    });
+                    card.addEventListener('mouseleave', function() {
+                        this.querySelector('.bank-info').style.opacity = '0';
+                    });
+                }
+            });
         });
     </script>
 

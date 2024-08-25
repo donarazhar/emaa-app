@@ -39,37 +39,33 @@ class BlogGiatMasjidKategoriResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')
+                Forms\Components\TextInput::make('nama')->label('Nama Kategori')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('deskripsi')
+                Forms\Components\TextInput::make('deskripsi')->label('Deskripsi')
                     ->maxLength(255)
                     ->default(null),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
+                Tables\Columns\TextColumn::make('nama')->label('Nama Kategori')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('deskripsi')
+                Tables\Columns\TextColumn::make('deskripsi')->label('Deskripsi')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -89,8 +85,8 @@ class BlogGiatMasjidKategoriResource extends Resource
     {
         return [
             'index' => Pages\ListBlogGiatMasjidKategoris::route('/'),
-            'create' => Pages\CreateBlogGiatMasjidKategori::route('/create'),
-            'edit' => Pages\EditBlogGiatMasjidKategori::route('/{record}/edit'),
+            // 'create' => Pages\CreateBlogGiatMasjidKategori::route('/create'),
+            // 'edit' => Pages\EditBlogGiatMasjidKategori::route('/{record}/edit'),
         ];
     }
 }

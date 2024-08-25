@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BlogArticle;
-use App\Models\BlogArticleKategori;
 use App\Models\BlogBanner;
+use App\Models\BlogArticle;
 use Illuminate\Http\Request;
+use App\Models\BlogProfileMasjid;
+use App\Models\BlogArticleKategori;
+use App\Models\BlogGiatMasjid;
+use App\Models\BlogGiatMasjidKategori;
 
 class BlogController extends Controller
 {
@@ -21,12 +24,40 @@ class BlogController extends Controller
         $tabs = BlogArticleKategori::all();
         $artikel = BlogArticle::orderBy('tanggal_jam', 'desc')->get();
 
-        return view('blog', compact('banner', 'tabs', 'artikel'));
+        return view('blog.blog', compact('banner', 'tabs', 'artikel'));
     }
 
     public function show($id)
     {
         $artikel = BlogArticle::findOrFail($id);
-        return view('blogshow', compact('artikel'));
+        return view('blog.blogshow', compact('artikel'));
+    }
+
+
+    public function profile()
+    {
+        $profile = BlogProfileMasjid::all();
+        return view('blog.profile', compact('profile'));
+    }
+
+    public function profileShow($id)
+    {
+        $profile = BlogProfileMasjid::find($id);
+        return view('blog.profileshow', compact('profile'));
+    }
+
+    public function kegiatan()
+    {
+        // Ambil semua kategori dan artikel giat masjid
+        $tabs = BlogGiatMasjidKategori::with('giatMasjids')->get();
+
+        return view('blog.giatmasjid', compact('tabs'));
+    }
+
+    public function giatMasjidShow($id)
+    {
+        $giatMasjid = BlogGiatMasjid::findOrFail($id);
+
+        return view('blog.giatmasjidshow', compact('giatMasjid'));
     }
 }

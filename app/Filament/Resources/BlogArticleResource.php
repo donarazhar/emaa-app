@@ -66,7 +66,7 @@ class BlogArticleResource extends Resource
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('thumbnail')->label('File Image')
                     ->size(40)->getStateUsing(function ($record) {
-                        return $record->thumbnail ? url('storage/' . $record->thumbnail) : url('storage/file-user/no-image.jpg');
+                        return $record->thumbnail ? url('storage/' . $record->thumbnail) : url('storage/file-user/no-image-banner.jpg');
                     }),
 
             ])

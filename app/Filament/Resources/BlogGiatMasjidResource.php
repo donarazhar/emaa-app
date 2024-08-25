@@ -6,6 +6,7 @@ use App\Filament\Resources\BlogGiatMasjidResource\Pages;
 use App\Filament\Resources\BlogGiatMasjidResource\RelationManagers;
 use App\Models\BlogGiatMasjid;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -37,49 +38,48 @@ class BlogGiatMasjidResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\DateTimePicker::make('tanggal_jam'),
+                Forms\Components\Select::make('blog_giat_masjid_kategori_id')->label('Kategori')
+                    ->relationship('kategori', 'nama')
+                    ->default(null),
                 Forms\Components\TextInput::make('judul')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('thumbnail')
-                    ->maxLength(255)
+                Forms\Components\FileUpload::make('thumbnail')->label('Upload file')
+                    ->directory('file-giatmasjid')
                     ->default(null),
-                Forms\Components\Textarea::make('isi')
-                    ->columnSpanFull(),
-                Forms\Components\DateTimePicker::make('tanggal_jam'),
-                Forms\Components\TextInput::make('blog_giat_masjid_kategori_id')
-                    ->numeric()
-                    ->default(null),
-            ]);
+                RichEditor::make('isi'),
+
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('judul')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('thumbnail')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tanggal_jam')
-                    ->dateTime()
+
+                Tables\Columns\TextColumn::make('id')->label('No'),
+                Tables\Columns\TextColumn::make('tanggal_jam')->label('Tgl. Dibuat')->dateTime('d/m/Y H:i')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('blog_giat_masjid_kategori_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('judul')->label('Judul Artikel')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('kategori.nama')->label('Kategori')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ImageColumn::make('thumbnail')->label('File Image')
+                    ->size(40)->getStateUsing(function ($record) {
+                        return $record->thumbnail ? url('storage/' . $record->thumbnail) : url('storage/file-user/no-image-banner.jpg');
+                    }),
+
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -99,8 +99,8 @@ class BlogGiatMasjidResource extends Resource
     {
         return [
             'index' => Pages\ListBlogGiatMasjids::route('/'),
-            'create' => Pages\CreateBlogGiatMasjid::route('/create'),
-            'edit' => Pages\EditBlogGiatMasjid::route('/{record}/edit'),
+            // 'create' => Pages\CreateBlogGiatMasjid::route('/create'),
+            // 'edit' => Pages\EditBlogGiatMasjid::route('/{record}/edit'),
         ];
     }
 }

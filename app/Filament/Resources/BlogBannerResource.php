@@ -57,7 +57,7 @@ class BlogBannerResource extends Resource
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('thumbnail')->label('File Image')
                     ->width(200)->height(100)->getStateUsing(function ($record) {
-                        return $record->thumbnail ? url('storage/' . $record->thumbnail) : url('storage/file-user/no-image.jpg');
+                        return $record->thumbnail ? url('storage/' . $record->thumbnail) : url('storage/file-user/no-image-banner.jpg');
                     }),
             ])
             ->filters([

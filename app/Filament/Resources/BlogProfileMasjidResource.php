@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BlogProfileMasjidResource\Pages;
-use App\Filament\Resources\BlogProfileMasjidResource\RelationManagers;
-use App\Models\BlogProfileMasjid;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use App\Models\BlogProfileMasjid;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\BlogProfileMasjidResource\Pages;
+use App\Filament\Resources\BlogProfileMasjidResource\RelationManagers;
 
 class BlogProfileMasjidResource extends Resource
 {
@@ -37,39 +38,37 @@ class BlogProfileMasjidResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('judul')
+                Forms\Components\TextInput::make('judul')->label('Judul Profile')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('thumbnail')
-                    ->maxLength(255)
+                Forms\Components\FileUpload::make('thumbnail')->label('Thumbnail')
+                    ->directory('file-profile')
                     ->default(null),
-                Forms\Components\Textarea::make('deskripsi')
-                    ->columnSpanFull(),
-            ]);
+                RichEditor::make('isi')->label('Deskripsi Profile'),
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('judul')
+                Tables\Columns\TextColumn::make('id')->label('No'),
+                Tables\Columns\TextColumn::make('judul')->label('Judul Profile')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('thumbnail')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ImageColumn::make('thumbnail')->label('Thumbnail')
+                    ->width(200)->height(100)->getStateUsing(function ($record) {
+                        return $record->thumbnail ? url('storage/' . $record->thumbnail) : url('storage/file-user/no-image-banner.jpg');
+                    }),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -89,8 +88,8 @@ class BlogProfileMasjidResource extends Resource
     {
         return [
             'index' => Pages\ListBlogProfileMasjids::route('/'),
-            'create' => Pages\CreateBlogProfileMasjid::route('/create'),
-            'edit' => Pages\EditBlogProfileMasjid::route('/{record}/edit'),
+            // 'create' => Pages\CreateBlogProfileMasjid::route('/create'),
+            // 'edit' => Pages\EditBlogProfileMasjid::route('/{record}/edit'),
         ];
     }
 }
