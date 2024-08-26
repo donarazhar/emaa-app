@@ -18,12 +18,11 @@
 <body class="bg-gray-100">
 
     <!-- Header Section -->
-    <header class="bg-white p-4 flex justify-between items-center">
-        <a href="/blog" class="text-gray-600 text-md md:text-xl">
+    <header class="bg-white text-black p-4 flex items-center">
+        <a href="{{ route('blog') }}" class="text-md font-bold mr-4">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
-        <h1 class="text-lg md:text-xl font-bold text-black text-center flex-grow">Profile</h1>
-        <div class="w-6"></div> <!-- Placeholder to balance the back button -->
+        <h1 class="text-md font-bold">Profile Masjid</h1>
     </header>
 
     <!-- Hero Section -->

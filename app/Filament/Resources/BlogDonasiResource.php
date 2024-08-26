@@ -36,14 +36,13 @@ class BlogDonasiResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama')
+                Forms\Components\TextInput::make('nama')->label('Nama Program')
                     ->maxLength(255)
                     ->default(null),
-                Forms\Components\TextInput::make('link')
-                    ->maxLength(255)
+                Forms\Components\TextInput::make('link')->url()->prefix('url')
                     ->default(null),
-                Forms\Components\TextInput::make('thumbnail')
-                    ->maxLength(255)
+                Forms\Components\FileUpload::make('thumbnail')->label('Upload file')
+                    ->directory('file-donasi')
                     ->default(null),
             ]);
     }
@@ -52,26 +51,24 @@ class BlogDonasiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
+                Tables\Columns\TextColumn::make('nama')->label('Nama Program')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('link')
+                Tables\Columns\TextColumn::make('link')->label('Link URL')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('thumbnail')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ImageColumn::make('thumbnail')->label('File Image')
+                    ->width(200)->height(100)->getStateUsing(function ($record) {
+                        return $record->thumbnail ? url('storage/' . $record->thumbnail) : url('storage/file-user/no-image-banner.jpg');
+                    }),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make()->color('info')->slideOver(),
+                    Tables\Actions\EditAction::make()->color('primary')->slideOver(),
+                    Tables\Actions\DeleteAction::make()->color('danger')->slideOver(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

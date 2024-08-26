@@ -127,7 +127,7 @@
     <!-- Content Section -->
     @foreach ($tabs as $tab)
         <section id="content-{{ Str::slug($tab->nama) }}" class="p-2 md:p-4 {{ !$loop->first ? 'hidden' : '' }}">
-            @foreach ($artikel->where('blog_article_kategori_id', $tab->id) as $item)
+            @foreach ($artikel[$tab->id] as $item)
                 <a href="{{ route('article.show', ['id' => $item->id]) }}" class="block">
                     <div class="bg-white p-2 md:p-4 rounded-md shadow-md mb-2 md:mb-4">
                         <div class="flex items-center">
@@ -143,62 +143,39 @@
                 </a>
             @endforeach
 
-            @if ($artikel->where('blog_article_kategori_id', $tab->id)->isEmpty())
+            @if (empty($artikel[$tab->id]) || $artikel[$tab->id]->isEmpty())
                 <p class="text-center text-gray-500 text-sm md:text-base">No articles available in this category.</p>
             @endif
 
             <div class="text-center mt-2 md:mt-4">
-                <button id="view-content-{{ Str::slug($tab->nama) }}"
-                    class="bg-blue-900 text-white px-3 md:px-4 py-1 md:py-2 text-sm md:text-base rounded-md">View
-                    All</button>
+                <a href="{{ route('article.viewAll', ['categoryId' => $tab->id]) }}"
+                    class="bg-blue-900 text-white px-3 md:px-4 py-1 md:py-2 text-sm md:text-base rounded-md">
+                    View All
+                </a>
             </div>
         </section>
     @endforeach
 
-    <!-- Services -->
+    <!-- Donasi -->
     <section id="services" class="py-10 md:py-20 bg-white mb-8 md:mb-8">
-        <h3 class="text-3xl md:text-5xl font-bold text-center mb-3 md:mb-5">Services</h3>
-        <p class="text-gray-500 mb-3 md:mb-5 text-center text-sm md:text-base px-4">Lorem ipsum, dolor sit amet
-            consectetur adipisicing elit. Eveniet, reprehenderit?</p>
+        <h3 class="text-3xl md:text-5xl font-bold text-center mb-3 md:mb-5">Program</h3>
+        <p class="text-gray-500 mb-3 md:mb-5 text-center text-sm md:text-base px-4">Beberapa program yang sedang kami
+            laksanakan, dan mengajak jamaah sekalian untuk dapat berpartisipasi</p>
         <div class="grid grid-cols-2 md:grid-cols-4 w-11/12 md:container mx-auto gap-3 md:gap-6">
-            <!-- Portfolio 1 -->
-            <div class="shadow-xl">
-                <a href="#">
-                    <img src="https://placehold.co/600x400" alt="" class="w-full">
-                    <div class="py-2 md:py-3 px-3 md:px-5">
-                        <h4 class="text-center font-bold text-sm md:text-base">Services 1</h4>
-                    </div>
-                </a>
-            </div>
-            <!-- Portfolio 2 -->
-            <div class="shadow-xl">
-                <a href="#">
-                    <img src="https://placehold.co/600x400" alt="" class="w-full">
-                    <div class="py-2 md:py-3 px-3 md:px-5">
-                        <h4 class="text-center font-bold text-sm md:text-base">Services 2</h4>
-                    </div>
-                </a>
-            </div>
-            <!-- Portfolio 3 -->
-            <div class="shadow-xl">
-                <a href="#">
-                    <img src="https://placehold.co/600x400" alt="" class="w-full">
-                    <div class="py-2 md:py-3 px-3 md:px-5">
-                        <h4 class="text-center font-bold text-sm md:text-base">Services 3</h4>
-                    </div>
-                </a>
-            </div>
-            <!-- Portfolio 4 -->
-            <div class="shadow-xl">
-                <a href="#">
-                    <img src="https://placehold.co/600x400" alt="" class="w-full">
-                    <div class="py-2 md:py-3 px-3 md:px-5">
-                        <h4 class="text-center font-bold text-sm md:text-base">Services 4</h4>
-                    </div>
-                </a>
-            </div>
+            @foreach ($donasi as $item)
+                <div class="shadow-xl">
+                    <a href="{{ $item->link }}">
+                        <img src="{{ $item->thumbnail ? asset('storage/' . $item->thumbnail) : 'https://placehold.co/600x400' }}"
+                            alt="{{ $item->nama }}" class="w-[200px] h-[100px] object-cover">
+                        <div class="py-2 md:py-3 px-3 md:px-5">
+                            <h4 class="text-center font-bold text-sm md:text-base">{{ $item->nama }}</h4>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
     </section>
+
 
     <!-- Bottom Nav -->
     <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md shadow-top">

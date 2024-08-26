@@ -2,15 +2,16 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Widgets\GrafikInventarisChart;
-use Filament\Pages;
 use Filament\Panel;
-use Filament\Widgets;
 use Filament\PanelProvider;
+use Filament\Pages\Dashboard;
 use Filament\Support\Colors\Color;
+use App\Filament\Widgets\AccountWidget;
 use App\Filament\Widgets\LaporKerjaBlog;
 use Filament\Http\Middleware\Authenticate;
 use App\Filament\Widgets\GrafikMarbotChart;
+use App\Filament\Widgets\FilamentInfoWidget;
+use App\Filament\Widgets\GrafikInventarisChart;
 use App\Filament\Widgets\GrafikKonsultasiChart;
 use Illuminate\Session\Middleware\StartSession;
 use App\Filament\Widgets\GrafikPengislamanChart;
@@ -68,12 +69,12 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                AccountWidget::class,
+                FilamentInfoWidget::class,
                 GrafikMarbotChart::class,
                 GrafikMarbotPerPosisiChart::class,
                 LaporKerjaBlog::class,

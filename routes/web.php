@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [BlogController::class, 'web'])->name('web');
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
 Route::get('/article/{id}', [BlogController::class, 'show'])->name('article.show');
+Route::get('/article/view-all/{categoryId}', [BlogController::class, 'viewAll'])->name('article.viewAll');
 Route::get('/profile', [BlogController::class, 'profile'])->name('profile');
 Route::get('/profile/{id}', [BlogController::class, 'profileShow'])->name('profile.show');
 Route::get('/giat-masjid', [BlogController::class, 'kegiatan'])->name('giatMasjid');
 Route::get('/giat-masjid/{id}', [BlogController::class, 'giatMasjidShow'])->name('giatMasjid.show');
-
 
 
 // Marbot route
