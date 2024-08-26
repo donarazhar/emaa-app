@@ -11,31 +11,27 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <style>
-        .hidden {
-            display: none;
+        body {
+            overflow-x: hidden;
+            /* Mencegah scroll ke samping */
         }
 
-        footer .flex {
-            flex-wrap: wrap;
-            /* Membuat item flex bisa membungkus ke baris berikutnya */
+        #main {
+            position: relative;
+            /* Mengatur posisi hero relatif */
+            z-index: 0;
+            /* Pastikan z-index hero lebih rendah dari footer */
         }
 
-        footer .text-center {
-            flex: 1 1 25%;
-            /* Setiap item memiliki lebar minimum 25% dari kontainer */
-            max-width: 25%;
-        }
-
-        @media (max-width: 768px) {
-            footer .fa-solid {
-                font-size: 1.25rem;
-                /* Ukuran font ikon lebih kecil untuk mobile */
-            }
-
-            footer .text-xs {
-                font-size: 0.75rem;
-                /* Ukuran teks lebih kecil untuk mobile */
-            }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 10;
+            /* Z-index lebih tinggi dari hero dan slider */
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -59,7 +55,7 @@
     </header>
 
     <!-- Hero -->
-    <section id="main" class="relative bg-blue-900">
+    <section id="main" class="relative bg-blue-900 overflow-hidden z-0">
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 @forelse ($banner as $item)
@@ -78,6 +74,7 @@
             <div class="swiper-pagination"></div>
         </div>
     </section>
+
 
     <!-- Nav Icon -->
     <section id="navigation" class="grid grid-cols-3 gap-2 md:gap-4 py-2 md:py-4 px-2 md:px-4">
@@ -178,7 +175,7 @@
 
 
     <!-- Bottom Nav -->
-    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md shadow-top">
+    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md z-10">
         <div class="flex justify-around p-2">
             <a href="/blog" class="text-center flex-1">
                 <i class="fa-solid fa-house text-lg md:text-xl hover:text-blue-900"></i>
@@ -199,6 +196,7 @@
         </div>
     </footer>
 
+
     <!-- JavaScript -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
@@ -213,6 +211,12 @@
                 autoplay: {
                     delay: 5000,
                 },
+                on: {
+                    slideChangeTransitionStart: function() {
+                        document.querySelector('footer').style.zIndex =
+                            10; // Pastikan footer selalu di atas
+                    }
+                }
             });
         });
     </script>
