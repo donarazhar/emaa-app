@@ -178,7 +178,7 @@
 
 
     <!-- Bottom Nav -->
-    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md z-10 mb-10 lg:mb-0">
+    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md z-10 mb-10 md:mb-2">
         <div class="flex justify-around p-2">
             <a href="/blog" class="text-center flex-1">
                 <i class="fa-solid fa-house text-lg md:text-xl hover:text-blue-900"></i>
