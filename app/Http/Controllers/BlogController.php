@@ -7,6 +7,7 @@ use App\Models\BlogArticle;
 use Illuminate\Http\Request;
 use App\Models\BlogProfileMasjid;
 use App\Models\BlogArticleKategori;
+use App\Models\BlogBuletin;
 use App\Models\BlogDonasi;
 use App\Models\BlogGiatMasjid;
 use App\Models\BlogGiatMasjidKategori;
@@ -90,5 +91,39 @@ class BlogController extends Controller
     {
         $donasi = BlogDonasi::orderBy('created_at', 'desc')->take(4)->get();
         return view('blog.donasi', compact('donasi'));
+    }
+
+    public function allArticles(Request $request)
+    {
+        $search = $request->input('search');
+        $articles = BlogArticle::query();
+
+        if ($search) {
+            $articles = $articles->where('judul', 'like', '%' . $search . '%');
+        }
+
+        $articles = $articles->orderBy('tanggal_jam', 'desc')->paginate(10);
+
+        return view('blog.all-articles', compact('articles', 'search'));
+    }
+
+    public function buletin(Request $request)
+    {
+        $search = $request->input('search');
+        $buletin = BlogBuletin::query();
+
+        if ($search) {
+            $buletin = $buletin->where('judul', 'like', '%' . $search . '%');
+        }
+
+        $buletin = $buletin->orderBy('tanggal_jam', 'desc')->paginate(10);
+
+        return view('blog.buletin', compact('buletin', 'search'));
+    }
+
+    public function buletinshow($id)
+    {
+        $buletin = BlogBuletin::findOrFail($id);
+        return view('blog.buletinshow', compact('buletin'));
     }
 }

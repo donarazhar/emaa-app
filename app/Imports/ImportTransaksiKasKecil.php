@@ -20,13 +20,13 @@ class ImportTransaksiKasKecil implements ToModel
     {
         // Membuat instance baru dari model KasKecilTransaksi dengan mengisi kolom-kolomnya menggunakan data dari file Excel
         return new KasKecilTransaksi([
-            'perincian' => $row[1],                            // Mengisi kolom 'perincian' dengan data dari kolom kedua Excel
-            'pengisian_id' => $row[2],                         // Mengisi kolom 'pengisian_id' dengan data dari kolom ketiga Excel
-            'jumlah' => intval($row[3]),                       // Mengisi kolom 'jumlah' dengan data dari kolom keempat Excel, dan memastikan tipe data integer
-            'kategori' => $row[4],                             // Mengisi kolom 'kategori' dengan data dari kolom kelima Excel
-            'tgl_transaksi' => Carbon::parse($row[5])->format('Y-m-d'), // Mengisi kolom 'tgl_transaksi' dengan data dari kolom keenam Excel, format tanggal diubah menjadi 'Y-m-d'
-            'kode_matanggaran' => $row[6],                     // Mengisi kolom 'kode_matanggaran' dengan data dari kolom ketujuh Excel
-            'foto_kaskecil' => $row[7] ?? null,                // Mengisi kolom 'foto_kaskecil' dengan data dari kolom kedelapan Excel, jika ada. Jika tidak ada, diisi dengan null.
+            'perincian' => $row[1],
+            'pengisian_id' => $row[2],
+            'jumlah' => intval($row[3]),
+            'kategori' => $row[4],
+            'tgl_transaksi' => Carbon::parse($row[5])->format('Y-m-d'),
+            'kode_matanggaran' => $row[6],
+            'foto_kaskecil' => $row[7] ?? null,
         ]);
     }
 }

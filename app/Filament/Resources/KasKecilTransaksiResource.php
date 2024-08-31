@@ -10,6 +10,7 @@ use Filament\Support\RawJs;
 use Filament\Resources\Resource;
 use App\Models\KasKecilTransaksi;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use App\Models\KasKecilMatanggaran;
 use Illuminate\Database\Query\Builder;
 use Filament\Notifications\Notification;
@@ -103,7 +104,19 @@ class KasKecilTransaksiResource extends Resource
                 Tables\Columns\ToggleColumn::make('pengisian_id')
                     ->label('Pencairan')
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->disabled(fn($record) => $record->kategori !== 'pengisian'),
+                    ->disabled(fn($record) => $record->kategori !== 'pengisian')
+                    ->action(function ($record) {
+                        if ($record->kategori === 'pengisian') {
+                            // Mengambil nomor urut terakhir dari pengisian_id yang berkategori 'pengisian'
+                            $lastPengisianId = KasKecilTransaksi::where('kategori', 'pengisian')
+                                ->max('pengisian_id');
+
+                            // Menambahkan nomor urut berikutnya
+                            $record->pengisian_id = $lastPengisianId + 1;
+                            $record->save();
+                        }
+                    }),
+
             ])
             ->filters([
                 DateRangeFilter::make('tgl_transaksi')

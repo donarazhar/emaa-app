@@ -17,6 +17,9 @@ Route::get('/profile', [BlogController::class, 'profile'])->name('profile');
 Route::get('/profile/{id}', [BlogController::class, 'profileShow'])->name('profile.show');
 Route::get('/giat-masjid', [BlogController::class, 'kegiatan'])->name('giatMasjid');
 Route::get('/giat-masjid/{id}', [BlogController::class, 'giatMasjidShow'])->name('giatMasjid.show');
+Route::get('/all-articles', [BlogController::class, 'allArticles'])->name('allArticles');
+Route::get('/buletin', [BlogController::class, 'buletin'])->name('buletin');
+Route::get('/buletin/{id}', [BlogController::class, 'buletinShow'])->name('buletin.show');
 
 
 // Marbot route

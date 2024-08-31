@@ -67,23 +67,23 @@
     </section>
 
     <!-- Bottom Nav -->
-    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md shadow-top">
+    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md z-10">
         <div class="flex justify-around p-2">
-            <a href="/blog" class="text-center">
-                <i class="fa-solid fa-house text-lg md:text-xl  hover:text-blue-900"></i>
-                <p class="text-xs md:text-sm  hover:text-blue-900">Beranda</p>
+            <a href="/blog" class="text-center flex-1">
+                <i class="fa-solid fa-house text-lg md:text-xl hover:text-blue-900"></i>
+                <p class="text-xs md:text-sm hover:text-blue-900">Beranda</p>
             </a>
-            <a href="#" class="text-center">
-                <i class="fa-solid fa-newspaper text-lg md:text-xl  hover:text-blue-900"></i>
-                <p class="text-xs md:text-sm  hover:text-blue-900">Artikel</p>
+            <a href="{{ route('allArticles') }}" class="text-center flex-1">
+                <i class="fa-solid fa-newspaper text-lg md:text-xl hover:text-blue-900"></i>
+                <p class="text-xs md:text-sm hover:text-blue-900">Artikel</p>
             </a>
-            <a href="#" class="text-center">
-                <i class="fa-solid fa-circle-dollar-to-slot text-lg md:text-xl  hover:text-blue-900"></i>
-                <p class="text-xs md:text-sm  hover:text-blue-900">Donasi</p>
+            <a href="#" class="text-center flex-1">
+                <i class="fa-solid fa-circle-dollar-to-slot text-lg md:text-xl hover:text-blue-900"></i>
+                <p class="text-xs md:text-sm hover:text-blue-900">Donasi</p>
             </a>
-            <a href="#" class="text-center">
-                <i class="fa-solid fa-gear text-lg md:text-xl  hover:text-blue-900"></i>
-                <p class="text-xs md:text-sm  hover:text-blue-900">Akun</p>
+            <a href="#" class="text-center flex-1">
+                <i class="fa-solid fa-gear text-lg md:text-xl hover:text-blue-900"></i>
+                <p class="text-xs md:text-sm hover:text-blue-900">Akun</p>
             </a>
         </div>
     </footer>

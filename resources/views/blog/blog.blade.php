@@ -75,7 +75,6 @@
         </div>
     </section>
 
-
     <!-- Nav Icon -->
     <section id="navigation" class="grid grid-cols-3 gap-2 md:gap-4 py-2 md:py-4 px-2 md:px-4">
         <div class="bg-white rounded-lg shadow-md p-2 md:p-4 text-center flex flex-col items-center">
@@ -91,12 +90,16 @@
             </a>
         </div>
         <div class="bg-white rounded-lg shadow-md p-2 md:p-4 text-center flex flex-col items-center">
-            <img src="img/tv.png" class="w-10 md:w-16 mb-1 md:mb-2" alt="">
-            <p class="text-xs md:text-sm font-bold">MAA TV</p>
+            <a href="https://www.youtube.com/@masjidagungalazhar">
+                <img src="img/tv.png" class="w-10 md:w-16 mb-1 md:mb-2" alt="">
+                <p class="text-xs md:text-sm font-bold">MAA TV</p>
+            </a>
         </div>
         <div class="bg-white rounded-lg shadow-md p-2 md:p-4 text-center flex flex-col items-center">
-            <img src="img/buletin.png" class="w-10 md:w-16 mb-1 md:mb-2" alt="">
-            <p class="text-xs md:text-sm font-bold">Buletin</p>
+            <a href="{{ route('buletin') }}">
+                <img src="img/buletin.png" class="w-10 md:w-16 mb-1 md:mb-2" alt="">
+                <p class="text-xs md:text-sm font-bold">Buletin Jum'at</p>
+            </a>
         </div>
         <div class="bg-white rounded-lg shadow-md p-2 md:p-4 text-center flex flex-col items-center">
             <img src="img/konsultasi.png" class="w-10 md:w-16 mb-1 md:mb-2" alt="">
@@ -163,7 +166,7 @@
                 <div class="shadow-xl">
                     <a href="{{ $item->link }}">
                         <img src="{{ $item->thumbnail ? asset('storage/' . $item->thumbnail) : 'https://placehold.co/600x400' }}"
-                            alt="{{ $item->nama }}" class="w-[200px] h-[100px] object-cover">
+                            alt="{{ $item->nama }}" class="w-full h-full object-cover">
                         <div class="py-2 md:py-3 px-3 md:px-5">
                             <h4 class="text-center font-bold text-sm md:text-base">{{ $item->nama }}</h4>
                         </div>
@@ -175,13 +178,13 @@
 
 
     <!-- Bottom Nav -->
-    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md z-10">
+    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md z-10 mb-10 lg:mb-0">
         <div class="flex justify-around p-2">
             <a href="/blog" class="text-center flex-1">
                 <i class="fa-solid fa-house text-lg md:text-xl hover:text-blue-900"></i>
                 <p class="text-xs md:text-sm hover:text-blue-900">Beranda</p>
             </a>
-            <a href="#" class="text-center flex-1">
+            <a href="{{ route('allArticles') }}" class="text-center flex-1">
                 <i class="fa-solid fa-newspaper text-lg md:text-xl hover:text-blue-900"></i>
                 <p class="text-xs md:text-sm hover:text-blue-900">Artikel</p>
             </a>

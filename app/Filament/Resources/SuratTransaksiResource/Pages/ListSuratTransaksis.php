@@ -47,13 +47,13 @@ class ListSuratTransaksis extends ListRecords
         return [
             'All' => Tab::make(),
             'This Week' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('tgl_transaksi_surat', '>=', now()->subWeek()))
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('tgl_transaksi_surat', '>=', now()->subWeek()))
                 ->badge(SuratTransaksi::query()->where('tgl_transaksi_surat', '>=', now()->subWeek())->count()),
             'This Month' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('tgl_transaksi_surat', '>=', now()->subMonth()))
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('tgl_transaksi_surat', '>=', now()->subMonth()))
                 ->badge(SuratTransaksi::query()->where('tgl_transaksi_surat', '>=', now()->subMonth())->count()),
             'This Year' => Tab::make()
-                ->modifyQueryUsing(fn (Builder $query) => $query->where('tgl_transaksi_surat', '>=', now()->subYear()))
+                ->modifyQueryUsing(fn(Builder $query) => $query->where('tgl_transaksi_surat', '>=', now()->subYear()))
                 ->badge(SuratTransaksi::query()->where('tgl_transaksi_surat', '>=', now()->subYear())->count()),
 
         ];

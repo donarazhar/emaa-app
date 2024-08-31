@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use Carbon\Carbon;
 use App\Models\SuratTransaksi;
 use Maatwebsite\Excel\Concerns\ToModel;
 
@@ -19,14 +20,14 @@ class ImportPersuratans implements ToModel
     {
         // Membuat instance baru dari model SuratTransaksi dengan mengisi kolom-kolomnya menggunakan data dari file Excel
         return new SuratTransaksi([
-            'no_transaksi_surat' => $row[1],           // Mengisi kolom 'no_transaksi_surat' dengan data dari kolom kedua Excel
-            'tgl_transaksi_surat' => $row[2],          // Mengisi kolom 'tgl_transaksi_surat' dengan data dari kolom ketiga Excel
-            'perihal_transaksi_surat' => $row[3],      // Mengisi kolom 'perihal_transaksi_surat' dengan data dari kolom keempat Excel
-            'surat_dari_transaksi_surat' => $row[4],   // Mengisi kolom 'surat_dari_transaksi_surat' dengan data dari kolom kelima Excel
-            'disposisi_transaksi_surat' => $row[5],    // Mengisi kolom 'disposisi_transaksi_surat' dengan data dari kolom keenam Excel
-            'status_transaksi_surat' => $row[6],       // Mengisi kolom 'status_transaksi_surat' dengan data dari kolom ketujuh Excel
-            'kategori_surat_id' => $row[7],            // Mengisi kolom 'kategori_surat_id' dengan data dari kolom kedelapan Excel
-            'asal_surat_id' => $row[8],                // Mengisi kolom 'asal_surat_id' dengan data dari kolom kesembilan Excel
+            'no_transaksi_surat' => $row[1],
+            'tgl_transaksi_surat' => Carbon::parse($row[2])->format('Y-m-d'),
+            'perihal_transaksi_surat' => $row[3],
+            'surat_dari_transaksi_surat' => $row[4],
+            'disposisi_transaksi_surat' => $row[5],
+            'status_transaksi_surat' => $row[6],
+            'kategori_surat_id' => $row[7],
+            'asal_surat_id' => $row[8],
         ]);
     }
 }

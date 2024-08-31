@@ -14,23 +14,27 @@ class KasKecilStats extends BaseWidget
     {
         return request()->routeIs('filament.admin.resources.kas-kecil-transaksis.index');
     }
+
     protected function getStats(): array
     {
         // Mendapatkan data awal pembentukan
         $pembentukan = KasKecilTransaksi::where('kategori', 'pembentukan')
             ->sum('jumlah');
 
-        // Mendapatkan data pengeluaran bulan ini
+        // Mendapatkan bulan dan tahun saat ini
         $bulanini = date('m');
         $tahunini = date('Y');
 
+        // Mendapatkan data pengeluaran bulan ini
         $pengeluaranbulanini = KasKecilTransaksi::where('kategori', 'pengeluaran')
             ->whereMonth('tgl_transaksi', $bulanini)
             ->whereYear('tgl_transaksi', $tahunini)
             ->sum('jumlah');
 
-        // Mendapatkan data pengisian bulan ini
+        // Mendapatkan data pengisian bulan ini yang tidak null atau 0
         $pengisianbulanini = KasKecilTransaksi::where('kategori', 'pengisian')
+            ->whereNotNull('pengisian_id')
+            ->where('pengisian_id', '!=', 0)
             ->whereMonth('tgl_transaksi', $bulanini)
             ->whereYear('tgl_transaksi', $tahunini)
             ->sum('jumlah');
@@ -39,12 +43,14 @@ class KasKecilStats extends BaseWidget
         $saldoberjalan = DB::table('kas_kecil_transaksis')
             ->select(
                 DB::raw('COALESCE(SUM(CASE WHEN kategori = "pembentukan" THEN jumlah ELSE 0 END), 0) AS total_pembentukan'),
-                DB::raw('COALESCE(SUM(CASE WHEN kategori = "pengisian" THEN jumlah ELSE 0 END), 0) AS total_pengisian'),
+                DB::raw('COALESCE(SUM(CASE WHEN kategori = "pengisian" AND pengisian_id IS NOT NULL AND pengisian_id != 0 THEN jumlah ELSE 0 END), 0) AS total_pengisian'),
                 DB::raw('COALESCE(SUM(CASE WHEN kategori = "pengeluaran" THEN jumlah ELSE 0 END), 0) AS total_pengeluaran'),
-                DB::raw('COALESCE(SUM(CASE WHEN kategori IN ("pembentukan", "pengisian") THEN jumlah ELSE 0 END), 0) - 
-                COALESCE(SUM(CASE WHEN kategori = "pengeluaran" THEN jumlah ELSE 0 END), 0) AS total_result')
+                DB::raw('COALESCE(SUM(CASE WHEN kategori = "pembentukan" THEN jumlah ELSE 0 END), 0) + 
+        COALESCE(SUM(CASE WHEN kategori = "pengisian" AND pengisian_id IS NOT NULL AND pengisian_id != 0 THEN jumlah ELSE 0 END), 0) - 
+        COALESCE(SUM(CASE WHEN kategori = "pengeluaran" THEN jumlah ELSE 0 END), 0) AS total_result')
             )
             ->first();
+
 
         return [
             Stat::make('Pembentukan Kas', 'Rp ' . number_format($pembentukan, 0, ',', ','))
@@ -66,8 +72,6 @@ class KasKecilStats extends BaseWidget
                 ->description('Saldo saat ini')
                 ->icon('heroicon-m-calculator')
                 ->color('warning'),
-
-
         ];
     }
 }
