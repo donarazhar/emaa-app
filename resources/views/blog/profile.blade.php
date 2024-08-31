@@ -48,7 +48,7 @@
     </section>
 
     <!-- Bottom Nav -->
-    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md shadow-top">
+    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md shadow-top mb-10 md:mb-2">
         <div class="flex justify-around p-2">
             <a href="/blog" class="text-center">
                 <i class="fa-solid fa-house text-lg md:text-xl  hover:text-blue-900"></i>
