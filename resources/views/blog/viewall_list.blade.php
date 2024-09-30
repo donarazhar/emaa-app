@@ -12,6 +12,6 @@
     </a>
 @endforeach
 
-<div class="mt-6">
+<div class="mt-6 mb-10">
     {{ $articles->links() }}
 </div>

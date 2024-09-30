@@ -38,6 +38,11 @@ class BlogController extends Controller
         return view('blog.blog', compact('banner', 'tabs', 'artikel', 'donasi'));
     }
 
+    public function privacy()
+    {
+        return view('blog.privacy');
+    }
+
     public function show($id)
     {
         $artikel = BlogArticle::findOrFail($id);

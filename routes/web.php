@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 // Blog route
 Route::get('/', [BlogController::class, 'web'])->name('web');
 Route::get('/blog', [BlogController::class, 'blog'])->name('blog');
+Route::get('/blog/privacy', [BlogController::class, 'privacy'])->name('privacy');
 Route::get('/article/{id}', [BlogController::class, 'show'])->name('article.show');
 Route::get('/article/view-all/{categoryId}', [BlogController::class, 'viewAll'])->name('article.viewAll');
 Route::get('/profile', [BlogController::class, 'profile'])->name('profile');
